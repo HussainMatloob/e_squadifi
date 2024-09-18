@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "939633534168",
+    "project_id": "esquadifi-72d81",
+    "storage_bucket": "esquadifi-72d81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939633534168:android:335dd9f597cde3972b63ad",
+        "android_client_info": {
+          "package_name": "com.example.e_squadifi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsRqwyGUDLjUV1Yv23r0UpSlsyE-DWvo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
