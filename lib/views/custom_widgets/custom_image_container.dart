@@ -43,6 +43,7 @@ class CustomImageContainer extends StatelessWidget {
                 width: borderWidth ?? 1.w,
                 color:index==profileController.selectedIndex? borderColor ?? Colors.transparent: Colors.transparent, // Default transparent if no border color
               ),
+              color: color??Colors.transparent
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(borderRadius ?? 14.r), // Clip the image with same radius

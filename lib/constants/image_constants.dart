@@ -8,4 +8,12 @@ class ImageConstants {
     "asset/images/image_3.jpg",
     "asset/images/image_4.jpg"
   ];
-}
+  static List<String> AchievementIcons = [
+    "asset/images/Sucsess.png",
+    "asset/images/Money Bags.png",
+    "asset/images/Crown.png",
+    "asset/images/shape_samsung.png",
+        "asset/images/Goal.png",
+  ];
+  static String profilePic="asset/images/profile_pic.png";
+ }
