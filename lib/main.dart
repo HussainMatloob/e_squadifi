@@ -1,4 +1,6 @@
+import 'package:e_squadifi/views/screens/profile_screen.dart';
 import 'package:e_squadifi/views/screens/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -30,22 +32,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-    designSize: Size(375,812),
-    minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context,child){
-      return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'eSquadifi',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          //scaffoldBackgroundColor: Color(0xFF1A003D),
-          scaffoldBackgroundColor: Colors.transparent
-        ),
-         home: SplashScreen());
-      }
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        // Check if the orientation is landscape or portrait
+        var isLandscape = orientation == Orientation.landscape;
+
+        return ScreenUtilInit(
+          // Set the designSize based on the screen orientation
+          designSize: isLandscape ? Size(932, 430) : Size(375, 812),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'eSquadifi',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+                scaffoldBackgroundColor: Colors.transparent,
+              ),
+              home: SplashScreen(),
+            );
+          },
+        );
+      },
     );
   }
 }

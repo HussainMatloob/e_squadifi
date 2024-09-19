@@ -1,7 +1,9 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
+import 'package:e_squadifi/views/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 class SplashScreen extends StatefulWidget {
@@ -10,16 +12,32 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 class _SplashScreenState extends State<SplashScreen> {
+  void initState() {
+    super.initState();
+    // Force portrait orientation for this screen
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+    // Optionally, reset orientation back to portrait when leaving this screen
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  // extendBodyBehindAppBar: true,
      body:
      Container(
        height: Get.height,
        width: Get.width,
-       padding: EdgeInsets.all(8.w), // Border width
+       padding: EdgeInsets.all(8.r), // Border width
        decoration: BoxDecoration(
          gradient: LinearGradient(
            colors: ColorConstant.gradientBorderColor,
@@ -124,7 +142,9 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: Padding(
                           padding: EdgeInsets.only(left: 20.w,right: 10.w),
                           child: GestureDetector(
-                            onTap:() {},
+                            onTap:() {
+                              Get.to(()=>ProfileScreen());
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

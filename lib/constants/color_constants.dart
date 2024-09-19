@@ -19,4 +19,5 @@ static Color blackColor=Colors.black;
 static Color whiteColor=Colors.white;
 static Color darkBlueColor=Color(0xFF0A89AD);
 static Color greyColor=Color(0xFF3A5175);
+static Color borderColor= Color(0xFF8F52B8);
 }
