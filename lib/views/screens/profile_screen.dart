@@ -1,26 +1,22 @@
-import 'package:e_squadifi/constants/enum_constant.dart';
+import 'package:e_squadifi/constants/app_data.dart';
 import 'package:e_squadifi/controllers/profile_controller.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
-import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
-import 'package:e_squadifi/views/custom_widgets/reuseable_colum_widget.dart';
+import 'package:e_squadifi/views/custom_widgets/improve_gaming_card.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
+import 'package:e_squadifi/views/screens/profile_improve_game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../constants/color_constants.dart';
 import '../../constants/image_constants.dart';
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
-
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   ProfileController profileController = Get.put(ProfileController());
@@ -33,7 +29,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       DeviceOrientation.landscapeLeft,
     ]);
   }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -137,209 +132,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Stack(
-                        children: [
-                          // Match the outer container's radius
-                          Container(
-                            width: 384.w,
-                            height: 430.h,
-                            decoration: BoxDecoration(),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(50.r),
-                                  topLeft: Radius.circular(50.r)),
-                              child: Image.asset(
-                                ImageConstants.profileImagesList[profileController
-                                    .selectedIndex],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 10, // Position the Row at the bottom
-                            left: 0, // Align it to the left
-                            right: 0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                for (int i = 0; i < ImageConstants.profileImagesList.length; i++)
-                                  CustomImageContainer(
-                                    height: 30.h,
-                                    width: 54.w,
-                                    borderRadius: 14.r,
-                                    borderColor: ColorConstant.whiteColor,
-                                    borderWidth: 1.w,
-                                    image: ImageConstants.profileImagesList[i],
-                                    onTap: () {
-                                      profileController.changeProfile(i);
-                                    },
-                                    index: i,
-                                  ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      Container(
-                        height: 397.h,
-                        width: 344.w,
-                        margin: EdgeInsets.symmetric(vertical: 5.h),
-                        decoration: BoxDecoration(
-                            color: ColorConstant.greyColor,
-                            borderRadius: BorderRadius.circular(14.r),
-                            border: Border.all(
-                                width: 1, color: ColorConstant.borderColor)),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(12.r),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                    "Achievement(18)",
-                                    fw: FontWeight.w700,
-                                    size: 14,
-                                    color: ColorConstant.whiteColor,
-                                  ),
-                                  SizedBox(
-                                    height: 8.h,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      for (int i = 0; i < ImageConstants.AchievementIcons.length; i++)
-                                        Flexible(
-                                          child: CustomImageContainer(
-                                            height: 30.h,
-                                            width: 51.w,
-                                            borderRadius: 16.r,
-                                            image: ImageConstants
-                                                .AchievementIcons[i],
-                                            onTap: () {},
-                                            color: ColorConstant.iconColors[i],
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(color: ColorConstant.dividerColor,),
-                          Container(
-                            padding: EdgeInsets.all(5
-                                .r),
-                            child:Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                 ColumnWidget(text1: "232",
-                                   text2: "Friends",
-                                 ),
-                                Container(
-                                  height: 70.h,
-                                  width: 0.1.w,
-                                  color: ColorConstant.whiteColor,
-                                ),
-                                ColumnWidget(
-                                  text1: "674",
-                                  text2: "Followers",
-                                ),
-                                Container(
-                                  height: 70.h,
-                                  width: 0.1.w,
-                                  color: ColorConstant.whiteColor,
-                                ),
-                                ColumnWidget(
-                                  text1: "674",
-                                  text2: "Following",
-                                ),
-                            ],)
-                          ),
-                            Divider(color: ColorConstant.dividerColor,),
-                            Flexible(
-                              child: Container(
-                                  padding: EdgeInsets.all(4.r),
-                                  child:Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      ColumnWidget(text1: "232",
-                                        text2: "Played Games",
-                                        gradientColor: ColorConstant.gameGradientColor,
-                                        achievement: true,
-                                        color: ColorConstant.greyColor,
-                                        height: 40.h,
-                                        width: 70.w,
-                                      ),
-                                      ColumnWidget(
-                                        text1: "674",
-                                        text2: "Challenges",
-                                        gradientColor: ColorConstant.challengesGradientColor,
-                                        achievement: true,
-                                        color: ColorConstant.greyColor,
-                                        height: 40.h,
-                                        width: 70.w,
-                                      ),
-                                      ColumnWidget(
-                                        text1: "674",
-                                        text2: "Tournaments",
-                                        gradientColor: ColorConstant.tournamentGradientColor,
-                                        achievement: true,
-                                        color: ColorConstant.greyColor,
-                                        height: 40.h,
-                                        width: 70.w,
-                                      ),
-                                    ],)
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      if(profileController.selectedProfileTileIndex==0)
+                      ProfileImproveGameScreen(),
+                      if(profileController.selectedProfileTileIndex==4)
+                       Container(
+                         margin: EdgeInsets.only(top: 30.h),
+                         padding: EdgeInsets.symmetric(
+                           horizontal:10.w
+                         ),
+
+
+                         child: Column(children: [
+                           Row(children: [
+                             ImproveGamingCard(
+                               height: 55.h,
+                               width: 209.w,
+                               text: "Improve gamming Skill",
+                               fw: FontWeight.w700,
+                               textSize: 14.sp,
+                               color: ColorConstant.greyColor,
+                               padding: 7.r,
+                               textColor: ColorConstant.whiteColor,
+                               radius: 14.r,
+                             ),
+                           ],)
+                         ],),
+
+
+                       ),
                       SizedBox(width: 10.w,),
                       Container(
                         margin: EdgeInsets.only(top: 35.h),
                         height: 429.h,
                         width: 160.w,
                         decoration: BoxDecoration(
-                          color: ColorConstant.greyColor,
-                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(50.r),topLeft: Radius.circular(13.r))
+                            color: ColorConstant.greyColor,
+                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(50.r),topLeft: Radius.circular(13.r))
                         ),
                         child: Column(
                           children: [
-                            for(int i=0;i<EnumConstant.profileTilesText.length;i++)
+                            for(int i=0;i<AppData.profileTilesText.length;i++)
                               CustomListTile(
-                              height: 42.h,
-                              width: 217.w,
-                              size: 14.sp,
-                              fontWeight: FontWeight.w700,
+                                height: 42.h,
+                                width: 217.w,
+                                size: 14.sp,
+                                fontWeight: FontWeight.w700,
+                                color: ColorConstant.cyanBlue,
+                                radiusBottomLeft: 14.r,
+                                radiusTopLeft: 14.r,
+                                text:AppData.profileTilesText[i],
+                                index: i,
+                                onTap: (){
+                                  profileController.changeTileSelection(i);
+                                },
+                              ),
+                            SizedBox(height: 5.h,),
+                            ButtonWidget(
+                              height: 25.h,
+                              width: 140.w,
+                              icon: Icon(Icons.account_balance_wallet,color: ColorConstant.whiteColor,),
+                              text: "Wallet",
                               color: ColorConstant.cyanBlue,
-                              radiusBottomLeft: 14.r,
-                              radiusTopLeft: 14.r,
-                              text:EnumConstant.profileTilesText[i],
-                              index: i,
+                              radius: 47.r,
+                              textSize: 12.sp,
+                              fw: FontWeight.w700,
+                              textColor: ColorConstant.whiteColor,
                               onTap: (){
-                              profileController.changeTileSelection(i);
                               },
                             ),
-                         SizedBox(height: 5.h,),
-                           ButtonWidget(
-                           height: 25.h,
-                             width: 140.w,
-                             icon: Icon(Icons.account_balance_wallet,color: ColorConstant.whiteColor,),
-                             text: "Wallet",
-                             color: ColorConstant.cyanBlue,
-                             radius: 47.r,
-                             textSize: 12.sp,
-                             fw: FontWeight.w700,
-                             textColor: ColorConstant.whiteColor,
-                             onTap: (){
-                             },
-                           ),
                           ],
                         ),
                       ),
