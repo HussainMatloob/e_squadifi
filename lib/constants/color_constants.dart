@@ -49,4 +49,9 @@ static List<Color> tournamentGradientColor=[Color(0xFF6D7D8B),
 ];
 static List<Color> profilePicGradient=[ Color(0xFFCA00FF),Color(0xFF3957FE)];
 static Color cyanBlue=Color(0xFF0A89AD);
+
+static Color iconColor=Color(0xFFA897CD);
+static Color purpleColor= Color(0xFF9354BC);
+static Color popUpColor=Color(0xFF532E77);
 }
+

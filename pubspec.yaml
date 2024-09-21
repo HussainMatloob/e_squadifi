@@ -40,6 +40,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   google_fonts: ^6.2.1
   fl_chart: ^0.69.0
+  percent_indicator: ^4.2.3
+  custom_pop_up_menu: ^1.2.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

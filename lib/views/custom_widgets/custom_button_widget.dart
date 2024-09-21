@@ -14,7 +14,10 @@ class ButtonWidget extends StatelessWidget {
   final double? radius;
   final Color? textColor;
   final VoidCallback? onTap;
-
+  final double? paddingHorizontal;
+  final double? marginAll;
+  final double? borderWidth;
+  final Color? borderColor;
   const ButtonWidget(
       {super.key, this.text,
         this.color,
@@ -26,7 +29,11 @@ class ButtonWidget extends StatelessWidget {
         this.textSize,
         this.radius,
         this.textColor,
-        this.onTap
+        this.onTap,
+        this.paddingHorizontal,
+        this.marginAll,
+        this.borderWidth,
+        this.borderColor
       });
 
   @override
@@ -34,14 +41,17 @@ class ButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.r),
+        margin: EdgeInsets.all(marginAll?? 0.r),
+        padding: EdgeInsets.symmetric(horizontal: paddingHorizontal??0.r),
         height: height,
         width: width,
         decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(radius??0.r)
+          color: borderWidth !=null? Colors.transparent:color,
+          borderRadius: BorderRadius.circular(radius??0.r),
+            border: Border.all(width: borderWidth??0.w,color:borderColor??Colors.transparent),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
           icon!,
             SizedBox(width: 7.w,),

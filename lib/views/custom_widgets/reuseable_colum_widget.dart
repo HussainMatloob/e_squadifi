@@ -42,7 +42,7 @@ class ColumnWidget extends StatelessWidget {
             ? CustomText(
                 text1,
                 fw: FontWeight.w700,
-                size: 24,
+                size: 24.sp,
                 color: ColorConstant.whiteColor,
               )
             : Container(),
@@ -52,7 +52,7 @@ class ColumnWidget extends StatelessWidget {
         CustomText(
           text2,
           fw: FontWeight.w400,
-          size: 12,
+          size: 12.sp,
           color: ColorConstant.whiteColor,
         ),
       ],

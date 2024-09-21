@@ -69,6 +69,7 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
             SizedBox(
               width: 18.w,
             ),
+
             Container(
               height: 397.h,
               width: 344.w,
@@ -101,23 +102,21 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                           children: [
                             for (int i = 0; i < ImageConstants.AchievementIcons.length; i++)
                                CustomImageContainer(
-                                  height: 30.h,
-                                  width: 51.w,
+                                  height: 26.h,
+                                  width: 55.w,
                                   borderRadius: 16.r,
                                   image: ImageConstants
                                       .AchievementIcons[i],
                                   onTap: () {},
                                   color: ColorConstant.iconColors[i],
                                 ),
-
                           ],
                         ),
                       ],
                     ),
                   ),
                   Divider(color: ColorConstant.dividerColor,),
-                  Flexible(
-                    child: Container(
+                    Container(
                         padding: EdgeInsets.all(5
                             .r),
                         child:Row(
@@ -127,7 +126,7 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               text2: "Friends",
                             ),
                             Container(
-                              height: 70.h,
+                              height: 50.h,
                               width: 0.1.w,
                               color: ColorConstant.whiteColor,
                             ),
@@ -136,7 +135,7 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               text2: "Followers",
                             ),
                             Container(
-                              height: 70.h,
+                              height: 50.h,
                               width: 0.1.w,
                               color: ColorConstant.whiteColor,
                             ),
@@ -146,10 +145,9 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                             ),
                           ],)
                     ),
-                  ),
+
                   Divider(color: ColorConstant.dividerColor,),
-                  Flexible(
-                    child: Container(
+                   Container(
                         padding: EdgeInsets.all(4.r),
                         child:Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -159,7 +157,7 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               gradientColor: ColorConstant.gameGradientColor,
                               achievement: true,
                               color: ColorConstant.greyColor,
-                              height: 40.h,
+                              height: 35.h,
                               width: 70.w,
                             ),
                             ColumnWidget(
@@ -168,7 +166,7 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               gradientColor: ColorConstant.challengesGradientColor,
                               achievement: true,
                               color: ColorConstant.greyColor,
-                              height: 40.h,
+                              height: 35.h,
                               width: 70.w,
                             ),
                             ColumnWidget(
@@ -177,12 +175,12 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               gradientColor: ColorConstant.tournamentGradientColor,
                               achievement: true,
                               color: ColorConstant.greyColor,
-                              height: 40.h,
+                              height: 35.h,
                               width: 70.w,
                             ),
                           ],)
                     ),
-                  ),
+
                 ],
               ),
             ),
