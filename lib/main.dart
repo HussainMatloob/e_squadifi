@@ -1,3 +1,5 @@
+import 'package:e_squadifi/views/screens/login_screen.dart';
+import 'package:e_squadifi/views/screens/signup_screen1.dart';
 import 'package:e_squadifi/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,8 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
-void main() async{
 
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -57,4 +59,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
