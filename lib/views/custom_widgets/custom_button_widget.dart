@@ -53,7 +53,7 @@ class ButtonWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          icon!,
+           icon==null? Container():icon!,
             SizedBox(width: 7.w,),
             CustomText( text,fw: fw,size: textSize,color: textColor,),
           ],

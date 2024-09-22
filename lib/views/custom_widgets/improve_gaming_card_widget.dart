@@ -2,8 +2,9 @@ import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_popup.dart';
-import 'package:e_squadifi/views/custom_widgets/custom_popup_tile.dart';
+
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/percentage_widget.dart';
 import 'package:flutter/material.dart';
@@ -60,13 +61,13 @@ class ImproveGamingCard extends StatelessWidget {
           children: [
            CustomImageContainer(
              image: ImageConstants.AchievementIcons[3],
-             height: 25.h,
+             height: 26.h,
              width: 52.w,
              color: ColorConstant.iconColors[3],
              borderRadius: 16.r,
            ),
             CustomPopUpDialog(
-              height: 60.h,
+              height: 75.h,
               width: 199.w,
               color:  ColorConstant.purpleColor,
               icon: Icon(Icons.more_horiz,color: ColorConstant.iconColor,),
@@ -75,25 +76,34 @@ class ImproveGamingCard extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CustomPopupTile(
+                    CustomListTile(
                       text: "Edit",
                       color: ColorConstant.whiteColor,
                       icon: Icon(Icons.edit,size: 19.sp,color: ColorConstant.whiteColor,),
                       onTap: (){},
+                      fw: FontWeight.w700,
+                      textSize: 16.sp,
+                      sizedBoxedWidth: 10.w,
                     ),
                     SizedBox(height: 8.h),
-                    CustomPopupTile(
+                    CustomListTile(
                       text: "Delete",
                       color: ColorConstant.whiteColor,
                       icon: Icon(Icons.delete,size: 19.sp,color: ColorConstant.whiteColor,),
                       onTap: (){},
+                      fw: FontWeight.w700,
+                      textSize: 16.sp,
+                      sizedBoxedWidth: 10.w,
                     ),
                     SizedBox(height: 8.h),
-                    CustomPopupTile(
+                    CustomListTile(
                       text: "Complete Goal",
                       color: ColorConstant.whiteColor,
                       icon: Icon(Icons.emoji_events_outlined,size: 19.sp,color: ColorConstant.whiteColor,),
                       onTap: (){},
+                      fw: FontWeight.w700,
+                      textSize: 16.sp,
+                      sizedBoxedWidth: 10.w,
                     ),
 
                   ],),

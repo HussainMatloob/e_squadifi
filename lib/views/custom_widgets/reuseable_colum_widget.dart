@@ -25,12 +25,13 @@ class ColumnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         achievement == false
             ? Container()
             :  ReuseableGradientContainer(
               text1: text1,
-              borderRadius: 100.r,
+              borderRadius: 50.w,
           padding: 7.r,
           stops: [0.5,0.5],
           height: height,

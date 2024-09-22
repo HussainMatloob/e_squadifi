@@ -16,4 +16,5 @@ class ImageConstants {
         "asset/images/Goal.png",
   ];
   static String profilePic="asset/images/profile_pic.png";
+  static String bottomBarLogo="asset/images/bottom_bar_logo.jpg";
  }

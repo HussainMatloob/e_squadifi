@@ -1,10 +1,11 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:e_squadifi/constants/app_data.dart';
+import 'package:e_squadifi/controllers/navigation_controller.dart';
 import 'package:e_squadifi/controllers/profile_controller.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
+import 'package:e_squadifi/views/custom_widgets/profile_list_tiles.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_popup.dart';
-import 'package:e_squadifi/views/custom_widgets/custom_popup_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
 import 'package:e_squadifi/views/screens/profile_goals_screen.dart';
@@ -23,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
-  ProfileController profileController = Get.put(ProfileController());
+  ProfileController profileController = Get.put(ProfileController(),permanent: true);
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -34,11 +35,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ]);
   }
 
+  NavController navigationController=Get.put(NavController());
+
   final CustomPopupMenuController controller = CustomPopupMenuController();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        navigationController.navIndex(0);
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.portraitUp,
           DeviceOrientation.portraitDown,
@@ -53,12 +57,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 elevation: 0,
                 backgroundColor: Colors.transparent,
                 foregroundColor: ColorConstant.whiteColor,
-                leading: Padding(
-                    padding: EdgeInsets.only(left: 40.w, top: 15.h),
-                    child: Icon(
-                      Icons.home,
-                      size: 32.sp,
-                    )),
+                leading: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                    SystemChrome.setPreferredOrientations([
+                      DeviceOrientation.portraitUp,
+                      DeviceOrientation.portraitDown,
+                    ]);
+                    navigationController.navIndex(0);
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 40.w, top: 15.h),
+                      child: Icon(
+                        Icons.home,
+                        size: 32.sp,
+                      )),
+                ),
                 actions: [
                   Padding(
                     padding: EdgeInsets.only(top: 10.h, right: 45.w),
@@ -71,14 +85,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 controller: controller,
                                // icon: null,
                                 width: 190.w,
-                                height: 40.h,
+                                height: 55.h,
                                 color: ColorConstant.cyanBlue,
                                 child: Container(
-                                  padding: EdgeInsets.all(15.r),
+                                  padding: EdgeInsets.all(18.r),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      CustomPopupTile(
+                                      CustomListTile(
                                         text: "Progressing",
                                         color: ColorConstant.whiteColor,
                                         icon: Icon(Icons.hourglass_empty,
@@ -87,9 +101,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         onTap: () {
 
                                         },
+                                        fw: FontWeight.w700,
+                                        textSize: 16.sp,
+                                        sizedBoxedWidth: 10.w,
                                       ),
                                       SizedBox(height: 5.h),
-                                      CustomPopupTile(
+                                      CustomListTile(
                                         text: "Completed",
                                         color: ColorConstant.whiteColor,
                                         icon: Icon(Icons.check_circle_outline,
@@ -98,14 +115,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         onTap: () {
 
                                         },
+                                        fw: FontWeight.w700,
+                                        textSize: 16.sp,
+                                        sizedBoxedWidth: 10.w,
                                       ),
                                     ],
                                   ),
                                 ),
 
                               ),
-
-
 
                               SizedBox(
                                 width: 10.w,
@@ -144,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: 8.w,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 4.h),
+                          padding: EdgeInsets.only(top: 3.h),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,7 +236,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             for (int i = 0;
                                 i < AppData.profileTilesText.length;
                                 i++)
-                              CustomListTile(
+                              ProfileListTile(
                                 height: 40.h,
                                 width: 217.w,
                                 size: 14.sp,

@@ -30,7 +30,7 @@ class _ProfileGoalsScreenState extends State<ProfileGoalsScreen> {
             children: [
               for(int i=0;i<3;i++)
                 ImproveGamingCard(
-                  height: 60.h,
+                  height: 65.9.h,
                   width: 211.w,
                   text: "Improve gaming Skill",
                   fw: FontWeight.w700,

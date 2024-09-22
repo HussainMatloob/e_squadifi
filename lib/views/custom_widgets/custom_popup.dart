@@ -30,7 +30,7 @@ class CustomPopUpDialog extends StatelessWidget {
       pressType: PressType.singleClick, // Trigger the popup with a click
       verticalMargin: -7.h, // Space below the icon
       menuBuilder: () => Transform.translate(
-        offset: Offset(-50, 0), // Manually adjust the position (negative moves left)
+        offset: Offset(-75, 0), // Manually adjust the position (negative moves left)
       child: Container(
         width: width, // Custom width
         height: height, // Custom height
