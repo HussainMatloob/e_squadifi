@@ -41,7 +41,7 @@ class ReuseableGradientContainer extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(100.r),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(borderRadius??0.r),
           color:color,
         ),
         child: Center(

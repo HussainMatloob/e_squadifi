@@ -1,7 +1,7 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
-import 'package:e_squadifi/views/screens/profile_screen.dart';
+import 'package:e_squadifi/views/screens/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
       DeviceOrientation.portraitDown,
     ]);
   }
-
   @override
   void dispose() {
     super.dispose();
@@ -144,7 +143,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             padding: EdgeInsets.only(left: 20.w,right: 10.w),
                             child: GestureDetector(
                               onTap:() {
-                                Get.to(()=>ProfileScreen());
+                                Get.to(()=> BottomNavBar());
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,6 +176,5 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
 }
 

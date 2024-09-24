@@ -26,7 +26,7 @@ class PercentageLine extends StatelessWidget {
         padding: EdgeInsets.zero,
         ),
         // Percentage Text
-        SizedBox(width: 4),
+        SizedBox(width: 4.w),
         CustomText(
           '${percentage}%', // Display percentage with 1 decimal
            fw: FontWeight.w700,

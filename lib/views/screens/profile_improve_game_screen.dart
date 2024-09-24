@@ -157,8 +157,8 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               gradientColor: ColorConstant.gameGradientColor,
                               achievement: true,
                               color: ColorConstant.greyColor,
-                              height: 35.h,
-                              width: 70.w,
+                              height: 40.h,
+                              width: 60.w,
                             ),
                             ColumnWidget(
                               text1: "674",
@@ -166,8 +166,8 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               gradientColor: ColorConstant.challengesGradientColor,
                               achievement: true,
                               color: ColorConstant.greyColor,
-                              height: 35.h,
-                              width: 70.w,
+                              height: 40.h,
+                              width: 60.w,
                             ),
                             ColumnWidget(
                               text1: "674",
@@ -175,8 +175,8 @@ class _ProfileImproveGameScreenState extends State<ProfileImproveGameScreen> {
                               gradientColor: ColorConstant.tournamentGradientColor,
                               achievement: true,
                               color: ColorConstant.greyColor,
-                              height: 35.h,
-                              width: 70.w,
+                              height: 40.h,
+                              width: 60.w,
                             ),
                           ],)
                     ),
