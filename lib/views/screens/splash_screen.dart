@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
                      height: 546.h,   // Set height
                      child: Image.asset(
                         ImageConstants.gameController, // Replace with your image path
-                       fit: BoxFit.cover,
+                       fit: BoxFit.fill,
                      ),
                    ),
                Row(
@@ -126,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen> {
                            height: 102.h,   // Set height
                            child: Image.asset(
                              ImageConstants.vectorImage, // Replace with your image path
-                             fit: BoxFit.cover,
+                             fit: BoxFit.fill,
                            ),
                          ),
                          SizedBox(width: 10.w,),

@@ -22,6 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           onWillPop:()async{
             if(navController.selectedNavIndex!=0){
               navController.navIndex(0);
+              navController.groupCreate(false);
               return false;
             }
             else{

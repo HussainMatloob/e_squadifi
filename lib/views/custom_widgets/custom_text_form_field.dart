@@ -14,6 +14,7 @@ class CustomTextFormField extends StatefulWidget {
   final double? height;
   final bool isPassword;
   final Color? color;
+  final FocusNode? focusNode;
 
   const CustomTextFormField({
     super.key,
@@ -27,7 +28,8 @@ class CustomTextFormField extends StatefulWidget {
     this.width,
     this.height,
     this.isPassword = false,
-    this.color
+    this.color,
+    this.focusNode
   });
 
   @override
@@ -46,6 +48,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           color: widget.color??Colors.transparent,
           borderRadius: BorderRadius.circular(10.r)),
       child: TextFormField(
+        focusNode: widget.focusNode,
         //keyboardType: TextInputType.multiline,
         maxLines: null,
         obscureText: false, // Toggle visibility based on state

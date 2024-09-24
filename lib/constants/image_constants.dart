@@ -17,4 +17,6 @@ class ImageConstants {
   ];
   static String profilePic="asset/images/profile_pic.png";
   static String bottomBarLogo="asset/images/bottom_bar_logo.jpg";
+  static String dummyVideo="asset/videos/SampleVideo_1280x720_2mb.mp4";
+  static String pubGImage="asset/images/pubG.png";
  }

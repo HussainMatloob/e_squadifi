@@ -56,6 +56,8 @@ static Color deepPurpleColor=Color(0xFF1A003D);
 static Color purple=Color(0xFF5A189A);
 static Color redColor=Colors.red;
 static Color messageBorderColor=Color(0xFF522B7A);
-static Color senderMessageColor=Color(0xFF3A51751C);
+static Color senderMessageColor=Color(0x3A51751C);
+static Color squadPurpleColor=Color(0xFF884DB1);
+ static Color darkGrayColor=Color(0xFF18203A);
 }
 
