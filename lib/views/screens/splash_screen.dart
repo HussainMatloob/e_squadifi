@@ -143,7 +143,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             padding: EdgeInsets.only(left: 20.w,right: 10.w),
                             child: GestureDetector(
                               onTap:() {
-                                Get.to(()=> BottomNavBar());
+                                Get.to(()=>BottomNavBar());
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

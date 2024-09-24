@@ -7,18 +7,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomPopUpDialog extends StatelessWidget {
  // final CustomPopupMenuController controller = CustomPopupMenuController();
-  final double width;
-  final double height;
-  final Color color;
-  final Widget child;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final Widget? child;
   final Widget? icon;
   final Widget? filterButton;
   final  CustomPopupMenuController? controller;
    CustomPopUpDialog({super.key,
-     required this.width,
-     required this.height,
-     required this.color,
-     required this.child,
+       this.width,
+    this.height,
+     this.color,
+      this.child,
      this.icon,
      this.filterButton,
      this.controller
@@ -30,10 +30,10 @@ class CustomPopUpDialog extends StatelessWidget {
       pressType: PressType.singleClick, // Trigger the popup with a click
       verticalMargin: -7.h, // Space below the icon
       menuBuilder: () => Transform.translate(
-        offset: Offset(-75, 0), // Manually adjust the position (negative moves left)
+        offset: Offset(-55, 0), // Manually adjust the position (negative moves left)
       child: Container(
-        width: width, // Custom width
-        height: height, // Custom height
+        width: width??0.w, // Custom width
+        height: height??0.h, // Custom height
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(19.r),

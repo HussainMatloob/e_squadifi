@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
 class ColorConstant{
 static List<Color> gradientBorderColor=[
   Color(0xFF8A4FB3), // Light purple
@@ -28,6 +25,7 @@ static Color whiteColor=Colors.white;
 static Color darkBlueColor=Color(0xFF0A89AD);
 static Color greyColor=Color(0xFF3A5175);
 static Color borderColor= Color(0xFF8F52B8);
+static Color greyLightColor=Color(0x663A5175);
 
 static List<Color> iconColors=[
   Colors.blue,
@@ -51,7 +49,13 @@ static List<Color> profilePicGradient=[ Color(0xFFCA00FF),Color(0xFF3957FE)];
 static Color cyanBlue=Color(0xFF0A89AD);
 
 static Color iconColor=Color(0xFFA897CD);
-static Color purpleColor= Color(0xFF9354BC);
+static Color purpleLightColor= Color(0xFF9354BC);
+static Color dullPurpleColor=Color(0x269354BC);
 static Color popUpColor=Color(0xFF532E77);
+static Color deepPurpleColor=Color(0xFF1A003D);
+static Color purple=Color(0xFF5A189A);
+static Color redColor=Colors.red;
+static Color messageBorderColor=Color(0xFF522B7A);
+static Color senderMessageColor=Color(0xFF3A51751C);
 }
 

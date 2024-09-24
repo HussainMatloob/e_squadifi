@@ -7,8 +7,14 @@ import 'package:get/get.dart';
 
 class NavController extends GetxController{
  int selectedNavIndex=0;
+ bool groupExist=false;
   void navIndex(index){
     selectedNavIndex=index;
+    update();
+  }
+
+  void groupCreate(bool value){
+    groupExist=value;
     update();
   }
 

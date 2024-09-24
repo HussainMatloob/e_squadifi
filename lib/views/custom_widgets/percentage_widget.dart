@@ -21,7 +21,7 @@ class PercentageLine extends StatelessWidget {
           lineHeight: 1.3.h, // Height of the progress bar
           percent: percentage / 100, // Convert percentage to value between 0 and 1
           backgroundColor: ColorConstant.whiteColor, // Background color of the line
-          progressColor: ColorConstant.purpleColor, // Color of the filled portion based on percentage
+          progressColor: ColorConstant.purpleLightColor, // Color of the filled portion based on percentage
           linearStrokeCap: LinearStrokeCap.roundAll, // Round edges of the line
         padding: EdgeInsets.zero,
         ),

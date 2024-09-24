@@ -3,6 +3,7 @@ import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/navigation_controller.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
 import 'package:e_squadifi/views/screens/profile_screen.dart';
+import 'package:e_squadifi/views/screens/your_groups_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -56,7 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
                   child: Stack(
                     children: [
-                       navController.pages[navController.selectedNavIndex],
+                       navController.groupExist==false?navController.pages[navController.selectedNavIndex]:YourGroupsScreen(),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: BottomAppBar(
@@ -72,6 +73,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     Icons.home_outlined,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
+                                  navController.groupCreate(false);
                                   navController.navIndex(0);
                                 },
                               ),
@@ -79,6 +81,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                 icon: Icon(Icons.mic_none,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
+                                  navController.groupCreate(false);
                                   navController.navIndex(1);
                                 },
                               ),
@@ -89,6 +92,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
                                   navController.navIndex(2);
+                                  navController.groupCreate(false);
                                 },
                               ),
                               IconButton(
@@ -96,6 +100,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     Icons.person_outline,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
+                                  navController.groupCreate(false);
                                   Get.to(()=>ProfileScreen());
                                   //navController.navIndex(3);
                                 },

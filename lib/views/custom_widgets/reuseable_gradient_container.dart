@@ -13,7 +13,8 @@ class ReuseableGradientContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
-  final bool? imageExist;
+  final String? image;
+  final double? internalPadding;
   const ReuseableGradientContainer({super.key,
     this.stops,
     this.gradientColor,
@@ -23,7 +24,8 @@ class ReuseableGradientContainer extends StatelessWidget {
     this.width,
     this.height,
     this.color,
-    this.imageExist=false
+    this.image,
+    this.internalPadding
   });
 
   @override
@@ -39,16 +41,17 @@ class ReuseableGradientContainer extends StatelessWidget {
         ),
       ),
       child: Container(
+        padding: EdgeInsets.all(internalPadding??0.r),
         width: width,
         height: height,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(borderRadius??0.r),
-          color:color,
+          color:color??Colors.transparent,
         ),
         child: Center(
-          child: imageExist==true? ClipRRect(
+          child: image!=null? ClipRRect(
             borderRadius: BorderRadius.circular(borderRadius??0.r),
             child: Image.asset(
-              ImageConstants.profilePic,
+              image!,
               fit: BoxFit.fill,
             ),
           ):CustomText(

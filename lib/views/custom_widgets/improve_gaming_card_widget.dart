@@ -9,6 +9,7 @@ import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/percentage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ImproveGamingCard extends StatelessWidget {
   final CustomPopupMenuController _controller = CustomPopupMenuController();
@@ -47,8 +48,8 @@ class ImproveGamingCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(padding??0.r),
       margin: EdgeInsets.only(right: margin??0.r),
-      width: width,
-      height: height,
+      width: width??0.w,
+      height: height??0.h,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(radius??0.r),
@@ -67,14 +68,13 @@ class ImproveGamingCard extends StatelessWidget {
              borderRadius: 16.r,
            ),
             CustomPopUpDialog(
-              height: 75.h,
+               height: Get.height/2.h,
               width: 199.w,
-              color:  ColorConstant.purpleColor,
+              color:  ColorConstant.purpleLightColor,
               icon: Icon(Icons.more_horiz,color: ColorConstant.iconColor,),
               child: Container(
                 padding: EdgeInsets.all(15.r),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     CustomListTile(
                       text: "Edit",
@@ -110,9 +110,6 @@ class ImproveGamingCard extends StatelessWidget {
               ),
 
             ),
-
-
-
         ],),
         SizedBox(height: 3.h,),
         CustomText(text,color: textColor,fw: fw,size: textSize,),

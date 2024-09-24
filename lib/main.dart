@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation) {
         // Check if the orientation is landscape or portrait
         var isLandscape = orientation == Orientation.landscape;
-
         return ScreenUtilInit(
           // Set the designSize based on the screen orientation
           designSize: isLandscape ? Size(932, 430) : Size(375, 812),

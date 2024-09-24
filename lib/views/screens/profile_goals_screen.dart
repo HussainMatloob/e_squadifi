@@ -5,6 +5,7 @@ import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/improve_gaming_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ProfileGoalsScreen extends StatefulWidget {
   const ProfileGoalsScreen({super.key});
@@ -30,7 +31,7 @@ class _ProfileGoalsScreenState extends State<ProfileGoalsScreen> {
             children: [
               for(int i=0;i<3;i++)
                 ImproveGamingCard(
-                  height: 65.9.h,
+                  height: Get.height/2.3.h,
                   width: 211.w,
                   text: "Improve gaming Skill",
                   fw: FontWeight.w700,
