@@ -1,10 +1,4 @@
-import 'package:e_squadifi/views/screens/about_you_personalityscreen.dart';
-import 'package:e_squadifi/views/screens/about_you_screen.dart';
-import 'package:e_squadifi/views/screens/about_you_screen2.dart';
-import 'package:e_squadifi/views/screens/login_screen.dart';
-import 'package:e_squadifi/views/screens/signup_screen1.dart';
 import 'package:e_squadifi/views/screens/splash_screen.dart';
-import 'package:e_squadifi/views/screens/vfcaton_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -55,7 +49,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 scaffoldBackgroundColor: Colors.transparent,
               ),
-              home: CodeVerificationScreen(),
+              home: SplashScreen(),
             );
           },
         );

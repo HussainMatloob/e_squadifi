@@ -8,7 +8,7 @@ import 'package:e_squadifi/views/custom_widgets/profile_list_tiles.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_popup.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
-import 'package:e_squadifi/views/screens/profile_goals_screen.dart';
+import 'package:e_squadifi/views/screens/auth/profile_goals_screen.dart';
 import 'package:e_squadifi/views/screens/profile_improve_game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
