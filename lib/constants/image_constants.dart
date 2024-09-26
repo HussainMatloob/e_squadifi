@@ -28,6 +28,6 @@ class ImageConstants {
     "asset/images/image_3.jpg",
     "asset/images/image_3.jpg",
   ];
-
+  static String memberPost="asset/images/member_post.png";
 
 }

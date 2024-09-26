@@ -206,9 +206,6 @@ class _SquadInviteScreenState extends State<SquadInviteScreen> {
                                 ),
                               ),
                             ),
-
-
-
                           ]
                       ),
                     ),

@@ -15,6 +15,7 @@ class ReuseableGradientContainer extends StatelessWidget {
   final Color? color;
   final String? image;
   final double? internalPadding;
+  final VoidCallback? onTap;
   const ReuseableGradientContainer({super.key,
     this.stops,
     this.gradientColor,
@@ -25,40 +26,44 @@ class ReuseableGradientContainer extends StatelessWidget {
     this.height,
     this.color,
     this.image,
-    this.internalPadding
+    this.internalPadding,
+    this.onTap
   });
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      padding: EdgeInsets.all(padding??0.r),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius??0.r),
-        gradient: LinearGradient(colors: gradientColor!,
-          stops: stops,  // Ensure the gradient stops at the halfway point
-          begin: Alignment.centerLeft, // Start the gradient from the left
-          end: Alignment.centerRight,
-        ),
-      ),
+    return  InkWell(
+      onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(internalPadding??0.r),
-        width: width,
-        height: height,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(borderRadius??0.r),
-          color:color??Colors.transparent,
+        padding: EdgeInsets.all(padding??0.r),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius??0.r),
+          gradient: LinearGradient(colors: gradientColor!,
+            stops: stops,  // Ensure the gradient stops at the halfway point
+            begin: Alignment.centerLeft, // Start the gradient from the left
+            end: Alignment.centerRight,
+          ),
         ),
-        child: Center(
-          child: image!=null? ClipRRect(
-            borderRadius: BorderRadius.circular(borderRadius??0.r),
-            child: Image.asset(
-              image!,
-              fit: BoxFit.fill,
+        child: Container(
+          padding: EdgeInsets.all(internalPadding??0.r),
+          width: width,
+          height: height,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(borderRadius??0.r),
+            color:color??Colors.transparent,
+          ),
+          child: Center(
+            child: image!=null? ClipRRect(
+              borderRadius: BorderRadius.circular(borderRadius??0.r),
+              child: Image.asset(
+                image!,
+                fit: BoxFit.fill,
+              ),
+            ):CustomText(
+              text1,
+              fw: FontWeight.w700,
+              size: 24.sp,
+              color: ColorConstant.whiteColor,
             ),
-          ):CustomText(
-            text1,
-            fw: FontWeight.w700,
-            size: 24.sp,
-            color: ColorConstant.whiteColor,
           ),
         ),
       ),

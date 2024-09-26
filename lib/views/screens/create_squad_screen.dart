@@ -99,8 +99,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
                         child: SingleChildScrollView(
                           child: Container(
 
-                            child: SingleChildScrollView(
-                              child: Column(
+                            child:  Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -157,7 +156,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       ButtonWidget(
-                                        text: "Next",
+                                        text: "Finish",
                                         width: 311.w,
                                         height: 51.h,
                                         color: ColorConstant.cyanBlue,
@@ -179,7 +178,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
                                   ),
                                 ],
                               ),
-                            ),
+
                           ),
                         ),
                       ),
