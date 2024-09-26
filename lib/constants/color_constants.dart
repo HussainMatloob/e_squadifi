@@ -59,5 +59,6 @@ static Color messageBorderColor=Color(0xFF522B7A);
 static Color senderMessageColor=Color(0x3A51751C);
 static Color squadPurpleColor=Color(0xFF884DB1);
  static Color darkGrayColor=Color(0xFF18203A);
+ static Color grayColor=Color(0xFF35383F);
 }
 

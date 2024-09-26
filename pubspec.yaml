@@ -46,6 +46,8 @@ dependencies:
   video_player: ^2.9.1
   video_thumbnail: ^0.5.3
   cached_network_image: ^3.4.1
+  carousel_slider: ^5.0.0
+  pie_menu: ^3.2.6
 
 dev_dependencies:
   flutter_test:

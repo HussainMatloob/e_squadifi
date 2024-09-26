@@ -18,6 +18,7 @@ class ButtonWidget extends StatelessWidget {
   final double? marginAll;
   final double? borderWidth;
   final Color? borderColor;
+    final double? sizedBoxWidth;
   const ButtonWidget(
       {super.key, this.text,
         this.color,
@@ -33,7 +34,8 @@ class ButtonWidget extends StatelessWidget {
         this.paddingHorizontal,
         this.marginAll,
         this.borderWidth,
-        this.borderColor
+        this.borderColor,
+        this.sizedBoxWidth
       });
 
   @override
@@ -54,7 +56,7 @@ class ButtonWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
           icon!,
-            SizedBox(width: 7.w,),
+            SizedBox(width: sizedBoxWidth==null?7.w:sizedBoxWidth,),
             CustomText( text,fw: fw,size: textSize,color: textColor,),
           ],
         ),

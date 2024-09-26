@@ -15,6 +15,7 @@ class SquadPodScreen extends StatefulWidget {
 
 class _SquadPodScreenState extends State<SquadPodScreen> {
   @override
+  String videoUrl = "https://drive.google.com/uc?export=view&id=1uQYXnnrwlsQTk9u9sAB4dP9L4VFGuUFX";
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -42,7 +43,10 @@ class _SquadPodScreenState extends State<SquadPodScreen> {
                      textColor: ColorConstant.whiteColor,
                      color: ColorConstant.squadPurpleColor,
                      icon: Icon(Icons.surround_sound,color: ColorConstant.whiteColor,),
-                     radius: 100,
+                     radius: 100.r,
+                     onTap: (){
+
+                     },
                    ),
                    Container(
                      height: 40.h,
@@ -90,35 +94,38 @@ class _SquadPodScreenState extends State<SquadPodScreen> {
                   padding: EdgeInsets.all(20.r),
                   child: CustomText("Live Pods",size: 16.sp,fw: FontWeight.w700,color: ColorConstant.whiteColor,)),
               Flexible(
-                child:GridView.builder(
-                    // shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    padding: EdgeInsets.zero,
-                    // physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),  // Disable GridView's internal scrolling
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                        mainAxisSpacing: 8,
-                        //childAspectRatio: 20,
-                        mainAxisExtent: 130,
-                        //crossAxisSpacing: 1
+                child:Container(
+                  padding: EdgeInsets.only(left:20.w,right: 20.w,bottom: 20.w),
+                  child: GridView.builder(
+                      // shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      padding: EdgeInsets.zero,
+                      // physics: NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),  // Disable GridView's internal scrolling
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                          mainAxisSpacing: 10.w,
+                          childAspectRatio: 1.64.r,
+                          //mainAxisExtent: 130,
+                          crossAxisSpacing: 12.w
+                      ),
+                      itemCount: 8,
+                      itemBuilder: (context, index) {
+                              //padding: EdgeInsets.only(left:20.w,right: 20.w,bottom: 20.w),
+                          return
+                             SquadLiveVideoWidget(
+                             height: 111.h,
+                             width: 158.w,
+                             videoName: "Diamond Rank!!!",
+                             ownerName: "Dr.Munder",
+                             views: "3k2",
+                               videoUrl: videoUrl,
+                           );
+                      },
                     ),
-                    itemCount: 8,
-                    itemBuilder: (context, index) {
-                            //padding: EdgeInsets.only(left:20.w,right: 20.w,bottom: 20.w),
-                        return Column(children: [
-                           SquadLiveVideoWidget(
-                           height: 111.h,
-                           width: 158.w,
-                           videoName: "Diamond Rank!!!",
-                           ownerName: "Dr.Munder",
-                           views: "3k2",
-                         )
-                         ],) ;
-                    },
-                  ),
+                ),
 
               ),
-              SizedBox(height: 100.h,)
+              SizedBox(height: 80.h,)
             ]
         ),
 

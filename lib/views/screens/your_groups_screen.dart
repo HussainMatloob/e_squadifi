@@ -4,7 +4,7 @@ import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
 import 'package:e_squadifi/views/screens/messages_screen.dart';
-import 'package:e_squadifi/views/screens/share_Lisnk_screen.dart';
+import 'package:e_squadifi/views/screens/share_Link_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
