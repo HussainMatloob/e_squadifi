@@ -1,5 +1,6 @@
 import 'package:e_squadifi/views/screens/about_you_screen2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:get/get.dart'; // Assuming this is your constants file
@@ -37,212 +38,226 @@ class _AboutYouScreenState extends State<AboutYouScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: Size(375, 812), minTextAdapt: true);
 
-    return Scaffold(
-      body: Container(
-        height: Get.height,
-        width: Get.width,
-        padding: EdgeInsets.all(8.r), // Border width
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: ColorConstant.gradientBorderColor,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          borderRadius: BorderRadius.circular(50.r),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50.r),
-            gradient: LinearGradient(
-              colors: ColorConstant.gradientScreenColor,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+    return GestureDetector(
+      onTap: (){
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+        FocusScope.of(context).unfocus();
+      },
+      child: WillPopScope(
+        onWillPop: () async{
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+          return true;
+        },
+        child: Scaffold(
+          body: Container(
+            height: Get.height,
+            width: Get.width,
+            padding: EdgeInsets.all(8.r), // Border width
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: ColorConstant.gradientBorderColor,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.circular(50.r),
             ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 50.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Back Button
-                IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white, size: 28.sp),
-                  onPressed: () {
-                    Get.back();
-                  },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.r),
+                gradient: LinearGradient(
+                  colors: ColorConstant.gradientScreenColor,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                SizedBox(height: 20.h),
-
-                // Heading
-                Text(
-                  'About You',
-                  style: TextStyle(
-                    fontSize: 28.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 10.h),
-
-                // Subheading
-                Text(
-                  'Answer some questions to let you get started with your profile.',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.white.withOpacity(0.7),
-                  ),
-                ),
-                SizedBox(height: 40.h),
-
-                // Age Dropdowns
-                Row(
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 50.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: DropdownButtonFormField<String>(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.2),
-                          hintText: 'Year',
-                          hintStyle:
-                              TextStyle(color: Colors.white.withOpacity(0.6)),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12.r),
-                            borderSide: BorderSide.none,
+                    // Back Button
+                    IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white, size: 28.sp),
+                      onPressed: () {
+                        Get.back();
+                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                      },
+                    ),
+                    SizedBox(height: 20.h),
+
+                    // Heading
+                    Text(
+                      'About You',
+                      style: TextStyle(
+                        fontSize: 28.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+
+                    // Subheading
+                    Text(
+                      'Answer some questions to let you get started with your profile.',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Colors.white.withOpacity(0.7),
+                      ),
+                    ),
+                    SizedBox(height: 40.h),
+
+                    // Age Dropdowns
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.2),
+                              hintText: 'Year',
+                              hintStyle:
+                                  TextStyle(color: Colors.white.withOpacity(0.6)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.r),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            dropdownColor: Colors.blueGrey,
+                            value: selectedYear,
+                            onChanged: (newValue) {
+                              setState(() {
+                                selectedYear = newValue;
+                              });
+                            },
+                            items: years.map((year) {
+                              return DropdownMenuItem<String>(
+                                value: year,
+                                child: Text(
+                                  year,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
-                        dropdownColor: Colors.blueGrey,
-                        value: selectedYear,
-                        onChanged: (newValue) {
-                          setState(() {
-                            selectedYear = newValue;
-                          });
-                        },
-                        items: years.map((year) {
-                          return DropdownMenuItem<String>(
-                            value: year,
-                            child: Text(
-                              year,
-                              style: TextStyle(color: Colors.white),
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white.withOpacity(0.2),
+                              hintText: 'Month',
+                              hintStyle:
+                                  TextStyle(color: Colors.white.withOpacity(0.6)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.r),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    SizedBox(width: 10.w),
-                    Expanded(
-                      child: DropdownButtonFormField<String>(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.2),
-                          hintText: 'Month',
-                          hintStyle:
-                              TextStyle(color: Colors.white.withOpacity(0.6)),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12.r),
-                            borderSide: BorderSide.none,
+                            dropdownColor: Colors.blueGrey,
+                            value: selectedMonth,
+                            onChanged: (newValue) {
+                              setState(() {
+                                selectedMonth = newValue;
+                              });
+                            },
+                            items: months.map((month) {
+                              return DropdownMenuItem<String>(
+                                value: month,
+                                child: Text(
+                                  month,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
-                        dropdownColor: Colors.blueGrey,
-                        value: selectedMonth,
-                        onChanged: (newValue) {
-                          setState(() {
-                            selectedMonth = newValue;
-                          });
+                      ],
+                    ),
+                    SizedBox(height: 20.h),
+
+                    // Gender Selection
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GenderButton(
+                          gender: 'Male',
+                          selectedGender: selectedGender,
+                          onPressed: () {
+                            setState(() {
+                              selectedGender = 'Male';
+                            });
+                          },
+                        ),
+                        GenderButton(
+                          gender: 'Female',
+                          selectedGender: selectedGender,
+                          onPressed: () {
+                            setState(() {
+                              selectedGender = 'Female';
+                            });
+                          },
+                        ),
+                        GenderButton(
+                          gender: 'Non-Binary',
+                          selectedGender: selectedGender,
+                          onPressed: () {
+                            setState(() {
+                              selectedGender = 'Non-Binary';
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 40.h),
+
+                    // Next Button
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.to(( )=>AboutYouScreen2());
+                          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                         },
-                        items: months.map((month) {
-                          return DropdownMenuItem<String>(
-                            value: month,
-                            child: Text(
-                              month,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          );
-                        }).toList(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.cyan,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 16.h, horizontal: 100.w),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(47.r),
+                          ),
+                        ),
+                        child: Text(
+                          'Next',
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
                       ),
+                    ),
+
+                    Spacer(),
+
+                    // User Agreement and Privacy Policy
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'User Agreement',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                        Text(
+                          'Privacy & Cookie Policy',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                SizedBox(height: 20.h),
-
-                // Gender Selection
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GenderButton(
-                      gender: 'Male',
-                      selectedGender: selectedGender,
-                      onPressed: () {
-                        setState(() {
-                          selectedGender = 'Male';
-                        });
-                      },
-                    ),
-                    GenderButton(
-                      gender: 'Female',
-                      selectedGender: selectedGender,
-                      onPressed: () {
-                        setState(() {
-                          selectedGender = 'Female';
-                        });
-                      },
-                    ),
-                    GenderButton(
-                      gender: 'Non-Binary',
-                      selectedGender: selectedGender,
-                      onPressed: () {
-                        setState(() {
-                          selectedGender = 'Non-Binary';
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 40.h),
-
-                // Next Button
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.to(( )=>AboutYouScreen2());
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.cyan,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 16.h, horizontal: 100.w),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(47.r),
-                      ),
-                    ),
-                    child: Text(
-                      'Next',
-                      style: TextStyle(fontSize: 18.sp),
-                    ),
-                  ),
-                ),
-
-                Spacer(),
-
-                // User Agreement and Privacy Policy
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'User Agreement',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                    Text(
-                      'Privacy & Cookie Policy',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
           ),
         ),

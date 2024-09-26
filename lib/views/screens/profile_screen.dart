@@ -1,5 +1,6 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:e_squadifi/constants/app_data.dart';
+import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/navigation_controller.dart';
 import 'package:e_squadifi/controllers/profile_controller.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
@@ -84,8 +85,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               CustomPopUpDialog(
                                 controller: controller,
                                // icon: null,
-                                width: 190.w,
-                                height: 55.h,
+                                width: 190.w ,
+                                height: Get.height/2.8.h,
                                 color: ColorConstant.cyanBlue,
                                 child: Container(
                                   padding: EdgeInsets.all(18.r),
@@ -156,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           padding: 4.r,
                           borderRadius: 100.r,
                           color: ColorConstant.greyColor,
-                          imageExist: true,
+                          image:  ImageConstants.profilePic,
                         ),
                         SizedBox(
                           width: 8.w,

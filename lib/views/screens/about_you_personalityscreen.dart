@@ -1,5 +1,6 @@
 import 'package:e_squadifi/views/screens/otp_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:get/get.dart'; // Assuming your constants file
@@ -128,6 +129,7 @@ class _AboutYouPersonalityScreenState extends State<AboutYouPersonalityScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         Get.to(( )=> OtpScreen());
+                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.cyan,
