@@ -58,9 +58,17 @@ class _PlayVideoWidgetState extends State<PlayVideoWidget> {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(widget.borderRadius ?? 0), // Set border radius here
-                      child: AspectRatio(
-                        aspectRatio: squadPodController.controller.value.aspectRatio,
-                        child: VideoPlayer(squadPodController.controller),
+                      child: Container(
+                        width: widget.width, // Adjusts to full width of parent
+                        height: widget.height, // Adjusts to full height of parent
+                        child: FittedBox(
+                          fit: BoxFit.cover, // Adjust the fit based on your preference (BoxFit.cover, BoxFit.contain, etc.)
+                          child: SizedBox(
+                            width: squadPodController.controller.value.size.width,
+                            height: squadPodController.controller.value.size.height,
+                            child: VideoPlayer(squadPodController.controller),
+                          ),
+                        ),
                       ),
                     );
                   } else {
@@ -68,8 +76,7 @@ class _PlayVideoWidgetState extends State<PlayVideoWidget> {
                       child: Container(
                         height: 30.h,
                         width: 30.w,
-                        child: Center(
-                            child: CircularProgressIndicator(color: Colors.white)),
+                        child: CircularProgressIndicator(color: Colors.white),
                       ),
                     );
                   }
