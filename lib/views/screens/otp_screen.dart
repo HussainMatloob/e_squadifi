@@ -1,3 +1,4 @@
+import 'package:e_squadifi/views/screens/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
@@ -108,7 +109,9 @@ class _OtpScreenState extends State<OtpScreen> {
                   // Verify Code Button
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAll(( )=>BottomNavBar());
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.cyan,
                         padding: EdgeInsets.symmetric(
