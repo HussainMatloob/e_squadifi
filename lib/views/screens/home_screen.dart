@@ -33,18 +33,47 @@ class _HomeScreenState extends State<HomeScreen>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-
                               CustomText("Just Play",color: ColorConstant.whiteColor,fw: FontWeight.w700,size: 20,),
-
                           Row(
                             children: [
-                              Container(
-                                height: 40.h,
-                                width: 40.w,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(48.r),
-                                    color: Colors.white38
+                              GestureDetector(
+                               onTap: (){
+                                 showModalBottomSheet(
+                                   backgroundColor: ColorConstant.deepPurpleColor,
+                                   context: context,
+                                   shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.vertical(
+                                       top: Radius.circular(25.0),
+                                     ),
+                                   ),
+                                   builder: (BuildContext context) {
+                                     // Wrapping the content inside a ClipRRect
+                                     return ClipRRect(
+                                       borderRadius: BorderRadius.vertical(
+                                         top: Radius.circular(40.r),
+                                       ),
+                                       child: Container(
+                                         height:  563.h, // Adjust height as per outer container
+                                         width: 375.w,
+                                         decoration: BoxDecoration(
+                                           color:ColorConstant.deepPurpleColor,
+                                           borderRadius: BorderRadius.vertical(
+                                             top: Radius.circular(40.r),
+                                           ),
+                                         ),
+                                       ),
+                                     );
+                                   },
+                                 );
+                               },
+                                child: Container(
+                                  height: 40.h,
+                                  width: 40.w,
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(48.r),
+                                      color: Colors.white38
+                                  ),
+                                  child: Center(child: Icon(Icons.search,color: ColorConstant.whiteColor,),),
                                 ),
-                                child: Center(child: Icon(Icons.search,color: ColorConstant.whiteColor,),),
                               ),
                               SizedBox(width: 8.w,),
                               Container(
@@ -100,8 +129,6 @@ class _HomeScreenState extends State<HomeScreen>
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-
-
                             ],
                           ),
                         ),
@@ -110,13 +137,13 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
             ),
-
           ],
 
         ),
       ),
     );
   }
+
 }
 
 
