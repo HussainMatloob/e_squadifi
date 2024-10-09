@@ -29,14 +29,10 @@ class SquadPodController extends GetxController{
     update();
   }
 
-
-
-
   void circularImages(int index){
      circularImageIndex=index;
      update();
   }
-
 
   late VideoPlayerController controller;
   late Future initializeVideoPlayerFuture;
