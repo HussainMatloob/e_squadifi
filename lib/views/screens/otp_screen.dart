@@ -45,7 +45,7 @@ class _OtpScreenState extends State<OtpScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.r),
                 gradient: LinearGradient(
-                  colors: ColorConstant.gradientScreenColor,
+                  colors: ColorConstant.primaryGradiantColors,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),

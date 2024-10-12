@@ -54,7 +54,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
 
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors:ColorConstant.gradientScreenColor,
+                    colors:ColorConstant.primaryGradiantColors,
 
                     begin: FractionalOffset(1.0,1.0),
                     end: FractionalOffset(-0.2,0.1),

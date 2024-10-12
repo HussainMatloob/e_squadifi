@@ -58,7 +58,7 @@ class _AboutYouScreen2State extends State<AboutYouScreen2> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.r),
                 gradient: LinearGradient(
-                  colors: ColorConstant.gradientScreenColor,
+                  colors: ColorConstant.primaryGradiantColors,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
