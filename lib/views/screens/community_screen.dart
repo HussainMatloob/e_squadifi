@@ -103,7 +103,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 children: [
                   ButtonWidget(
                     text: "Get Started",
-                    width: 311.w,
+                   // width: 311.w,
+                    paddingHorizontal: 70.w,
                     height: 51.h,
                     color: ColorConstant.cyanBlue,
                     radius: 47.r,

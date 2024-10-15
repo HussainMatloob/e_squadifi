@@ -51,7 +51,7 @@ class _AboutYouPersonalityScreenState extends State<AboutYouPersonalityScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.r),
             gradient: LinearGradient(
-              colors: ColorConstant.gradientScreenColor,
+              colors: ColorConstant.primaryGradiantColor,
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

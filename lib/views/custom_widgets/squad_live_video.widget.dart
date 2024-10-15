@@ -117,21 +117,23 @@ class _SquadLiveVideoWidgetState extends State<SquadLiveVideoWidget> {
                     ),
                   ],),
                 ),
-              Row(children: [
-                CustomImageContainer(image: ImageConstants.pubGImage,
-                height: 23.h,
-                  width: 23.w,
-                  borderRadius: 100.r,
-                ),
-                 SizedBox(width: 5.w,),
-                 Column(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                   CustomText(widget.videoName,fw: FontWeight.w600,size: 12.sp,color: ColorConstant.whiteColor,),
-                   CustomText(widget.ownerName,fw: FontWeight.w400,size: 10.sp,color: ColorConstant.whiteColor,),
-                 ],)
-              ],)
+              FittedBox(
+                child: Row(children: [
+                  CustomImageContainer(image: ImageConstants.pubGImage,
+                  height: 23.h,
+                    width: 23.w,
+                    borderRadius: 100.r,
+                  ),
+                   SizedBox(width: 5.w,),
+                   Column(
+                     mainAxisAlignment: MainAxisAlignment.start,
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                     CustomText(widget.videoName,fw: FontWeight.w600,size: 12.sp,color: ColorConstant.whiteColor,),
+                     CustomText(widget.ownerName,fw: FontWeight.w400,size: 10.sp,color: ColorConstant.whiteColor,),
+                   ],)
+                ],),
+              )
               ],),
             ),
 

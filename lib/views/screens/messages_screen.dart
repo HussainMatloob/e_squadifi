@@ -46,7 +46,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
             child:  Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors:ColorConstant.gradientScreenColor,
+                  colors:ColorConstant.primaryGradiantColor,
                   begin: FractionalOffset(1.0,1.0),
                   end: FractionalOffset(-0.2,0.1),
                   // begin: Alignment.topLeft, // Start the gradient at top-left
@@ -63,32 +63,36 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 10.w,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: (){
-                                  Get.back();
-                                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                },
-                                child: Container(
-                                  height: 40.h,
-                                  width: 40.w,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white38,
-                                    borderRadius: BorderRadius.circular(100.r),
+                      FittedBox(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: (){
+                                    Get.back();
+                                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                                  },
+                                  child: Container(
+                                    height: 40.h,
+                                    width: 40.w,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white38,
+                                      borderRadius: BorderRadius.circular(100.r),
+                                    ),
+                                    child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
                                   ),
-                                  child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
                                 ),
-                              ),
-                              SizedBox(width: 15.w,),
-                              CustomText("Community Name",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
-                            ],),
-                          Icon(Icons.video_camera_front_outlined,color: ColorConstant.whiteColor,),
-                          Icon(Icons.call_outlined,color: ColorConstant.whiteColor,)
-                        ],
+                                SizedBox(width: 15.w,),
+                                CustomText("Community Name",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
+                              ],),
+                            SizedBox(width: 10.w,),
+                            Icon(Icons.video_camera_front_outlined,color: ColorConstant.whiteColor,),
+                            SizedBox(width: 10.w,),
+                            Icon(Icons.call_outlined,color: ColorConstant.whiteColor,)
+                          ],
+                        ),
                       ),
 
                       Expanded(

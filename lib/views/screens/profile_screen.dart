@@ -203,7 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: ColorConstant.gradientScreenColor,
+                      colors: ColorConstant.primaryGradiantColor,
                       begin: FractionalOffset(1.0, 1.0),
                       end: FractionalOffset(-0.2, 0.1),
                       stops: [0.0, 0.2, 0.5, 0.8, 1.0],
@@ -225,7 +225,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Container(
                         // height: Get.height,
-                        width: 155.w,
+                       width: 155.w,
                         margin: EdgeInsets.only(top: 35.h),
                         decoration: BoxDecoration(
                             color: ColorConstant.greyColor,

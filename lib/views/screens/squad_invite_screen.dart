@@ -41,7 +41,7 @@ class _SquadInviteScreenState extends State<SquadInviteScreen> {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: ColorConstant.gradientScreenColor,
+                  colors: ColorConstant.primaryGradiantColor,
                   begin: FractionalOffset(1.0, 1.0),
                   end: FractionalOffset(-0.2, 0.1),
                   // begin: Alignment.topLeft, // Start the gradient at top-left
@@ -298,37 +298,39 @@ class _SquadInviteScreenState extends State<SquadInviteScreen> {
                             topLeft: Radius.circular(15.r),
                             bottomRight: Radius.circular(50.r),
                             bottomLeft: Radius.circular(50.r))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ButtonWidget(
-                          paddingHorizontal: 15.w,
-                          height: 39.h,
-                          text: "Migdh_3hjhdjkkla_y8778",
-                          textSize: 13.sp,
-                          fw: FontWeight.w400,
-                          textColor: ColorConstant.whiteColor,
-                          color: ColorConstant.greyLightColor,
-                          radius: 12.r,
-                          onTap: () {},
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        ButtonWidget(
-                          paddingHorizontal: 15.w,
-                          height: 38.h,
-                          text: "send Link",
-                          textSize: 13.sp,
-                          fw: FontWeight.w400,
-                          textColor: ColorConstant.whiteColor,
-                          color: ColorConstant.cyanBlue,
-                          radius: 100.r,
-                          onTap: () {
-                            Get.to(() => CreateSquadScreen());
-                          },
-                        ),
-                      ],
+                    child: FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ButtonWidget(
+                            paddingHorizontal: 15.w,
+                            height: 39.h,
+                            text: "Migdh_3hjhdjkkla_y8778",
+                            textSize: 13.sp,
+                            fw: FontWeight.w400,
+                            textColor: ColorConstant.whiteColor,
+                            color: ColorConstant.greyLightColor,
+                            radius: 12.r,
+                            onTap: () {},
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                           ButtonWidget(
+                              paddingHorizontal: 15.w,
+                              height: 38.h,
+                              text: "send Link",
+                              textSize: 13.sp,
+                              fw: FontWeight.w400,
+                              textColor: ColorConstant.whiteColor,
+                              color: ColorConstant.cyanBlue,
+                              radius: 100.r,
+                              onTap: () {
+                                Get.to(() => CreateSquadScreen());
+                              },
+                            ),
+                        ],
+                      ),
                     ),
                   )
                 ],

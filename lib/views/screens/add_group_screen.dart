@@ -38,7 +38,7 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
         child:  Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors:ColorConstant.gradientScreenColor,
+              colors:ColorConstant.primaryGradiantColor,
               begin: FractionalOffset(1.0,1.0),
               end: FractionalOffset(-0.2,0.1),
               // begin: Alignment.topLeft, // Start the gradient at top-left

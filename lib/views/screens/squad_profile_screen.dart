@@ -37,7 +37,7 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: ColorConstant.gradientScreenColor,
+              colors: ColorConstant.primaryGradiantColor,
 
               begin: FractionalOffset(1.0, 1.0),
               end: FractionalOffset(-0.2, 0.1),
@@ -108,71 +108,74 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                     SizedBox(
                       height: 30.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CustomImageContainer(
-                          image: ImageConstants.profileImagesList[2],
-                          width: 126.w,
-                          height: 111.h,
-                          borderRadius: 16.r,
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              "Wade Warren",
-                              color: ColorConstant.whiteColor,
-                              fw: FontWeight.w700,
-                              size: 22.sp,
-                            ),
-                            Row(
-                              children: [
-                                ButtonWidget(
-                                  radius: 6.r,
-                                  paddingHorizontal: 10.w,
-                                  height: 22.h,
-                                  text: "Skill level",
+                    FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomImageContainer(
+                            image: ImageConstants.profileImagesList[2],
+                            width: 126.w,
+                            height: 111.h,
+                            borderRadius: 16.r,
+                          ),
+                          SizedBox(
+                            width: 8.w,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                               CustomText(
+                                  "Wade Warren",
+                                  color: ColorConstant.whiteColor,
                                   fw: FontWeight.w700,
-                                  textSize: 10.sp,
-                                  color: ColorConstant.greyColor,
-                                  textColor: ColorConstant.whiteColor,
+                                  size: 22.sp,
                                 ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                ButtonWidget(
-                                  radius: 6.r,
-                                  paddingHorizontal: 10.w,
-                                  height: 22.h,
-                                  text: "RPG",
-                                  fw: FontWeight.w700,
-                                  textSize: 10.sp,
-                                  color: ColorConstant.greyColor,
-                                  textColor: ColorConstant.whiteColor,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                            ButtonWidget(
-                              radius: 6.r,
-                              paddingHorizontal: 10.w,
-                              height: 22.h,
-                              text: "Preferred Role",
-                              fw: FontWeight.w700,
-                              textSize: 10.sp,
-                              color: ColorConstant.greyColor,
-                              textColor: ColorConstant.whiteColor,
-                            )
-                          ],
-                        ),
-                      ],
+
+                              Row(
+                                children: [
+                                  ButtonWidget(
+                                    radius: 6.r,
+                                    paddingHorizontal: 10.w,
+                                    height: 22.h,
+                                    text: "Skill level",
+                                    fw: FontWeight.w700,
+                                    textSize: 10.sp,
+                                    color: ColorConstant.greyColor,
+                                    textColor: ColorConstant.whiteColor,
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  ButtonWidget(
+                                    radius: 6.r,
+                                    paddingHorizontal: 10.w,
+                                    height: 22.h,
+                                    text: "RPG",
+                                    fw: FontWeight.w700,
+                                    textSize: 10.sp,
+                                    color: ColorConstant.greyColor,
+                                    textColor: ColorConstant.whiteColor,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              ButtonWidget(
+                                radius: 6.r,
+                                paddingHorizontal: 10.w,
+                                height: 22.h,
+                                text: "Preferred Role",
+                                fw: FontWeight.w700,
+                                textSize: 10.sp,
+                                color: ColorConstant.greyColor,
+                                textColor: ColorConstant.whiteColor,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
