@@ -30,4 +30,7 @@ class ImageConstants {
   ];
   static String memberPost="asset/images/member_post.png";
 
+  static String wildAvatar="asset/images/Wild_avatar.png";
+  static String wildPic="asset/images/wild_pic.png";
+
 }

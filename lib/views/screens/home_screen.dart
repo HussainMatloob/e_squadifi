@@ -1,6 +1,8 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
+import 'package:e_squadifi/views/custom_widgets/home_people_widget.dart';
+import 'package:e_squadifi/views/custom_widgets/latest_stream_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen>
 
                                   },
                                 ),
-                                SizedBox(height: 20.h,),
+                                SizedBox(height: 10.h,),
                                 CustomText("Player Name",fw: FontWeight.w700,size: 11.sp,color: ColorConstant.whiteColor,)
                               ],
                                 ),
@@ -123,12 +125,30 @@ class _HomeScreenState extends State<HomeScreen>
 
                         ),
                       ),
+                      SizedBox(height: 20.h,),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(children: [
+                                  for(int i=0;i<=10;i++)
+                                    HomePeopleWidget(
+                                      image: ImageConstants.profileImagesList[1],
+                                      name: "Wade Warren",
+                                    ),
+                                ],),
+                              ),
+                              SizedBox(height: 20.h,),
+                              CustomText("Latest Stream &",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
+                              CustomText("Podcasts",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
+                             SizedBox(height: 15.h,),
+                              for(int i=0;i<=3;i++)
+                              LatestStreamWidget(),
+                              SizedBox(height: 100.h,),
                             ],
                           ),
                         ),
@@ -137,6 +157,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
             ),
+
           ],
 
         ),

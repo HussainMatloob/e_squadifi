@@ -15,7 +15,10 @@ class CustomTextFormField extends StatefulWidget {
   final bool isPassword;
   final Color? color;
   final FocusNode? focusNode;
-
+  final Color? fillColor;
+  final double? hintTextSize;
+  final Color? hintTextColor;
+  final FontWeight? hintTextFw;
   const CustomTextFormField({
     super.key,
     this.hintText,
@@ -29,7 +32,7 @@ class CustomTextFormField extends StatefulWidget {
     this.height,
     this.isPassword = false,
     this.color,
-    this.focusNode
+    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw
   });
 
   @override
@@ -58,9 +61,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintStyle: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16.sp,
-            color: Color(0xFF9E9E9E),
+            fontWeight:widget.hintTextFw??FontWeight.w400,
+            fontSize: widget.hintTextSize??16.sp,
+            color: widget.hintTextColor??Color(0xFF9E9E9E),
 
           ),
           hintText: widget.hintText,
@@ -85,7 +88,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             borderSide: BorderSide(color: widget.errorBorderColor, width: 2.0.w),
           ),
           suffixIcon:null,
-            fillColor: ColorConstant.greyColor,
+            fillColor: widget.fillColor??ColorConstant.greyColor,
           filled: true
         ),
         validator: (value) {

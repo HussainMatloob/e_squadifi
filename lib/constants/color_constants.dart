@@ -50,6 +50,7 @@ static List<Color> tournamentGradientColor=[Color(0xFF6D7D8B),
 ];
 static List<Color> profilePicGradient=[ Color(0xFFCA00FF),Color(0xFF3957FE)];
 static Color cyanBlue=Color(0xFF0A89AD);
+static Color lighterCyanBlue = Color(0xFF99CCE1);
 
 static Color iconColor=Color(0xFFA897CD);
 static Color purpleLightColor= Color(0xFF9354BC);
@@ -61,7 +62,10 @@ static Color redColor=Colors.red;
 static Color messageBorderColor=Color(0xFF522B7A);
 static Color senderMessageColor=Color(0x3A51751C);
 static Color squadPurpleColor=Color(0xFF884DB1);
- static Color darkGrayColor=Color(0xFF18203A);
- static Color grayColor=Color(0xFF35383F);
+static Color darkGrayColor=Color(0xFF18203A);
+static Color grayColor=Color(0xFF35383F);
+static List<Color> wildCatColor=[Color(0xFF0A89AD), Color(0xFF884DB1)]; // #884DB1];
+
+static Color searchFieldColor = Color(0x80353278);
 }
 
