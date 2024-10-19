@@ -52,14 +52,14 @@ class ButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius??0.r),
             border: Border.all(width: borderWidth??0.w,color:borderColor??Colors.transparent),
         ),
-        child: icon==null?Center(child:  CustomText( text,fw: fw,size: textSize,color: textColor,),) :Row(
+        child:icon==null?Center(child:  CustomText( text,fw: fw,size: textSize,color: textColor,),) :icon!=null&&text!=null?Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
           icon!,
             SizedBox(width: sizedBoxWidth==null?7.w:sizedBoxWidth,),
             CustomText( text,fw: fw,size: textSize,color: textColor,),
           ],
-        ),
+        ):Center(child: icon,),
       ),
     );
   }
