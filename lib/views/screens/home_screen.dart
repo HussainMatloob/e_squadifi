@@ -5,7 +5,7 @@ import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/home_page_profiles_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/latest_stream_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
-import 'package:e_squadifi/views/screens/legends_screen.dart';
+import 'package:e_squadifi/views/screens/just_play_screen.dart';
 import 'package:e_squadifi/views/screens/squad_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     InkWell(
                                       onTap: (){
-                                        Get.to(( )=>LegendsScreen());
+                                        Get.to(( )=>JustPlayScreen());
                                       },
                                       child: Container(
                                         height: 40.h,

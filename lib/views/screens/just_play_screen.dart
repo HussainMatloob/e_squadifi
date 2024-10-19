@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class LegendsScreen extends StatefulWidget {
+class JustPlayScreen extends StatefulWidget {
 
-  const LegendsScreen({super.key,});
+  const JustPlayScreen({super.key,});
   @override
-  State<LegendsScreen> createState() => _LegendsScreenState();
+  State<JustPlayScreen> createState() => _JustPlayScreenState();
 }
-class _LegendsScreenState extends State<LegendsScreen> {
+class _JustPlayScreenState extends State<JustPlayScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
