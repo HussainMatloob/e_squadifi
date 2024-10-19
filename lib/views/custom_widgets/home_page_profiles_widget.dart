@@ -4,16 +4,18 @@ import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-class HomePeopleWidget extends StatelessWidget {
+class HomePageProfilesWidget extends StatelessWidget {
   final String? image;
   final String? name;
-  const HomePeopleWidget({super.key, this.image, this.name});
+  final VoidCallback? onTap;
+  const HomePageProfilesWidget({super.key, this.image, this.name, this.onTap});
   @override
   Widget build(BuildContext context) {
     return  Padding(
       padding: EdgeInsets.only(right: 5.w),
       child: Column(children: [
         CustomImageContainer(
+          onTap: onTap,
           width: 173.w,
           height: 153.h,
           image: image,

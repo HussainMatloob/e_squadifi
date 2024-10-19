@@ -129,7 +129,7 @@ class _InviteSquadMemberScreenState extends State<InviteSquadMemberScreen> {
                                     color: ColorConstant.purple,
                                     internalPadding: 5.r,
                                     onTap: () {
-                                      Get.to(() => SquadProfileScreen());
+                                      Get.to(() => SquadProfileScreen(image: ImageConstants.profileImagesList[3],));
                                     },
                                   ),
                                   SizedBox(

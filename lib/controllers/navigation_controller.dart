@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NavController extends GetxController{
+
  int selectedNavIndex=0;
  bool groupExist=false;
   void navIndex(index){
@@ -25,4 +26,15 @@ class NavController extends GetxController{
    ProfileScreen(),
  ];
 
+ bool isBottomSheetVisible = false;
+
+ void toggleBottomSheet() {
+     isBottomSheetVisible = !isBottomSheetVisible;
+     update();
+ }
+
+ void setBottomSheetFalse(){
+   isBottomSheetVisible=false;
+   update();
+ }
 }

@@ -4,7 +4,6 @@ import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_colum_widget.dart';
-import 'package:e_squadifi/views/custom_widgets/reuseable_friends_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class SquadProfileScreen extends StatefulWidget {
-  const SquadProfileScreen({super.key});
+  final String? image;
+  const SquadProfileScreen({super.key, this.image});
 
   @override
   State<SquadProfileScreen> createState() => _SquadProfileScreenState();
@@ -113,7 +113,7 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           CustomImageContainer(
-                            image: ImageConstants.profileImagesList[2],
+                            image: widget.image,
                             width: 126.w,
                             height: 111.h,
                             borderRadius: 16.r,
@@ -131,7 +131,6 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                                   fw: FontWeight.w700,
                                   size: 22.sp,
                                 ),
-
                               Row(
                                 children: [
                                   ButtonWidget(
@@ -303,7 +302,7 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                         ),
                         FittedBox(
                           child: ButtonWidget(
-                            text: "Relaxation and self-core",
+                            text: "Relaxation and self-care",
                             height: 39.h,
                             color: ColorConstant.cyanBlue,
                             radius: 90.r,

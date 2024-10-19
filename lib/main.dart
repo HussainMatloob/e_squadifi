@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'firebase_options.dart';
 import 'package:device_preview/device_preview.dart';
 
-
+late Size mq;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

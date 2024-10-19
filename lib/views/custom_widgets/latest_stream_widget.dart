@@ -13,7 +13,7 @@ class LatestStreamWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 15.h),
-      height: 412.h,
+     // height: 412.h,
       width: 327.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.sp),
         gradient: LinearGradient(
@@ -76,7 +76,7 @@ class LatestStreamWidget extends StatelessWidget {
             hintTextFw: FontWeight.w400,
             hintTextSize: 12.sp,
             fillColor: ColorConstant.searchFieldColor,
-            height: 42.h,
+           // height: 42.h,
             hintText: "Write down your comment",
           ),
         ),
