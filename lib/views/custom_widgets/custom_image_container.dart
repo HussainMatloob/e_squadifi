@@ -50,7 +50,7 @@ class CustomImageContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius ?? 0.r), // Set the radius for the container
               border: Border.all(
                 width: borderWidth ?? 0.w,
-                color:index==profileController.selectedIndex? borderColor ?? Colors.transparent: Colors.transparent, // Default transparent if no border color
+                color:index==null?borderColor??Colors.transparent:index==profileController.selectedIndex? borderColor ?? Colors.transparent: Colors.transparent, // Default transparent if no border color
               ),
               color: color??Colors.transparent
             ),
@@ -66,7 +66,6 @@ class CustomImageContainer extends StatelessWidget {
           ),
         );
       },
-
     );
 
   }

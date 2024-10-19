@@ -59,7 +59,7 @@ class _SquadPodVideoScreenState extends State<SquadPodVideoScreen>  with SingleT
                 child:  Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors:ColorConstant.primaryGradiantColors,
+                      colors:ColorConstant.primaryGradiantColor,
                       begin: FractionalOffset(1.0,1.0),
                       end: FractionalOffset(-0.2,0.1),
                       // begin: Alignment.topLeft, // Start the gradient at top-left
@@ -76,44 +76,50 @@ class _SquadPodVideoScreenState extends State<SquadPodVideoScreen>  with SingleT
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 10.w,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+                          FittedBox(
+                            child: Container(
+                              width: Get.width,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  InkWell(
-                                    onTap: (){
-                                      Get.back();
-                                      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                    },
-                                    child: Container(
-                                      height: 40.h,
-                                      width: 40.w,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white38,
-                                        borderRadius: BorderRadius.circular(100.r),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: (){
+                                          Get.back();
+                                          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                                        },
+                                        child: Container(
+                                          height: 40.h,
+                                          width: 40.w,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white38,
+                                            borderRadius: BorderRadius.circular(100.r),
+                                          ),
+                                          child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
+                                        ),
                                       ),
-                                      child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
-                                    ),
+                                      SizedBox(width: 15.w,),
+                                      CustomText("squad pod",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
+                                    ],),
+
+                                  ButtonWidget(
+                                    height: 38.h,
+                                    width: 115.w,
+                                    text: "Create",
+                                    textSize: 16.sp,
+                                    fw: FontWeight.w600,
+                                    textColor: ColorConstant.whiteColor,
+                                    color: ColorConstant.squadPurpleColor,
+                                    icon: Icon(Icons.surround_sound,color: ColorConstant.whiteColor,),
+                                    radius: 100.r,
+                                    onTap: (){
+                                      Get.to(( )=> SquadFriendsScreen());
+                                    },
                                   ),
-                                  SizedBox(width: 15.w,),
-                                  CustomText("squad pod",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
-                                ],),
-                              ButtonWidget(
-                                height: 38.h,
-                                width: 115.w,
-                                text: "Create",
-                                textSize: 16.sp,
-                                fw: FontWeight.w600,
-                                textColor: ColorConstant.whiteColor,
-                                color: ColorConstant.squadPurpleColor,
-                                icon: Icon(Icons.surround_sound,color: ColorConstant.whiteColor,),
-                                radius: 100.r,
-                                onTap: (){
-                                  Get.to(( )=> SquadFriendsScreen());
-                                },
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                           Expanded(
                             child: SingleChildScrollView(

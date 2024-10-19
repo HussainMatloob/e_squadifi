@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
+import 'package:device_preview/device_preview.dart';
 
+late Size mq;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -15,11 +17,17 @@ void main() async {
   // Hide status bar and navigation bar
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-  // Set the status bar style (optional, if you want to control transparency)
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // Makes status bar transparent
-    statusBarIconBrightness: Brightness.light, // Changes icon brightness
-  ));
+ // Set the status bar style (optional, if you want to control transparency)
+ //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+ //    statusBarColor: Colors.transparent, // Makes status bar transparent
+ //    statusBarIconBrightness: Brightness.light, // Changes icon brightness
+ //  ));
+
+  // runApp(
+  //     DevicePreview(
+  //         builder:(context)=>
+  //         const MyApp())
+  // );
 
   runApp(const MyApp());
 }

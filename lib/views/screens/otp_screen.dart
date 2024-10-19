@@ -1,9 +1,9 @@
-import 'package:e_squadifi/views/screens/bottom_navigation_bar.dart';
+import 'package:e_squadifi/views/screens/create_avatar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
-import 'package:get/get.dart'; // Assuming your constants file
+import 'package:get/get.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -45,7 +45,7 @@ class _OtpScreenState extends State<OtpScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.r),
                 gradient: LinearGradient(
-                  colors: ColorConstant.primaryGradiantColors,
+                  colors: ColorConstant.primaryGradiantColor,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -122,21 +122,21 @@ class _OtpScreenState extends State<OtpScreen> {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.offAll(( )=>BottomNavBar());
+                            Get.to(( )=>CreateAvatarScreen());
                             SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.cyan,
                             padding: EdgeInsets.symmetric(
-                                vertical: 16.h, horizontal: 100.w),
+                                vertical: 16.h, horizontal: 60.w),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(47.r),
                             ),
                           ),
                           child: Text(
-                            'Verify Code',
-                            style: TextStyle(fontSize: 18.sp),
-                          ),
+                              'Verify Code',
+                              style: TextStyle(fontSize: 18.sp),
+                            ),
                         ),
                       ),
 

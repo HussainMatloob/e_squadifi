@@ -1,7 +1,7 @@
 import 'package:e_squadifi/constants/color_constants.dart'; // Your custom color constants
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/screens/about_you_screen.dart';
-import 'package:e_squadifi/views/screens/auth/signup_screen1.dart';
+import 'package:e_squadifi/views/screens/authentications/signup_screen1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: ColorConstant.primaryGradiantColors,
+                  colors: ColorConstant.primaryGradiantColor,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),

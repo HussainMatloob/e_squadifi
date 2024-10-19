@@ -4,7 +4,8 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 import 'dart:typed_data';
 class SquadPodController extends GetxController{
   int circularImageIndex=-1;
-  bool isCheck=false;
+  List<int> selectedMembers=[];
+
   Uint8List? thumbnailData;
   void  generateThumbnail(videoUrl){
      thumbNail(videoUrl).then((data) {
@@ -12,12 +13,6 @@ class SquadPodController extends GetxController{
       update();
     });
   }
-
-  void inviteCheck(bool value){
-    isCheck=value;
-    update();
-  }
-
 
   Future<Uint8List?> thumbNail(String videoUrl) async {
     final uint8list = await VideoThumbnail.thumbnailData(
@@ -29,11 +24,20 @@ class SquadPodController extends GetxController{
     return uint8list;
   }
 
+  void inviteCheck(int index){
+    if((selectedMembers??[]).contains(index)){
+      selectedMembers.remove(index);
+      update();
+    }else{
+      selectedMembers.add(index);
+      update();
+    }
+  }
+
   void circularImages(int index){
      circularImageIndex=index;
      update();
   }
-
 
   late VideoPlayerController controller;
   late Future initializeVideoPlayerFuture;

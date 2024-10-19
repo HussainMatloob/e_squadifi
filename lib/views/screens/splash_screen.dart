@@ -1,7 +1,7 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
-import 'package:e_squadifi/views/screens/auth/login_screen.dart';
+import 'package:e_squadifi/views/screens/authentications/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,8 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
        body:
        Container(
          height: Get.height,
@@ -50,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
          decoration: BoxDecoration(
          gradient: LinearGradient(
-         colors:ColorConstant.primaryGradiantColors,
+         colors:ColorConstant.primaryGradiantColor,
 
            begin: FractionalOffset(1.0,1.0),
              end: FractionalOffset(-0.2,0.1),
@@ -118,54 +117,60 @@ class _SplashScreenState extends State<SplashScreen> {
                               ),
                         ),
                       ),
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.center,
-                         children: [
-                         Container(
-                           width: 136.w,    // Set width
-                           height: 102.h,   // Set height
-                           child: Image.asset(
-                             ImageConstants.vectorImage, // Replace with your image path
-                             fit: BoxFit.fill,
+                       FittedBox(
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                           Container(
+                             //width: 136.w,    // Set width
+                             height: 102.h,   // Set height
+                             child: ClipRRect(
+                               child: Image.asset(
+                                 ImageConstants.vectorImage, // Replace with your image path
+                                 fit: BoxFit.fill,
+                               ),
+                             ),
                            ),
-                         ),
-                         SizedBox(width: 10.w,),
+                           SizedBox(width: 10.w,),
 
-                         Container(
-                           margin: EdgeInsets.only(top: 35.h),
-                           width: 173.w,
-                           height: 51.h,
-                           decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(47.r),
-                             color: ColorConstant.darkBlueColor
-                           ),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 20.w,right: 10.w),
-                            child: GestureDetector(
-                              onTap:() {
-                                Get.to(()=>LoginScreen());
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                 CustomText("Get Started",
-                                 fw: FontWeight.w700,
-                                   size: 14.sp,
-                                   color: ColorConstant.whiteColor,
-                                 ),
-                                   Container(
-                                     height: 37.h,
-                                     width: 37.w,
-                                     decoration: BoxDecoration(color: ColorConstant.greyColor,
-                                     borderRadius: BorderRadius.circular(100)
+                                             Container(
+                               margin: EdgeInsets.only(top: 35.h),
+                               //width: 173.w,
+                               height: 51.h,
+                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(47.r),
+                                 color: ColorConstant.darkBlueColor
+                               ),
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 20.w,right: 10.w),
+                                child: GestureDetector(
+                                  onTap:() {
+                                    Get.to(()=>LoginScreen());
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                     CustomText("Get Started",
+                                     fw: FontWeight.w700,
+                                       size: 14.sp,
+                                       color: ColorConstant.whiteColor,
                                      ),
-                                     child: Center(child: Icon(Icons.arrow_forward,color: Colors.white,)),
-                                   ),
-                              ],),
-                            ),
-                          ),
-                         )
-                       ],)
+                                       SizedBox(width: 3.w,),
+                                       Container(
+                                         height: 37.h,
+                                         width: 37.w,
+                                         decoration: BoxDecoration(color: ColorConstant.greyColor,
+                                         borderRadius: BorderRadius.circular(100)
+                                         ),
+                                         child: Center(child: Icon(Icons.arrow_forward,color: Colors.white,)),
+                                       ),
+                                  ],),
+                                ),
+                              ),
+                             ),
+
+                         ],),
+                       )
                      ],),
                    )
                ],)
@@ -173,8 +178,7 @@ class _SplashScreenState extends State<SplashScreen> {
            ),
          )
        ),
-      ),
-    );
+      ) ;
   }
 }
 

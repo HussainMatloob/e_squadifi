@@ -1,5 +1,4 @@
 import 'package:e_squadifi/constants/color_constants.dart';
-import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

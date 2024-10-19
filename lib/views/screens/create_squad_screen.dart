@@ -54,7 +54,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
 
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors:ColorConstant.primaryGradiantColors,
+                    colors:ColorConstant.primaryGradiantColor,
 
                     begin: FractionalOffset(1.0,1.0),
                     end: FractionalOffset(-0.2,0.1),
@@ -157,7 +157,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
                                     children: [
                                       ButtonWidget(
                                         text: "Finish",
-                                        width: 311.w,
+                                        paddingHorizontal: 70.w,
                                         height: 51.h,
                                         color: ColorConstant.cyanBlue,
                                         radius: 47.r,

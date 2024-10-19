@@ -34,7 +34,7 @@ class _ShareLinkScreenState extends State<ShareLinkScreen> {
         child:  Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors:ColorConstant.primaryGradiantColors,
+              colors:ColorConstant.primaryGradiantColor,
               begin: FractionalOffset(1.0,1.0),
               end: FractionalOffset(-0.2,0.1),
               // begin: Alignment.topLeft, // Start the gradient at top-left
@@ -51,33 +51,35 @@ class _ShareLinkScreenState extends State<ShareLinkScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 10.w,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          ReuseableGradientContainer(
-                            height: 62.h,
-                            width: 63.w,
-                            borderRadius: 28.r,
-                            gradientColor: ColorConstant.profilePicGradient,
-                            padding: 2.r,
-                            image: ImageConstants.profileImagesList[3],
-                            color: ColorConstant.purple,
-                            internalPadding: 5.r,
-                          ),
-                          SizedBox(width: 15.w,),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText("Community Name",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
-                              CustomText("Community Group",fw: FontWeight.w400,size: 14.sp,color: ColorConstant.whiteColor,)
-                            ],),
+                  FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            ReuseableGradientContainer(
+                              height: 62.h,
+                              width: 63.w,
+                              borderRadius: 28.r,
+                              gradientColor: ColorConstant.profilePicGradient,
+                              padding: 2.r,
+                              image: ImageConstants.profileImagesList[3],
+                              color: ColorConstant.purple,
+                              internalPadding: 5.r,
+                            ),
+                            SizedBox(width: 15.w,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText("Community Name",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
+                                CustomText("Community Group",fw: FontWeight.w400,size: 14.sp,color: ColorConstant.whiteColor,)
+                              ],),
 
-                        ],),
-                      Icon(Icons.more_vert,color: ColorConstant.whiteColor,)
-                    ],
+                          ],),
+                        Icon(Icons.more_vert,color: ColorConstant.whiteColor,)
+                      ],
+                    ),
                   ),
                   SizedBox(height: 50.w,),
                   Expanded(

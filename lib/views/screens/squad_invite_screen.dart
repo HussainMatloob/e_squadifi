@@ -41,7 +41,7 @@ class _SquadInviteScreenState extends State<SquadInviteScreen> {
             child:  Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors:ColorConstant.primaryGradiantColors,
+                  colors:ColorConstant.primaryGradiantColor,
                   begin: FractionalOffset(1.0,1.0),
                   end: FractionalOffset(-0.2,0.1),
                   // begin: Alignment.topLeft, // Start the gradient at top-left
@@ -149,63 +149,80 @@ class _SquadInviteScreenState extends State<SquadInviteScreen> {
                             Divider(color: ColorConstant.greyColor,),
                             SizedBox(height: 16.h,),
                             Expanded(
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    for(int i=0;i<20;i++)
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              child: ListView.builder(
+                                  itemCount: 30,
+                                  itemBuilder: (context,index){
+                                    return   Padding(
+                                      padding:EdgeInsets.only(bottom: 10.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Row(children: [
-                                            ReuseableGradientContainer(
-                                              height: 50.h,
-                                              width: 50.w,
-                                              borderRadius: 50.r,
-                                              gradientColor: ColorConstant.profilePicGradient,
-                                              padding: 2.r,
-                                              image: ImageConstants.profileImagesList[1],
-                                              color: ColorConstant.deepPurpleColor,
-                                              internalPadding: 5.r,
-                                            ),
-                                            SizedBox(width: 10.w,),
-                                            CustomText("Player Name",color: ColorConstant.whiteColor,fw: FontWeight.w400,size: 16,),
-
-                                          ],),
+                                          Row(
+                                            children: [
+                                              ReuseableGradientContainer(
+                                                height: 50.h,
+                                                width: 50.w,
+                                                borderRadius: 50.r,
+                                                gradientColor: ColorConstant
+                                                    .profilePicGradient,
+                                                padding: 2.r,
+                                                image: ImageConstants
+                                                    .profileImagesList[1],
+                                                color: ColorConstant
+                                                    .deepPurpleColor,
+                                                internalPadding: 5.r,
+                                              ),
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              CustomText(
+                                                "Player Name",
+                                                color: ColorConstant.whiteColor,
+                                                fw: FontWeight.w400,
+                                                size: 16,
+                                              ),
+                                            ],
+                                          ),
                                           CheckboxTheme(
                                             data: CheckboxThemeData(
                                               shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(4.r), // Optional, to make the border rounded
+                                                borderRadius:
+                                                BorderRadius.circular(4
+                                                    .r), // Optional, to make the border rounded
                                                 side: BorderSide(
-                                                  color: Color(0x261B0D38), // #1B0D38 with 15% opacity
-                                                  width: 1.5.w,               // Border width
+                                                  color: Color(
+                                                      0x261B0D38), // #1B0D38 with 15% opacity
+                                                  width: 1.5.w, // Border width
                                                 ),
                                               ),
-                                              fillColor: MaterialStateProperty.resolveWith((states) {
-                                                if (states.contains(MaterialState.selected)) {
-                                                  return ColorConstant.purpleLightColor; // Tick color when selected
+                                              fillColor: MaterialStateProperty
+                                                  .resolveWith((states) {
+                                                if (states.contains(
+                                                    MaterialState.selected)) {
+                                                  return ColorConstant
+                                                      .purpleLightColor; // Tick color when selected
                                                 }
-                                                return Colors.transparent; // Background color when unchecked
+                                                return Colors
+                                                    .transparent; // Background color when unchecked
                                               }),
-                                              checkColor: MaterialStateProperty.all(ColorConstant.blackColor), // Tick color
+                                              checkColor: MaterialStateProperty
+                                                  .all(ColorConstant
+                                                  .blackColor), // Tick color
                                             ),
                                             child: Checkbox(
-                                              value:  squadPodController.isCheck,
+                                              value: (squadPodController.selectedMembers??[]).contains(index)?true:false,
                                               onChanged: (value) {
-                                                squadPodController.inviteCheck(value!);
-
+                                                squadPodController
+                                                    .inviteCheck(index);
                                               },
                                             ),
                                           )
                                         ],
-
                                       ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
+                                    );
+                                  }),
+                            )
                           ]
                       ),
                     ),

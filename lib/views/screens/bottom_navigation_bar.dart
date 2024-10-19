@@ -1,6 +1,7 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/navigation_controller.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_bottom_sheet.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
 import 'package:e_squadifi/views/screens/profile_screen.dart';
 import 'package:e_squadifi/views/screens/your_groups_screen.dart';
@@ -46,9 +47,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50.r),
                 child: Container(
+                  height: Get.height,
+                  width: Get.width,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: ColorConstant.primaryGradiantColors,
+                      colors: ColorConstant.primaryGradiantColor,
                       begin: FractionalOffset(1.0, 1.0),
                       end: FractionalOffset(-0.2, 0.1),
                       stops: [0.0, 0.3, 0.5, 0.8, 2.0],
@@ -110,6 +113,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           ),
                         ),
                       ),
+                      if (navController.isBottomSheetVisible)
+                        CustomBottomSheet()
                     ],
                   ),
                   //
@@ -119,13 +124,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
             // Floating Action Button
             floatingActionButton:
-            CustomImageContainer(
+            navController.isBottomSheetVisible?Container():CustomImageContainer(
               width: 56.w,
               height: 56.h,
               borderRadius: 56.r / 2,
               image: ImageConstants.bottomBarLogo,
-              marginBottom: 55.h,
-              marginTop: 60.h,
+              marginBottom: Get.height/15.h,
+              marginTop: Get.height/11.h,
               marginLeft: 15.w,
             ),
 
