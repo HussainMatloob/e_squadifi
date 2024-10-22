@@ -7,8 +7,7 @@ import 'package:e_squadifi/views/screens/squad_pod_video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-
+import '../../controllers/live_streaming_controller.dart';
 class SquadLiveVideoWidget extends StatefulWidget {
   final String? videoUrl;
   final double? height;
@@ -19,27 +18,23 @@ class SquadLiveVideoWidget extends StatefulWidget {
   const SquadLiveVideoWidget({super.key,this.videoUrl,
   this.height,this.width,this.videoName,this.ownerName,this.views
   });
-
   @override
   State<SquadLiveVideoWidget> createState() => _SquadLiveVideoWidgetState();
 }
-
 class _SquadLiveVideoWidgetState extends State<SquadLiveVideoWidget> {
   @override
   SquadPodController squadPodController=Get.put(SquadPodController());
-
 
   void initState() {
     super.initState();
       squadPodController.generateThumbnail(widget.videoUrl);
   }
-
   Widget build(BuildContext context) {
     return GetBuilder<SquadPodController>(
     builder: (squadPodController){
       return GestureDetector(
         onTap: (){
-          Get.to(()=>SquadPodVideoScreen(videoUrl: widget.videoUrl,));
+          Get.to(()=>SquadPodVideoScreen(videoUrl:widget.videoUrl,));
         },
         child: Container(
           height: widget.height,
@@ -64,7 +59,6 @@ class _SquadLiveVideoWidgetState extends State<SquadLiveVideoWidget> {
                     : Center(child: CircularProgressIndicator(color: ColorConstant.whiteColor,),)  // Show a loader while generating
               ),
             ),
-
             Container(
               height: widget.height,
               width: widget.width,
@@ -136,7 +130,6 @@ class _SquadLiveVideoWidgetState extends State<SquadLiveVideoWidget> {
               )
               ],),
             ),
-
           ],),
         ),
       );

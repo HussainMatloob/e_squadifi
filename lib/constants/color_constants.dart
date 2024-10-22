@@ -70,5 +70,6 @@ static List<Color> wildCatColor=[Color(0xFF0A89AD), Color(0xFF884DB1)]; // #884D
 static Color searchFieldColor = Color(0x80353278);
 static Color bottomSheetDividerColor = Color(0xFF2B2F57);
 static Color blueColor=Colors.blue;
+static Color orangeColor=Color(0xFFF75555);
 }
 

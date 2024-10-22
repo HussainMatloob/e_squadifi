@@ -3,7 +3,7 @@ import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_friends_widget.dart';
-import 'package:e_squadifi/views/screens/squad_invite_screen.dart';
+import 'package:e_squadifi/views/screens/invite_people_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -83,7 +83,7 @@ class _SquadFriendsScreenState extends State<SquadFriendsScreen> {
                                   color: ColorConstant.squadPurpleColor,
                                   radius: 100.r,
                                   onTap: (){
-                                    Get.to(( )=>SquadInviteScreen());
+                                    Get.to(( )=>InvitePeopleScreen());
                                   },
                                 ),
 

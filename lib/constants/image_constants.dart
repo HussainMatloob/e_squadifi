@@ -32,5 +32,5 @@ class ImageConstants {
 
   static String wildAvatar="asset/images/Wild_avatar.png";
   static String wildPic="asset/images/wild_pic.png";
-
+  static String gameImage="asset/images/game_image.png";
 }

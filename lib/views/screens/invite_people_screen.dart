@@ -11,14 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class SquadInviteScreen extends StatefulWidget {
-  const SquadInviteScreen({super.key});
+class InvitePeopleScreen extends StatefulWidget {
+  const InvitePeopleScreen({super.key});
 
   @override
-  State<SquadInviteScreen> createState() => _SquadInviteScreenState();
+  State<InvitePeopleScreen> createState() => _InvitePeopleScreenState();
 }
 
-class _SquadInviteScreenState extends State<SquadInviteScreen> {
+class _InvitePeopleScreenState extends State<InvitePeopleScreen> {
   SquadPodController squadPodController=Get.put(SquadPodController());
   @override
   Widget build(BuildContext context) {

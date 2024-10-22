@@ -10,15 +10,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class SquadProfileScreen extends StatefulWidget {
+class PlayerDetailScreen extends StatefulWidget {
   final String? image;
-  const SquadProfileScreen({super.key, this.image});
-
+  const PlayerDetailScreen({super.key, this.image});
   @override
-  State<SquadProfileScreen> createState() => _SquadProfileScreenState();
+  State<PlayerDetailScreen> createState() => _PlayerDetailScreenState();
 }
-
-class _SquadProfileScreenState extends State<SquadProfileScreen> {
+class _PlayerDetailScreenState extends State<PlayerDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -95,19 +93,16 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                             ),
                           ),
                         ],
-
                       ),
                       SizedBox(height: 30.h,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-
                         children: [
                           CustomImageContainer(
                             image: widget.image,
                             width: 126.w,
                             height: 111.h,
                             borderRadius: 16.r,
-
                           ),
                           SizedBox(width: 8.w,),
                           Column(
@@ -151,15 +146,11 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                                 textColor: ColorConstant.whiteColor,
                               )
                             ],),
-
                         ],),
                     ],
-
                   ),
                 ),
-
              Divider(color:ColorConstant.purpleLightColor ,),
-
                 Container(
                     padding: EdgeInsets.symmetric(horizontal:  40.w),
                     child:  Row(
@@ -179,7 +170,7 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                         ),
                         ColumnWidget(
                           text1: "233",
-                          text2: "Friends",
+                          text2: "Followers",
                         ),
                         SizedBox(
                           height: 90.h,  // Set the desired height for the divider
@@ -190,11 +181,9 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                         ),
                         ColumnWidget(
                           text1: "233",
-                          text2: "Friends",
+                          text2: "Following",
                         ),
-
                     ],)),
-
                 Divider(color:ColorConstant.purpleLightColor,),
                 Container(
                   padding: EdgeInsets.all(20.r),
@@ -225,11 +214,8 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
                                   ],
 
                                 ),
-
-
                           ),
                   ),
-
                 Container(
                   padding: EdgeInsets.all(20.r),
                   child: Column(
@@ -291,15 +277,8 @@ class _SquadProfileScreenState extends State<SquadProfileScreen> {
 
                   ],),
                 ),
-
-
-
-
-
               ],
-
             ),
-
         ),),
     );
   }

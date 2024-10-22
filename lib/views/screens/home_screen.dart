@@ -5,8 +5,8 @@ import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/home_page_profiles_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/latest_stream_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
-import 'package:e_squadifi/views/screens/just_play_screen.dart';
-import 'package:e_squadifi/views/screens/squad_profile_screen.dart';
+import 'package:e_squadifi/views/screens/games_list_screen.dart';
+import 'package:e_squadifi/views/screens/player_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     InkWell(
                                       onTap: (){
-                                        Get.to(( )=>JustPlayScreen());
+                                        Get.to(( )=>GamesListScreen());
                                       },
                                       child: Container(
                                         height: 40.h,
@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   .profileImagesList.length; i++)
                                             HomePageProfilesWidget(
                                               onTap: (){
-                                             Get.to(()=>SquadProfileScreen(
+                                             Get.to(()=>PlayerDetailScreen(
                                                image: ImageConstants
                                                    .profileImagesList[i],
                                              ));

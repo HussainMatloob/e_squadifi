@@ -2,7 +2,7 @@ import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/pod_container_widget.dart';
-import 'package:e_squadifi/views/custom_widgets/squad_live_video.widget.dart';
+import 'package:e_squadifi/views/custom_widgets/squad_live_video_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -64,7 +64,6 @@ class _SquadPodScreenState extends State<SquadPodScreen> {
                          ],),
                       ],
                     ),
-
                 ),
               ),
               SizedBox(height: 10.h,),
@@ -74,6 +73,7 @@ class _SquadPodScreenState extends State<SquadPodScreen> {
                   padding: EdgeInsets.only(left: 20.w),
                   child: Row(children: [
                     PodContainer(
+                      videoUrl: videoUrl,
                       width: 208.w,
                       height: 172.h,
                       color1: ColorConstant.squadPurpleColor,
@@ -85,6 +85,7 @@ class _SquadPodScreenState extends State<SquadPodScreen> {
                     ),
                     SizedBox(width: 11.w,),
                     PodContainer(
+                      videoUrl: videoUrl,
                       width: 208.w,
                       height: 172.h,
                       color1: ColorConstant.cyanBlue,
@@ -136,8 +137,6 @@ class _SquadPodScreenState extends State<SquadPodScreen> {
               SizedBox(height: 80.h,)
             ]
         ),
-
-
 
     );
   }

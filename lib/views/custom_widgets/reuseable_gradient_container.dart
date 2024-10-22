@@ -15,6 +15,7 @@ class ReuseableGradientContainer extends StatelessWidget {
   final String? image;
   final double? internalPadding;
   final VoidCallback? onTap;
+  final Icon? icon;
   const ReuseableGradientContainer({super.key,
     this.stops,
     this.gradientColor,
@@ -26,7 +27,7 @@ class ReuseableGradientContainer extends StatelessWidget {
     this.color,
     this.image,
     this.internalPadding,
-    this.onTap
+    this.onTap, this.icon
   });
 
   @override
@@ -51,7 +52,7 @@ class ReuseableGradientContainer extends StatelessWidget {
             color:color??Colors.transparent,
           ),
           child: Center(
-            child: image!=null? ClipRRect(
+            child: icon!=null?icon:image!=null? ClipRRect(
               borderRadius: BorderRadius.circular(borderRadius??0.r),
               child: Image.asset(
                 image!,

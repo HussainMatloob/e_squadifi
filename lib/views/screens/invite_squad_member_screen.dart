@@ -3,7 +3,7 @@ import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
-import 'package:e_squadifi/views/screens/squad_profile_screen.dart';
+import 'package:e_squadifi/views/screens/player_detail_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -129,7 +129,7 @@ class _InviteSquadMemberScreenState extends State<InviteSquadMemberScreen> {
                                     color: ColorConstant.purple,
                                     internalPadding: 5.r,
                                     onTap: () {
-                                      Get.to(() => SquadProfileScreen(image: ImageConstants.profileImagesList[3],));
+                                      Get.to(() => PlayerDetailScreen(image: ImageConstants.profileImagesList[3],));
                                     },
                                   ),
                                   SizedBox(

@@ -3,18 +3,19 @@ import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
+import 'package:e_squadifi/views/screens/live_streaming_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-class JustPlayScreen extends StatefulWidget {
-
-  const JustPlayScreen({super.key,});
+class GamesListScreen extends StatefulWidget {
+  const GamesListScreen({super.key,});
   @override
-  State<JustPlayScreen> createState() => _JustPlayScreenState();
+  State<GamesListScreen> createState() => _GamesListScreenState();
 }
-class _JustPlayScreenState extends State<JustPlayScreen> {
+class _GamesListScreenState extends State<GamesListScreen> {
   @override
+  String videoUrl = "https://drive.google.com/uc?export=view&id=1uQYXnnrwlsQTk9u9sAB4dP9L4VFGuUFX";
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Container(
@@ -43,7 +44,29 @@ class _JustPlayScreenState extends State<JustPlayScreen> {
             // border: Border.all(width: 10,color: Colors.purple)
           ),
           child: SingleChildScrollView(
-            child: Column(children: [
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              GestureDetector(
+                onTap: (){
+                  Get.back();
+                },
+                child: Container(
+                  height: 40.h,
+                  width: 40.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white38,
+                    borderRadius: BorderRadius.circular(100.r),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      CupertinoIcons.back,
+                      color: ColorConstant.whiteColor,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 25.h,),
               for(int i=0;i<=10;i++)
                 FittedBox(
@@ -55,6 +78,9 @@ class _JustPlayScreenState extends State<JustPlayScreen> {
                         width: 95.w,
                         height: 127.h,
                         borderRadius: 16.r,
+                        onTap: (){
+                          Get.to(()=>LiveStreamingScreen(videoUrl:videoUrl,));
+                        },
                       ),
                       SizedBox(width: 15.w,),
                       Column(
