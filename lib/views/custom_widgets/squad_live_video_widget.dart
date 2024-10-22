@@ -7,7 +7,6 @@ import 'package:e_squadifi/views/screens/squad_pod_video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../controllers/live_streaming_controller.dart';
 class SquadLiveVideoWidget extends StatefulWidget {
   final String? videoUrl;
   final double? height;
@@ -134,7 +133,6 @@ class _SquadLiveVideoWidgetState extends State<SquadLiveVideoWidget> {
         ),
       );
     },
-
     );
   }
 }

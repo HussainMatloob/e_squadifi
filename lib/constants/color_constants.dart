@@ -71,5 +71,6 @@ static Color searchFieldColor = Color(0x80353278);
 static Color bottomSheetDividerColor = Color(0xFF2B2F57);
 static Color blueColor=Colors.blue;
 static Color orangeColor=Color(0xFFF75555);
+static Color dialogColor=Color(0xFF1F222A);
 }
 

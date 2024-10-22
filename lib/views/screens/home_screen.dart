@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen>
         return  GestureDetector(
           onTap: (){
             navController.setBottomSheetFalse();
-            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
           },
           child: Scaffold(
             body: Column(
@@ -58,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     GestureDetector(
                                       onTap: () {
                                         navController.toggleBottomSheet();
-                                      },
+                                        },
                                       child: Container(
                                         height: 40.h,
                                         width: 40.w,

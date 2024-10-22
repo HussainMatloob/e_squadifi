@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_dialog_box.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -202,7 +203,9 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                                               color: ColorConstant.whiteColor,
                                             )),
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              CustomDialogBox().showDialogBox(context);
+                                            },
                                             icon: Icon(
                                               Icons.settings_outlined,
                                               color: ColorConstant.whiteColor,

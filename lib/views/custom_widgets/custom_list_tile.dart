@@ -1,7 +1,7 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -18,6 +18,9 @@ class CustomListTile extends StatelessWidget {
   final Color? containerColor;
   final double? borderRadius;
   final String? image;
+  final bool?  isDialog;
+  final Icon?  tralingIcon;
+  final String? tralingText;
   const CustomListTile({super.key,
     this.icon,
     this.color,
@@ -31,35 +34,50 @@ class CustomListTile extends StatelessWidget {
     this.width,
     this.containerColor,
     this.borderRadius,
-    this.image
+    this.image,
+    this.isDialog=false, this.tralingIcon, this.tralingText
   });
-
   @override
   Widget build(BuildContext context) {
-  return GestureDetector(
-          onTap: onTap,
+  return InkWell(
+    onTap: onTap,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
           child: Row(children: [
-           image==null?icon==null?Container():height==null&&width==null?icon!:Container(
-                width: width??0.r,
-                height: height??0.r,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(borderRadius??0.r),
-                  color: containerColor,
-                ),
-                child: Center(child: icon!)):ReuseableGradientContainer(
-             height: 36.h,
-             width: 36.w,
-             borderRadius: 16.r,
-             image: image,
-             padding: 1.r,
-             gradientColor: ColorConstant.profilePicGradient,
-             color: ColorConstant.greyColor,
-             internalPadding: 3.r,
-           ),
-            SizedBox(width: sizedBoxedWidth??0.w,),
-            Flexible(child: CustomText(text,fw: fw,size: textSize,color: color,fontStyle: fontStyle ))
-          ],),
-        );
+              image==null?icon==null?Container():height==null&&width==null?icon!:Container(
+                  width: width??0.r,
+                  height: height??0.r,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(borderRadius??0.r),
+                    color: containerColor,
+                  ),
+                  child: Center(child: icon!)):ReuseableGradientContainer(
+                height: 36.h,
+                width: 36.w,
+                borderRadius: 16.r,
+                image: image,
+                padding: 1.r,
+                gradientColor: ColorConstant.profilePicGradient,
+                color: ColorConstant.greyColor,
+                internalPadding: 3.r,
+              ),
+              SizedBox(width: sizedBoxedWidth??0.w,),
+              Flexible(child: CustomText(text,fw: fw,size: textSize,color: color,fontStyle: fontStyle ))
+            ],),
+        ),
+        isDialog! ?Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+            CustomText(tralingText,fw: FontWeight.w700,size: 18.sp,color: color,fontStyle: fontStyle ),
+              SizedBox(width: sizedBoxedWidth??0.w,),
+              Container(child: tralingIcon,),
+            ],)
+        :Container()
+      ],
+    ),
+  );
   }
 }
 
