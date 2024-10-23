@@ -6,6 +6,7 @@ import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/screens/set_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -82,6 +83,7 @@ class _CreateAvatarScreenState extends State<CreateAvatarScreen> {
                                 InkWell(
                                     onTap: (){
                                       Get.to(( )=>SetProfileScreen());
+                                      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                                     },
                                     child: Container(child: CustomText("Skip",fw: FontWeight.w700,size: 14.sp,color: ColorConstant.whiteColor,))),
                               ],

@@ -19,6 +19,9 @@ class CustomTextFormField extends StatefulWidget {
   final double? hintTextSize;
   final Color? hintTextColor;
   final FontWeight? hintTextFw;
+  final double? borderRadius;
+  final double? horizontalPadding;
+  final double? verticalPadding;
   const CustomTextFormField({
     super.key,
     this.hintText,
@@ -32,7 +35,7 @@ class CustomTextFormField extends StatefulWidget {
     this.height,
     this.isPassword = false,
     this.color,
-    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw
+    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding
   });
 
   @override
@@ -40,16 +43,14 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool _isObscured = true; // State variable to toggle password visibility
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: widget.width??0.w,
+      height: widget.height??0.h,
       decoration: BoxDecoration(
           color: widget.color??Colors.transparent,
-          borderRadius: BorderRadius.circular(10.r)),
+          borderRadius: BorderRadius.circular(widget.borderRadius??10.r)),
       child: TextFormField(
         focusNode: widget.focusNode,
         //keyboardType: TextInputType.multiline,
@@ -68,28 +69,32 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
           hintText: widget.hintText,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
             borderSide: BorderSide(color: widget.borderColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
             borderSide: BorderSide(color: widget.focusedBorderColor, width: 2.0.w),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
             borderSide: BorderSide(color: widget.borderColor),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
             borderSide: BorderSide(color: widget.errorBorderColor),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
             borderSide: BorderSide(color: widget.errorBorderColor, width: 2.0.w),
           ),
           suffixIcon:null,
             fillColor: widget.fillColor??ColorConstant.greyColor,
-          filled: true
+          filled: true,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: widget.verticalPadding ?? 0.r,
+            horizontal: widget.horizontalPadding ?? 0.r,
+          )
         ),
         validator: (value) {
           if(value==null||value.trim().isEmpty){

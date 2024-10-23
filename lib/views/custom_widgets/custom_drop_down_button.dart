@@ -43,8 +43,8 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               child: Text(
                 item,
                 style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
                   color: Colors.white,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -60,7 +60,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               padding: EdgeInsets.only(
                   left: mq.width * 0.03, right: mq.width * 0.04),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(93),
+                borderRadius: BorderRadius.circular(93.r),
                 border: Border.all(
                   color: Colors.transparent,
                 ),

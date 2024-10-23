@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/controllers/live_streaming_controller.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
@@ -20,7 +18,7 @@ class CustomDialogBox {
                 borderRadius: BorderRadius.circular(28.r), // Optional: Add rounded corners
               ),
               child: Container(
-                height: liveStreamingController.isLandScape.value?135.h:300.h, // Set custom height
+                height: liveStreamingController.isLandScape.value?150.h:270.h, // Set custom height
                 width: 400.w,  // Set custom width
                 padding: EdgeInsets.all(28.r), // Add some padding
                 decoration: BoxDecoration(
@@ -67,6 +65,7 @@ class CustomDialogBox {
                     ),
                     SizedBox(height: 15.h,),
                     CustomListTile(
+                      isDialog: true,
                       icon: Icon(
                         Icons.exit_to_app,
                         color: ColorConstant.whiteColor,
@@ -79,6 +78,8 @@ class CustomDialogBox {
                     ),
                     SizedBox(height: 15.h,),
                     CustomListTile(
+                      isDialog: true,
+                      tralingText: "abc",
                       icon: Icon(
                         Icons.report_gmailerrorred,
                         color: ColorConstant.whiteColor,

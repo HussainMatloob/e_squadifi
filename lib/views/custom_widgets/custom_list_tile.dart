@@ -1,8 +1,10 @@
 import 'package:e_squadifi/constants/color_constants.dart';
+import 'package:e_squadifi/controllers/live_streaming_controller.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class CustomListTile extends StatelessWidget {
   final Icon? icon;
@@ -67,7 +69,24 @@ class CustomListTile extends StatelessWidget {
               Flexible(child: CustomText(text,fw: fw,size: textSize,color: color,fontStyle: fontStyle ))
             ],),
         ),
-        isDialog! ?Row(
+        isDialog! ? tralingText==null?Transform.scale(
+    scale: 0.9,  // This controls the size of the switch
+    child: GetBuilder<LiveStreamingController>(
+      builder: (liveStreamingController){
+        return Switch(
+          value: liveStreamingController.isSwitchedOn,
+          onChanged: (value) {
+            liveStreamingController.switchedButton();
+          },
+          activeColor: ColorConstant.whiteColor,            // Color of the thumb when the switch is ON
+          activeTrackColor: ColorConstant.cyanBlue,  // Color of the track when the switch is ON
+          inactiveThumbColor: ColorConstant.whiteColor,      // Color of the thumb when the switch is OFF
+          inactiveTrackColor: ColorConstant.cyanBlue,     // Color of the track when the switch is OFF
+        );
+      },
+
+    ),
+    ):Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
             CustomText(tralingText,fw: FontWeight.w700,size: 18.sp,color: color,fontStyle: fontStyle ),

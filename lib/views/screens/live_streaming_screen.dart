@@ -4,6 +4,7 @@ import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_dialog_box.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text_form_field.dart';
+import 'package:e_squadifi/views/screens/connect_video_game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -197,7 +198,9 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                                               color: ColorConstant.whiteColor,
                                             )),
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Get.to(()=>ConnectVideoGameScreen());
+                                            },
                                             icon: Icon(
                                               Icons.cast,
                                               color: ColorConstant.whiteColor,

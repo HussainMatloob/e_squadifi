@@ -15,7 +15,7 @@ class BottomNavBar extends StatefulWidget {
 }
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
-  NavController navController=Get.put(NavController());
+  NavController navController=Get.put(NavController(),permanent: true);
   Widget build(BuildContext context) {
     return GetBuilder<NavController>(
       init: NavController(),

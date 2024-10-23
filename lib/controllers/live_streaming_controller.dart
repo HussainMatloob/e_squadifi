@@ -22,6 +22,11 @@ class LiveStreamingController extends GetxController{
   //   return uint8list;
   // }
 
+ bool isSwitchedOn=false;
+ void switchedButton(){
+   isSwitchedOn=!isSwitchedOn;
+   update();
+ }
 
   Rx<bool> isShowingPlay=false.obs;
   Rx<bool> isLandScape=false.obs;
