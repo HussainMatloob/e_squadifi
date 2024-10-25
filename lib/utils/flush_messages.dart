@@ -20,7 +20,7 @@ class FlushMessagesUtil{
       ..textColor = Colors.white // Color of the loading status text
       ..indicatorColor = Colors.white // Color of the loading indicator
       ..progressColor = Colors.white // Progress color of the loading indicator (if applicable)
-      ..backgroundColor = ColorConstant.greyLightColor // Background color of the loading indicator
+      ..backgroundColor = ColorConstant.greyColor // Background color of the loading indicator
       ..maskColor = Colors.red; // Mask color of the loading (if applicable)
     EasyLoading.show(status: 'Please Wait...');
   }

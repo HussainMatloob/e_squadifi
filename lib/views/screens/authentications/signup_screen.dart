@@ -119,7 +119,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       validateFunction: authenticationController.emailValidate,
                                       horizontalPadding: 20.w,
                                       controller: emailController,
-                                      color: ColorConstant.greyColor,
                                       hintText: "Enter your Email",
                                       hintTextColor: ColorConstant.whiteColor,
                                       hintTextFw: FontWeight.w400,
@@ -161,13 +160,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               email: emailController.text.toString(),
                                               password: passwordController.text.toString())
                                               .then((value) async {
+                                            Get.back();
                                             authenticationController.loadingFunctionSignup();
                                             SharedPreferences sp =
                                             await SharedPreferences.getInstance();
                                             sp.setString('name', "Game User");
                                             sp.setString('email', emailController.text);
                                             FlushMessagesUtil.snackBarMessage("Success", "SignUp Successfully", context);
-                                            Get.off(()=>LoginScreen());
                                               }).onError((error, stackTrace) {
                                             authenticationController.loadingFunctionSignup();
                                             FlushMessagesUtil.snackBarMessage("Error", error.toString(), context);

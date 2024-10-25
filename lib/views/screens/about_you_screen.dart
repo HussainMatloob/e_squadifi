@@ -18,10 +18,6 @@ class AboutYouScreen extends StatefulWidget {
 }
 
 class _AboutYouScreenState extends State<AboutYouScreen> {
-  String? selectedYear;
-  String? selectedMonth;
-
-
 AuthenticationController authenticationController=Get.put(AuthenticationController());
   @override
   Widget build(BuildContext context) {
@@ -62,7 +58,7 @@ AuthenticationController authenticationController=Get.put(AuthenticationControll
                       end: Alignment.bottomRight,
                     ),
                   ),
-                  child:   Column(
+                  child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Back Button
@@ -127,11 +123,9 @@ AuthenticationController authenticationController=Get.put(AuthenticationControll
                                   ),
                                 ),
                                 dropdownColor: ColorConstant.greyColor,
-                                value: selectedYear,
+                                value: authenticationController.selectedYear,
                                 onChanged: (newValue) {
-                                  setState(() {
-                                    selectedYear = newValue;
-                                  });
+                                  authenticationController.selectYear(newValue!);
                                 },
                                 items: AppData.years.map((year) {
                                   return DropdownMenuItem<String>(
@@ -159,11 +153,9 @@ AuthenticationController authenticationController=Get.put(AuthenticationControll
                                   ),
                                 ),
                                 dropdownColor: ColorConstant.greyColor,
-                                value: selectedMonth,
+                                value:authenticationController.selectedMonth,
                                 onChanged: (newValue) {
-                                  setState(() {
-                                    selectedMonth = newValue;
-                                  });
+                                  authenticationController.selectMonth(newValue!);
                                 },
                                 items:AppData.months.map((month) {
                                   return DropdownMenuItem<String>(

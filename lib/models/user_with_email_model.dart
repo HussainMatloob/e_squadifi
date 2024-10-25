@@ -1,23 +1,24 @@
 import 'dart:convert';
 
-UserWithEmailModel userWithEmailModelFromJson(String str) => UserWithEmailModel.fromJson(json.decode(str));
+UserWithEmailOrContactModel userWithEmailOrContactModelFromJson(String str) => UserWithEmailOrContactModel.fromJson(json.decode(str));
 
-String userWithEmailModelToJson(UserWithEmailModel data) => json.encode(data.toJson());
+String userWithEmailOrContactModelToJson(UserWithEmailOrContactModel data) => json.encode(data.toJson());
 
-class UserWithEmailModel {
+class UserWithEmailOrContactModel {
   String? userId;
   String? id;
   bool? isLive;
   String? email;
   String? name;
   String? gender;
-  List<dynamic>? goalsList;
+  List<String>? goalsList;
   String? about;
-  List<dynamic>? traitsList;
+  List<String>? traitsList;
   String? image;
   String? contact;
+  String? age;
 
-  UserWithEmailModel({
+  UserWithEmailOrContactModel({
     this.userId,
     this.id,
     this.isLive,
@@ -29,20 +30,22 @@ class UserWithEmailModel {
     this.traitsList,
     this.image,
     this.contact,
+    this.age,
   });
 
-  factory UserWithEmailModel.fromJson(Map<String, dynamic> json) => UserWithEmailModel(
+  factory UserWithEmailOrContactModel.fromJson(Map<String, dynamic> json) => UserWithEmailOrContactModel(
     userId: json["userId"],
     id: json["id"],
     isLive: json["isLive"],
     email: json["email"],
     name: json["name"],
     gender: json["gender"],
-    goalsList: json["goalsList"] == null ? [] : List<dynamic>.from(json["goalsList"]!.map((x) => x)),
+    goalsList: json["goalsList"] == null ? [] : List<String>.from(json["goalsList"]!.map((x) => x)),
     about: json["about"],
-    traitsList: json["traitsList"] == null ? [] : List<dynamic>.from(json["traitsList"]!.map((x) => x)),
+    traitsList: json["traitsList"] == null ? [] : List<String>.from(json["traitsList"]!.map((x) => x)),
     image: json["image"],
     contact: json["contact"],
+    age: json["age"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -57,6 +60,7 @@ class UserWithEmailModel {
     "traitsList": traitsList == null ? [] : List<dynamic>.from(traitsList!.map((x) => x)),
     "image": image,
     "contact": contact,
+    "age": age,
   };
 }
 

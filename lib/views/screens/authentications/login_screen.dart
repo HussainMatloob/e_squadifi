@@ -141,7 +141,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                             fw: FontWeight.w400,
                                             textSize: 14.sp,
                                             onTap: (){
-                                              authenticationController.signInWithPhone();
+                                              if(authenticationController.loaderLogin==false){
+                                                authenticationController.signInWithPhone();
+                                              }
                                             },
                                           ),
                                           ButtonWidget(
@@ -154,7 +156,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                             fw: FontWeight.w400,
                                             textSize: 14.sp,
                                             onTap: (){
-                                              authenticationController.signInWithEmail();
+                                              if(authenticationController.loaderLogin==false){
+                                                authenticationController.signInWithEmail();
+                                              }
                                             },
                                           ),
                                         ],),
@@ -167,8 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 authenticationController.isPhone?CustomTextFormField(
                                   controller: phoneController,
                                   verticalPadding: 10.h,
-                                  color: ColorConstant.greyColor,
-                                  hintText: "Enter your phone number",
+
+                                  hintText: "Enter phone number",
                                   hintTextColor: ColorConstant.whiteColor,
                                   hintTextFw: FontWeight.w400,
                                   hintTextSize: 12.sp,
@@ -210,8 +214,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     showOnlyCountryWhenClosed: false,
                                     alignLeft: false,
                                   ),
+                                  validateFunction: authenticationController.phoneValidate,
                                 ):Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                   CustomTextFormField(
                                     horizontalPadding: 20.w,
@@ -249,26 +255,33 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onTap: (){
                                     if(formKey.currentState!.validate()){
                                       {
-                                        authenticationController.loadingFunctionLogin();
-                                        auth.signInWithEmailAndPassword(email:emailController.text.toString(),
-                                            password: passwordController.text.toString()).then((value) async{
+                                        if( authenticationController.isPhone){
                                           authenticationController.loadingFunctionLogin();
-                                          if (value != null) {
-                                            if ((await FirebaseServices.userExists())) {
-                                              Get.to(( )=> BottomNavBar());
-                                              SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                            } else {
-                                              await FirebaseServices.createUserWithEmailOrContact().then((value) {
-                                                Get.to(( )=> AboutYouScreen());
+                                          authenticationController.verifyPhoneNumber(
+                                              countryCode + phoneController.text,context);
+                                        }else{
+                                          authenticationController.loadingFunctionLogin();
+                                          auth.signInWithEmailAndPassword(email:emailController.text.toString(),
+                                              password: passwordController.text.toString()).then((value) async{
+                                            authenticationController.loadingFunctionLogin();
+                                            if (value != null) {
+                                              if ((await FirebaseServices.userExists())) {
+                                                Get.offAll(( )=> BottomNavBar());
                                                 SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                              });
+                                              } else {
+                                                await FirebaseServices.createUserWithEmailOrContact().then((value) {
+                                                  authenticationController.phoneLoginOrNot();
+                                                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                                                  Get.offAll(( )=> AboutYouScreen());
+                                                });
+                                              }
+                                              FlushMessagesUtil.snackBarMessage("Success", "Login Successfully", context);
                                             }
-                                            FlushMessagesUtil.snackBarMessage("Success", "Login Successfully", context);
-                                          }
-                                        }).onError((error, stackTrace){
-                                          authenticationController.loadingFunctionLogin();
-                                          FlushMessagesUtil.snackBarMessage("Error", error.toString(), context);
-                                        });
+                                          }).onError((error, stackTrace){
+                                            authenticationController.loadingFunctionLogin();
+                                            FlushMessagesUtil.snackBarMessage("Error", error.toString(), context);
+                                          });
+                                        }
                                       }
                                     }
                                   },

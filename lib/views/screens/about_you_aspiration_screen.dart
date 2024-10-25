@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
-import 'package:get/get.dart'; // Assuming this is your constants file
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Assuming this is your constants file
 
 class AboutYouAspirationScreen extends StatefulWidget {
   const AboutYouAspirationScreen({super.key});
@@ -22,8 +23,8 @@ class _AboutYouAspirationScreenState extends State<AboutYouAspirationScreen> {
   String selectedGoal = '';
 
 AuthenticationController authenticationController=Get.put(AuthenticationController());
-  @override
   TextEditingController yourSelfController=TextEditingController();
+  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: Size(375, 812), minTextAdapt: true);
 
@@ -178,7 +179,11 @@ AuthenticationController authenticationController=Get.put(AuthenticationControll
                                 textColor: ColorConstant.whiteColor,
                                 fw: FontWeight.w700,
                                 textSize: 14.sp,
-                                onTap: (){
+                                onTap: () async{
+                                  authenticationController.loadingFunctionSignup();
+                                  SharedPreferences sp =
+                                      await SharedPreferences.getInstance();
+                                  sp.setString('about', yourSelfController.text);
                                   Get.to(()=>AboutYouPersonalityScreen());
                                   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                                 },

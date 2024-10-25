@@ -1,7 +1,9 @@
 import 'package:e_squadifi/constants/app_data.dart';
 import 'package:e_squadifi/controllers/authentication_controller.dart';
+import 'package:e_squadifi/services/firebase_services.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/screens/authentications/otp_screen.dart';
+import 'package:e_squadifi/views/screens/create_avatar_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -147,8 +149,13 @@ class _AboutYouPersonalityScreenState extends State<AboutYouPersonalityScreen> {
                             fw: FontWeight.w700,
                             textSize: 14.sp,
                             onTap: (){
-                              Get.to(( )=> OtpScreen());
-                              SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                              if(authenticationController.logInWithPhone){
+                                Get.to(( )=> OtpScreen());
+                                SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                              }else{
+                                FirebaseServices.updateUserData();
+                               Get.offAll(CreateAvatarScreen());
+                              }
                             },
                           ),
 

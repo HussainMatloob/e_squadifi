@@ -11,10 +11,11 @@ class UserWithGoogleModel {
   String? email;
   String? name;
   String? gender;
-  List<dynamic>? goalsList;
+  List<String>? goalsList;
   String? about;
-  List<dynamic>? traitsList;
+  List<String>? traitsList;
   String? image;
+  String? age;
 
   UserWithGoogleModel({
     this.userId,
@@ -27,6 +28,7 @@ class UserWithGoogleModel {
     this.about,
     this.traitsList,
     this.image,
+    this.age,
   });
 
   factory UserWithGoogleModel.fromJson(Map<String, dynamic> json) => UserWithGoogleModel(
@@ -36,10 +38,11 @@ class UserWithGoogleModel {
     email: json["email"],
     name: json["name"],
     gender: json["gender"],
-    goalsList: json["goalsList"] == null ? [] : List<dynamic>.from(json["goalsList"]!.map((x) => x)),
+    goalsList: json["goalsList"] == null ? [] : List<String>.from(json["goalsList"]!.map((x) => x)),
     about: json["about"],
-    traitsList: json["traitsList"] == null ? [] : List<dynamic>.from(json["traitsList"]!.map((x) => x)),
+    traitsList: json["traitsList"] == null ? [] : List<String>.from(json["traitsList"]!.map((x) => x)),
     image: json["image"],
+    age: json["age"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +56,6 @@ class UserWithGoogleModel {
     "about": about,
     "traitsList": traitsList == null ? [] : List<dynamic>.from(traitsList!.map((x) => x)),
     "image": image,
+    "age": age,
   };
 }

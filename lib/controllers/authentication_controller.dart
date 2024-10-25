@@ -1,20 +1,29 @@
 import 'dart:io';
+import 'package:e_squadifi/models/user_with_email_model.dart';
 import 'package:e_squadifi/views/screens/bottom_navigation_bar.dart';
+import 'package:e_squadifi/views/screens/create_avatar_screen.dart';
+import 'package:e_squadifi/views/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../services/firebase_services.dart';
 import '../utils/flush_messages.dart';
 import '../views/screens/about_you_screen.dart';
 
 class AuthenticationController extends GetxController{
+  String pinCodeLength = "";
+  String? selectedYear;
+  String? selectedMonth;
+  bool logInWithPhone=false;
 bool isPhone=false;
 bool isEmail=true;
 String? gender;
 List<String> selectedGoals=[];
 List<String> selectedTreats=[];
+final FirebaseAuth auth = FirebaseAuth.instance;
 void signInWithPhone(){
   isPhone=true;
   isEmail=false;
@@ -30,6 +39,22 @@ void selectGender(String value){
   gender=value;
   update();
 }
+
+void phoneLoginOrNot(){
+  logInWithPhone=false;
+  update();
+}
+
+void selectMonth(String month){
+  selectedMonth=month;
+  update();
+}
+
+void selectYear(String year){
+  selectedYear= year;
+  update();
+}
+
 /* -------------------------------------------------------------------------- */
 /*                              Selected Goals List                           */
 /* -------------------------------------------------------------------------- */
@@ -112,13 +137,19 @@ String? passwordValidate(value)
   return null; // Valid input
 }
 
-String? nameValidate(value)
-{
-  if(value==null||value.trim().isEmpty)
+String? phoneValidate(value)
   {
-    return "Please enter name";
+    final regex = RegExp(r'^\d{10}$');
+    if(value==null||value.trim().isEmpty)
+    {
+      return"Please enter phone number";
+    }
+    if (!regex.hasMatch(value)) {
+      return 'Please enter valid number';
+    }
+    return null; // Valid input
   }
-}
+
 
 
 /* -------------------------------------------------------------------------- */
@@ -190,6 +221,112 @@ String? nameValidate(value)
     } catch (error) {
       FlushMessagesUtil.snackBarMessage("Error", error.toString(), context);
     }
+  }
+
+
+
+  /*--------------------------------------------------------------------------*/
+  /*                                  Sign in with Phone                       */
+  /*--------------------------------------------------------------------------*/
+
+
+  String verificationID = "";
+  String? mobileNumber;
+  Future<void> verifyPhoneNumber(String phone,BuildContext context) async {
+    try {
+      mobileNumber = phone.trim();
+      verificationID = "";
+      update();
+
+      verificationCompleted(AuthCredential credential) async {
+        await auth.signInWithCredential(credential);
+      }
+
+      verificationFailed(FirebaseAuthException authException) {
+        FlushMessagesUtil.snackBarMessage("Error",  authException.message.toString(), context);
+         loaderLogin = false;
+        update();
+
+        // Show error message
+      }
+
+      codeSent(String verificationId, [int? forceResendingToken]) async {
+        forceResendingToken = forceResendingToken;
+        loaderLogin = false;
+        verificationID=verificationId;
+        logInWithPhone=true;
+        update();
+        Get.offAll(()=>AboutYouScreen());
+      }
+
+      codeAutoRetrievalTimeout(String verificationId) {
+        verificationID = verificationId;
+      }
+
+      await auth.verifyPhoneNumber(
+        phoneNumber: mobileNumber,
+        verificationCompleted: verificationCompleted,
+        verificationFailed: verificationFailed,
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+      );
+    } catch (e) {
+      loaderLogin = false;
+      update();
+      FlushMessagesUtil.snackBarMessage("Error", "Error in OTP send", context);
+    }
+  }
+
+
+  Future<void> submitVerificationCode(String verificationCode,String verId,BuildContext context) async {
+    update();
+    try {
+      final AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verId,
+        smsCode: verificationCode,
+      );
+
+      await auth.signInWithCredential(credential);
+
+      if (!await FirebaseServices.userExists()) {
+        await FirebaseServices
+            .createUserWithEmailOrContact().then((onValue){
+              Get.offAll(()=>CreateAvatarScreen());
+        });
+      }else{
+        Get.offAll(BottomNavBar());
+      }
+      update();
+    } on FirebaseAuthException catch (e) {
+      FlushMessagesUtil.snackBarMessage("OTP Verification", e.message.toString(), context);
+
+
+    } catch (e) {
+      FlushMessagesUtil.snackBarMessage("OTP Verification", e.toString(), context);
+
+      // Show error message
+    }
+  }
+
+
+  pinCodeUpdateLength(String value) {
+    pinCodeLength = value;
+    update();
+  }
+
+
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+    SharedPreferences sp=await SharedPreferences.getInstance();
+    sp.clear();
+    verificationID = "";
+    selectedTreats.clear();
+    selectedGoals.clear();
+    selectedYear=null;
+    selectedMonth=null;
+    mobileNumber=null;
+    update();
+    Get.offAll(() => SplashScreen());
   }
 
 }
