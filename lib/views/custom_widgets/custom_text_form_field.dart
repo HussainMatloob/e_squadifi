@@ -1,5 +1,4 @@
 import 'package:e_squadifi/constants/color_constants.dart';
-import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,6 +23,11 @@ class CustomTextFormField extends StatefulWidget {
   final double? horizontalPadding;
   final double? verticalPadding;
   final Widget? child;
+  final bool? isObSecure;
+  final VoidCallback? obSecureTap;
+  final Function(dynamic value)? onChanged;
+  final String? Function(String?)? validateFunction;
+  final TextStyle? hintStyle;
   const CustomTextFormField({
     super.key,
     this.hintText,
@@ -37,7 +41,7 @@ class CustomTextFormField extends StatefulWidget {
     this.height,
     this.isPassword = false,
     this.color,
-    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding, this.child
+    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding, this.child, this.isObSecure, this.onChanged, this.hintStyle, this.obSecureTap, this.validateFunction
   });
 
   @override
@@ -54,20 +58,23 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           color: widget.color??Colors.transparent,
           borderRadius: BorderRadius.circular(widget.borderRadius??10.r)),
       child: TextFormField(
+        onChanged: widget.onChanged,
         focusNode: widget.focusNode,
         //keyboardType: TextInputType.multiline,
-        maxLines: null,
-        obscureText: false, // Toggle visibility based on state
+        //maxLines: null,
+        obscureText: widget.isObSecure??false, // Toggle visibility based on state
+        obscuringCharacter: "*",
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.text,
         controller: widget.controller,
         decoration: InputDecoration(
           labelText: widget.labelText,
-          hintStyle: TextStyle(
+          hintStyle:widget.hintStyle??TextStyle(
             fontWeight:widget.hintTextFw??FontWeight.w400,
             fontSize: widget.hintTextSize??16.sp,
             color: widget.hintTextColor??Color(0xFF9E9E9E),
           ),
+
           hintText: widget.hintText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
@@ -103,7 +110,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               ),
             ],
           ),
-          suffixIcon:null,
+            suffixIcon: widget.obSecureTap!=null?InkWell(
+                onTap: widget.obSecureTap,
+                child: widget.isObSecure! ? Icon(Icons.visibility_off_outlined,color: ColorConstant.whiteColor,):Icon(Icons.remove_red_eye,color: ColorConstant.whiteColor,)
+            ):null,
             fillColor: widget.fillColor??ColorConstant.greyColor,
           filled: true,
           contentPadding: EdgeInsets.symmetric(
@@ -111,14 +121,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             horizontal: widget.horizontalPadding ?? 0.w,
           )
         ),
-        validator: (value) {
-          if(value==null||value.trim().isEmpty){
-            return  null;
-          }
-          else {
-            return null;
-          }
-        },
+        validator:widget.validateFunction
       ),
     );
   }

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-UserWithEmailModel userWithEmailModelFromJson(String str) => UserWithEmailModel.fromJson(json.decode(str));
+UserWithGoogleModel userWithGoogleModelFromJson(String str) => UserWithGoogleModel.fromJson(json.decode(str));
 
-String userWithEmailModelToJson(UserWithEmailModel data) => json.encode(data.toJson());
+String userWithGoogleModelToJson(UserWithGoogleModel data) => json.encode(data.toJson());
 
-class UserWithEmailModel {
+class UserWithGoogleModel {
   String? userId;
   String? id;
   bool? isLive;
@@ -15,9 +15,8 @@ class UserWithEmailModel {
   String? about;
   List<dynamic>? traitsList;
   String? image;
-  String? contact;
 
-  UserWithEmailModel({
+  UserWithGoogleModel({
     this.userId,
     this.id,
     this.isLive,
@@ -28,10 +27,9 @@ class UserWithEmailModel {
     this.about,
     this.traitsList,
     this.image,
-    this.contact,
   });
 
-  factory UserWithEmailModel.fromJson(Map<String, dynamic> json) => UserWithEmailModel(
+  factory UserWithGoogleModel.fromJson(Map<String, dynamic> json) => UserWithGoogleModel(
     userId: json["userId"],
     id: json["id"],
     isLive: json["isLive"],
@@ -42,7 +40,6 @@ class UserWithEmailModel {
     about: json["about"],
     traitsList: json["traitsList"] == null ? [] : List<dynamic>.from(json["traitsList"]!.map((x) => x)),
     image: json["image"],
-    contact: json["contact"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -56,7 +53,5 @@ class UserWithEmailModel {
     "about": about,
     "traitsList": traitsList == null ? [] : List<dynamic>.from(traitsList!.map((x) => x)),
     "image": image,
-    "contact": contact,
   };
 }
-
