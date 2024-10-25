@@ -19,6 +19,7 @@ class ButtonWidget extends StatelessWidget {
   final double? borderWidth;
   final Color? borderColor;
     final double? sizedBoxWidth;
+    final bool? isAuth;
   const ButtonWidget(
       {super.key, this.text,
         this.color,
@@ -35,7 +36,7 @@ class ButtonWidget extends StatelessWidget {
         this.marginAll,
         this.borderWidth,
         this.borderColor,
-        this.sizedBoxWidth
+        this.sizedBoxWidth, this.isAuth=false
       });
 
   @override
@@ -53,7 +54,7 @@ class ButtonWidget extends StatelessWidget {
             border: Border.all(width: borderWidth??0.w,color:borderColor??Colors.transparent),
         ),
         child:icon==null?Center(child:  CustomText( text,fw: fw,size: textSize,color: textColor,),) :icon!=null&&text!=null?Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment:isAuth==true?MainAxisAlignment.start:MainAxisAlignment.center,
           children: [
           icon!,
             SizedBox(width: sizedBoxWidth==null?7.w:sizedBoxWidth,),

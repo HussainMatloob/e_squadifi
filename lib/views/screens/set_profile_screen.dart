@@ -110,16 +110,30 @@ class _SetProfileScreenState extends State<SetProfileScreen> {
                                             crossAxisCount: 3
                                         ),
                                         itemBuilder: (context,index){
-                                          return CustomImageContainer(
-                                            borderWidth: 3.w,
-                                            borderColor: (prfileController.gameIndexes ?? []).contains(index)?ColorConstant.squadPurpleColor:Colors.transparent,
-                                            width: 100.w,
-                                            height: 133.h,
-                                            image: ImageConstants.memberPost,
-                                            borderRadius: 16.r,
-                                            onTap: (){
-                                              prfileController.selectGames(index);
-                                            },
+                                          return Stack(
+                                            children: [
+                                              CustomImageContainer(
+                                                borderWidth: 3.w,
+                                                borderColor: (prfileController.gameIndexes ?? []).contains(index)?ColorConstant.squadPurpleColor:Colors.transparent,
+                                                width: 100.w,
+                                                height: 133.h,
+                                                image: ImageConstants.memberPost,
+                                                borderRadius: 16.r,
+                                                onTap: (){
+                                                  prfileController.selectGames(index);
+                                                },
+                                              ),
+                                              (prfileController.gameIndexes ?? []).contains(index)?Positioned(
+                                                top: 15.h,
+                                                right: 10.w,
+                                                  child: ButtonWidget(
+                                                  height: 16.h,
+                                                    width: 16.w,
+                                                    color: ColorConstant.cyanBlue,
+                                                    icon: Icon(Icons.done,color: Colors.white,size: 8.sp,),
+                                                    radius: 5.r,
+                                              )):Container()
+                                            ],
                                           );
                                         }),
                                   )

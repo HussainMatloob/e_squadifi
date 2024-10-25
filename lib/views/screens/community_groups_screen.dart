@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class YourGroupsScreen extends StatefulWidget {
-  const YourGroupsScreen({super.key});
+class CommunityGroupsScreen extends StatefulWidget {
+  const CommunityGroupsScreen({super.key});
 
   @override
-  State<YourGroupsScreen> createState() => _YourGroupsScreenState();
+  State<CommunityGroupsScreen> createState() => _CommunityGroupsScreenState();
 }
 
-class _YourGroupsScreenState extends State<YourGroupsScreen> {
+class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +54,7 @@ class _YourGroupsScreenState extends State<YourGroupsScreen> {
                                   ],),
 
                               ],),
-                            SizedBox(width: 10.w,),
+                            SizedBox(width: 15.w,),
                             Icon(Icons.more_vert,color: ColorConstant.whiteColor,)
                           ],
                         ),
@@ -264,7 +264,7 @@ class _YourGroupsScreenState extends State<YourGroupsScreen> {
                                   ),
                                 ],),
                             ),
-                            SizedBox(height: 70.w,),
+                            SizedBox(height: 90.w,),
                           ],),
                         ),
                       )

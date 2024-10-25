@@ -1,4 +1,9 @@
-import 'package:e_squadifi/views/screens/about_you_screen2.dart';
+import 'package:e_squadifi/constants/app_data.dart';
+import 'package:e_squadifi/controllers/authentication_controller.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
+import 'package:e_squadifi/views/screens/about_you_aspiration_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,292 +20,253 @@ class AboutYouScreen extends StatefulWidget {
 class _AboutYouScreenState extends State<AboutYouScreen> {
   String? selectedYear;
   String? selectedMonth;
-  String selectedGender = 'Male';
 
-  final List<String> years =
-      List.generate(100, (index) => (2024 - index).toString());
-  final List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
 
+AuthenticationController authenticationController=Get.put(AuthenticationController());
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: Size(375, 812), minTextAdapt: true);
 
-    return GestureDetector(
-      onTap: (){
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-        FocusScope.of(context).unfocus();
+    return GetBuilder<AuthenticationController>(
+      builder: (authenticationController){
+        return  GestureDetector(
+          onTap: (){
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+            FocusScope.of(context).unfocus();
+          },
+          child: WillPopScope(
+            onWillPop: () async{
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+              return true;
+            },
+            child: Scaffold(
+              body: Container(
+                height: Get.height,
+                width: Get.width,
+                padding: EdgeInsets.all(8.r), // Border width
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: ColorConstant.gradientBorderColor,
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: BorderRadius.circular(50.r),
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(20.r),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50.r),
+                    gradient: LinearGradient(
+                      colors: ColorConstant.primaryGradiantColor,
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child:   Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Back Button
+                        InkWell(
+                          onTap: (){
+                            Get.back();
+                            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                          },
+                          child: Container(
+                            height: 40.h,
+                            width: 40.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white38,
+                              borderRadius: BorderRadius.circular(100.r),
+                            ),
+                            child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
+                          ),
+                        ),
+                        SizedBox(height: 20.h),
+
+                        // Heading
+                        CustomText(
+                          'About You',
+                          fw: FontWeight.w800,
+                          size: 32.sp,
+                          color: ColorConstant.whiteColor,
+                        ),
+
+                        SizedBox(height: 10.h),
+
+                        // Subheading
+                        CustomText(
+                          'Answer some questions to let you get started with your profile.',
+                          fw: FontWeight.w400,
+                          size: 13.sp,
+                          color: ColorConstant.whiteColor,
+                        ),
+
+                        SizedBox(height: 40.h),
+
+                        CustomText(
+                          "Age:",
+                          fw: FontWeight.w600,
+                          size: 14.sp,
+                          color: ColorConstant.whiteColor,
+                        ),
+                        SizedBox(height: 10.h,),
+                        // Age Dropdowns
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: ColorConstant.greyColor,
+                                  hintText: 'Year',
+                                  hintStyle:
+                                  TextStyle(color: Colors.white.withOpacity(0.6)),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
+                                dropdownColor: ColorConstant.greyColor,
+                                value: selectedYear,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    selectedYear = newValue;
+                                  });
+                                },
+                                items: AppData.years.map((year) {
+                                  return DropdownMenuItem<String>(
+                                    value: year,
+                                    child: Text(
+                                      year,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor:  ColorConstant.greyColor,
+                                  hintText: 'Month',
+                                  hintStyle:
+                                  TextStyle(color: Colors.white.withOpacity(0.6)),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
+                                dropdownColor: ColorConstant.greyColor,
+                                value: selectedMonth,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    selectedMonth = newValue;
+                                  });
+                                },
+                                items:AppData.months.map((month) {
+                                  return DropdownMenuItem<String>(
+                                    value: month,
+                                    child: Text(
+                                      month,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        CustomText(
+                          "Gender",
+                          fw: FontWeight.w600,
+                          size: 14.sp,
+                          color: ColorConstant.whiteColor,
+                        ),
+                        SizedBox(height: 10.h,),
+
+                        // Gender Selection
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              for(int i =0;i<AppData.genderList.length;i++)
+                              Padding(
+                                padding: EdgeInsets.only(left: 10.w),
+                                child: ButtonWidget(
+                                  borderColor: ColorConstant.cyanBlue,
+                                  borderWidth: 2.sp,
+                                  text: AppData.genderList[i],
+                                  height: 48.h,
+                                  color: authenticationController.gender==AppData.genderList[i]
+                                      ? ColorConstant.cyanBlue
+                                      : Colors.transparent,
+                                  radius: 90.r,
+                                  textColor:  authenticationController.gender==AppData.genderList[i]?ColorConstant.whiteColor:ColorConstant.cyanBlue,
+                                  fw: FontWeight.w700,
+                                  textSize: 14.sp,
+                                  paddingHorizontal: 25.w,
+                                  onTap: () {
+                                     authenticationController.selectGender(AppData.genderList[i]);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 40.h),
+
+                        // Next Button
+
+                        ButtonWidget(
+                          text:  'Next',
+                          height: 51.h,
+                          color: ColorConstant.cyanBlue,
+                          radius: 47.r,
+                          textColor: ColorConstant.whiteColor,
+                          fw: FontWeight.w700,
+                          textSize: 14.sp,
+                          onTap: (){
+                            Get.to(( )=>AboutYouAspirationScreen());
+                            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                          },
+                        ),
+                        Spacer(),
+
+                        // User Agreement and Privacy Policy
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'User Agreement',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.6),
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                            Text(
+                              'Privacy & Cookie Policy',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.6),
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+
+                ),
+              ),
+            ),
+          ),
+        );
       },
-      child: WillPopScope(
-        onWillPop: () async{
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-          return true;
-        },
-        child: Scaffold(
-          body: Container(
-            height: Get.height,
-            width: Get.width,
-            padding: EdgeInsets.all(8.r), // Border width
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: ColorConstant.gradientBorderColor,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-              borderRadius: BorderRadius.circular(50.r),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50.r),
-                gradient: LinearGradient(
-                  colors: ColorConstant.primaryGradiantColor,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 50.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Back Button
-                    IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white, size: 28.sp),
-                      onPressed: () {
-                        Get.back();
-                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                      },
-                    ),
-                    SizedBox(height: 20.h),
-
-                    // Heading
-                    Text(
-                      'About You',
-                      style: TextStyle(
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 10.h),
-
-                    // Subheading
-                    Text(
-                      'Answer some questions to let you get started with your profile.',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Colors.white.withOpacity(0.7),
-                      ),
-                    ),
-                    SizedBox(height: 40.h),
-
-                    // Age Dropdowns
-                    Row(
-                      children: [
-                        Expanded(
-                          child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white.withOpacity(0.2),
-                              hintText: 'Year',
-                              hintStyle:
-                                  TextStyle(color: Colors.white.withOpacity(0.6)),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.r),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                            dropdownColor: Colors.blueGrey,
-                            value: selectedYear,
-                            onChanged: (newValue) {
-                              setState(() {
-                                selectedYear = newValue;
-                              });
-                            },
-                            items: years.map((year) {
-                              return DropdownMenuItem<String>(
-                                value: year,
-                                child: Text(
-                                  year,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        SizedBox(width: 10.w),
-                        Expanded(
-                          child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white.withOpacity(0.2),
-                              hintText: 'Month',
-                              hintStyle:
-                                  TextStyle(color: Colors.white.withOpacity(0.6)),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.r),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                            dropdownColor: Colors.blueGrey,
-                            value: selectedMonth,
-                            onChanged: (newValue) {
-                              setState(() {
-                                selectedMonth = newValue;
-                              });
-                            },
-                            items: months.map((month) {
-                              return DropdownMenuItem<String>(
-                                value: month,
-                                child: Text(
-                                  month,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20.h),
-
-                    // Gender Selection
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GenderButton(
-                          gender: 'Male',
-                          selectedGender: selectedGender,
-                          onPressed: () {
-                            setState(() {
-                              selectedGender = 'Male';
-                            });
-                          },
-                        ),
-                        GenderButton(
-                          gender: 'Female',
-                          selectedGender: selectedGender,
-                          onPressed: () {
-                            setState(() {
-                              selectedGender = 'Female';
-                            });
-                          },
-                        ),
-                        GenderButton(
-                          gender: 'Non-Binary',
-                          selectedGender: selectedGender,
-                          onPressed: () {
-                            setState(() {
-                              selectedGender = 'Non-Binary';
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 40.h),
-
-                    // Next Button
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.to(( )=>AboutYouScreen2());
-                          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.cyan,
-                          padding:
-                              EdgeInsets.symmetric(vertical: 16.h, horizontal: 100.w),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(47.r),
-                          ),
-                        ),
-                        child: Text(
-                          'Next',
-                          style: TextStyle(fontSize: 18.sp),
-                        ),
-                      ),
-                    ),
-
-                    Spacer(),
-
-                    // User Agreement and Privacy Policy
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'User Agreement',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                        Text(
-                          'Privacy & Cookie Policy',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
 
-class GenderButton extends StatelessWidget {
-  final String gender;
-  final String selectedGender;
-  final VoidCallback onPressed;
 
-  const GenderButton({
-    Key? key,
-    required this.gender,
-    required this.selectedGender,
-    required this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor:
-              selectedGender == gender ? Colors.cyan : Colors.transparent,
-          side: BorderSide(color: Colors.cyan),
-          padding: EdgeInsets.symmetric(vertical: 16.h),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(47.r),
-          ),
-        ),
-        child: Text(
-          gender,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 14.sp,
-          ),
-        ),
-      ),
-    );
-  }
-}

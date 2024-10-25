@@ -5,19 +5,19 @@ import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
 import 'package:e_squadifi/views/screens/bottom_navigation_bar.dart';
-import 'package:e_squadifi/views/screens/your_groups_screen.dart';
+import 'package:e_squadifi/views/screens/community_groups_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class AddGroupScreen extends StatefulWidget {
-  const AddGroupScreen({super.key});
+class CommunityCreateGroupScreen extends StatefulWidget {
+  const CommunityCreateGroupScreen({super.key});
 
   @override
-  State<AddGroupScreen> createState() => _AddGroupScreenState();
+  State<CommunityCreateGroupScreen> createState() => _CommunityCreateGroupScreenState();
 }
 
-class _AddGroupScreenState extends State<AddGroupScreen> {
+class _CommunityCreateGroupScreenState extends State<CommunityCreateGroupScreen> {
   @override
   NavController navController=Get.put( NavController());
   Widget build(BuildContext context) {
@@ -105,7 +105,7 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
                   ),
                   SizedBox(height: 20.w,),
                   CustomListTile(
-                    text: "Create group",
+                    text: "Add existing group",
                     color: ColorConstant.whiteColor,
                     icon: Icon(
                       Icons.add,

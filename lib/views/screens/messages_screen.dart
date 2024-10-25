@@ -119,7 +119,9 @@ class _MessagesScreenState extends State<MessagesScreen> {
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: Row(children: [
                             Icon(Icons.emoji_emotions_outlined,color: ColorConstant.whiteColor,),
-                          Expanded(child: CustomTextFormField(hintText: "Send a message",)),
+                          Expanded(child: CustomTextFormField(
+                            horizontalPadding: 15.w,
+                            hintText: "Send a message",)),
                             GestureDetector(
                                 onTap: (){},
                                 child: Icon(Icons.send,color: ColorConstant.whiteColor,)),

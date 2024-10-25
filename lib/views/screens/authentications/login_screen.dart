@@ -1,7 +1,12 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:e_squadifi/constants/color_constants.dart'; // Your custom color constants
+import 'package:e_squadifi/controllers/authentication_controller.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_text_form_field.dart';
 import 'package:e_squadifi/views/screens/about_you_screen.dart';
-import 'package:e_squadifi/views/screens/authentications/signup_screen1.dart';
+import 'package:e_squadifi/views/screens/authentications/signup_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,234 +21,342 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
+  TextEditingController phoneController=TextEditingController();
+  TextEditingController emailController=TextEditingController();
+  final String countryCode = "+92";
+  AuthenticationController authenticationController=Get.put(AuthenticationController());
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-        FocusScope.of(context).unfocus();
-      },
-      child: WillPopScope(
-        onWillPop: () async{
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-          return true;
-        },
-        child: Scaffold(
-          body: Container(
-            height: Get.height,
-            width: Get.width,
-            padding: EdgeInsets.all(8.r), // Border width
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: ColorConstant.gradientBorderColor,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-              borderRadius: BorderRadius.circular(50.r),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: ColorConstant.primaryGradiantColor,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+    return GetBuilder<AuthenticationController>(
+      builder: (authenticationController){
+        return  GestureDetector(
+          onTap: (){
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+            FocusScope.of(context).unfocus();
+          },
+          child: WillPopScope(
+            onWillPop: () async{
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+              return true;
+            },
+            child: Scaffold(
+              body: Container(
+                height: Get.height,
+                width: Get.width,
+                padding: EdgeInsets.all(8.r), // Border width
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: ColorConstant.gradientBorderColor,
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: BorderRadius.circular(50.r),
                 ),
-                borderRadius: BorderRadius.circular(50.r),
-              ),
-              child:
-                    SingleChildScrollView(
+                child: Container(
+                    padding: EdgeInsets.all(20.r),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: ColorConstant.primaryGradiantColor,
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(50.r),
+                  ),
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    InkWell(
+                      onTap: (){
+                        Get.back();
+                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                      },
                       child: Container(
-                        padding: EdgeInsets.all(20.r),
+                        height: 40.h,
+                        width: 40.w,
+                        decoration: BoxDecoration(
+                          color: Colors.white38,
+                          borderRadius: BorderRadius.circular(100.r),
+                        ),
+                        child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
+                      ),
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Back Arrow Icon
-
-                                IconButton(
-                                  icon: Icon(Icons.arrow_back, color: Colors.white),
-                                  onPressed: () {
-                                    Get.back();
-                                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                  },
-                                ),
-
-                            SizedBox(height: 30.h),
-
-                            // "Enter your phone number" text
-                              Text(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 30.h),
+                              // "Enter your phone number" text
+                              authenticationController.isPhone?CustomText(
                                 'Enter your\nphone number',
-                                style: TextStyle(
-                                  fontSize: 30.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                                fw: FontWeight.w800,
+                                size: 32.sp,
+                                color: ColorConstant.whiteColor,
+                              ):CustomText(
+                                'Enter your\nemail',
+                                fw: FontWeight.w800,
+                                size: 32.sp,
+                                color: ColorConstant.whiteColor,
                               ),
                               SizedBox(height: 10.h),
-
                               // Subtext for instruction
-                              Text(
+                              CustomText(
                                 'Enter Phone number. you will receive\nVerification code in your email.',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Colors.white70,
-                                ),
+                                fw: FontWeight.w400,
+                                size: 13.sp,
+                                color: ColorConstant.whiteColor,
                               ),
                               SizedBox(height: 40.h),
 
 
-
-                            // Phone number input field
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.w),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[850],
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Row(
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // Country flag and code (placeholder)
-                                  Text(
-                                    '+92 ',
-                                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                                  ),
-                                  SizedBox(width: 10.w),
-                                  Expanded(
-                                    child: TextField(
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter your phone number',
-                                        hintStyle: TextStyle(color: Colors.white70),
-                                        border: InputBorder.none,
-                                      ),
+                                  Container(
+                                    height: 51.h,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(47.r),
+                                        color: ColorConstant.greyColor
                                     ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        ButtonWidget(
+                                          paddingHorizontal: 10.w,
+                                          text:  'Login with Phone',
+                                          height: 50.h,
+                                          color: authenticationController.isPhone?ColorConstant.cyanBlue:Colors.transparent,
+                                          radius: 47.r,
+                                          textColor: ColorConstant.whiteColor,
+                                          fw: FontWeight.w400,
+                                          textSize: 14.sp,
+                                          onTap: (){
+                                            authenticationController.signInWithPhone();
+                                          },
+                                        ),
+                                        ButtonWidget(
+                                          paddingHorizontal: 10.w,
+                                          text:  'Login with Email',
+                                          height: 50.h,
+                                          color:authenticationController.isEmail?ColorConstant.cyanBlue:Colors.transparent,
+                                          radius: 47.r,
+                                          textColor: ColorConstant.whiteColor,
+                                          fw: FontWeight.w400,
+                                          textSize: 14.sp,
+                                          onTap: (){
+                                            authenticationController.signInWithEmail();
+                                          },
+                                        ),
+                                      ],),
                                   ),
                                 ],
                               ),
-                            ),
-                            SizedBox(height: 30.h),
 
-                            // Login button
-                            Container(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(vertical: 15.h),
-                                  backgroundColor: Colors.cyan,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
+
+                              SizedBox(height: 30.h),
+                              authenticationController.isPhone?CustomTextFormField(
+                                controller: phoneController,
+                                verticalPadding: 10.h,
+                                color: ColorConstant.greyColor,
+                                hintText: "Enter your phone number",
+                                hintTextColor: ColorConstant.whiteColor,
+                                hintTextFw: FontWeight.w400,
+                                hintTextSize: 12.sp,
+                                child: CountryCodePicker(
+                                  builder: (countryCode) {
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: ColorConstant.whiteColor,
+                                          size: 15.sp,
+                                        ),
+                                        SizedBox(
+                                          width: 5.h,
+                                        ),
+                                        Image.asset(
+                                          countryCode?.flagUri ?? '',
+                                          package: 'country_code_picker',
+                                          height: 18.h,
+                                          width: 18.w,
+                                        ),
+                                        SizedBox(
+                                          width: 5.h,
+                                        ),
+                                        CustomText(
+                                          "$countryCode",
+                                          size: 14.sp,
+                                          fw: FontWeight.w400,
+                                          color: ColorConstant.whiteColor,
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  onChanged: (code) {},
+                                  initialSelection: countryCode,
+                                  favorite: const ['+92'],
+                                  showCountryOnly: false,
+                                  showOnlyCountryWhenClosed: false,
+                                  alignLeft: false,
                                 ),
-                                onPressed: () {
+                              ):CustomTextFormField(
+                                horizontalPadding: 20.w,
+                                controller: emailController,
+                                color: ColorConstant.greyColor,
+                                hintText: "Enter your Email",
+                                hintTextColor: ColorConstant.whiteColor,
+                                hintTextFw: FontWeight.w400,
+                                hintTextSize: 12.sp,
+                              ),
+
+                              SizedBox(height: 20.h),
+
+                              // Login button
+                              ButtonWidget(
+                                text:  'Login',
+                                height: 51.h,
+                                color: ColorConstant.cyanBlue,
+                                radius: 47.r,
+                                textColor: ColorConstant.whiteColor,
+                                fw: FontWeight.w700,
+                                textSize: 14.sp,
+                                onTap: (){
                                   Get.to(( )=> AboutYouScreen());
                                   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                                 },
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(fontSize: 16.sp, color: Colors.white),
-                                ),
                               ),
-                            ),
-                            SizedBox(height: 20.h),
 
-                            // OR divider
-                            Row(
-                              children: [
-                                Expanded(child: Divider(color: Colors.white54)),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                                  child: Text(
-                                    'Or',
-                                    style: TextStyle(color: Colors.white54),
-                                  ),
-                                ),
-                                Expanded(child: Divider(color: Colors.white54)),
-                              ],
-                            ),
-                            SizedBox(height: 20.h),
+                              SizedBox(height: 20.h),
 
-                            // Social media buttons
-                            _buildSocialButton(
-                              icon: Icons.apple,
-                              text: 'Sign in with Apple',
-                              backgroundColor: Colors.black,
-                            ),
-                            SizedBox(height: 10.h),
-                            _buildSocialButton(
-                              icon: Icons.g_mobiledata,
-                              text: 'Continue with Google',
-                              backgroundColor: Colors.red,
-                            ),
-                            SizedBox(height: 10.h),
-                            _buildSocialButton(
-                              icon: Icons.facebook,
-                              text: 'Continue with Facebook',
-                              backgroundColor: Colors.blue,
-                            ),
-                            SizedBox(height: 10.h),
-                            _buildSocialButton(
-                              icon: Icons.camera,
-                              text: 'Continue with Instagram',
-                              backgroundColor: Colors.pink,
-                            ),
-                            SizedBox(height: 20.h), // Replace Spacer with SizedBox for space
-                            FittedBox(
-                              child: Row(
+                              // OR divider
+                              Row(
                                 children: [
-                                  CustomText(
-                                    "Don't have an Account?",
-                                    fw: FontWeight.w400,
-                                    size: 14.sp,
-                                    color: ColorConstant.whiteColor,
+                                  Expanded(child: Divider(color: Colors.white54)),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                                    child: Text(
+                                      'Or',
+                                      style: TextStyle(color: Colors.white54),
+                                    ),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Get.to(() => SignUpScreen());
-                                      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                    },
-                                    child: CustomText(
-                                      "Signup",
-                                      fw: FontWeight.w700,
+                                  Expanded(child: Divider(color: Colors.white54)),
+                                ],
+                              ),
+                              SizedBox(height: 20.h),
+
+                              // Social media buttons
+                              ButtonWidget(
+                                sizedBoxWidth: 50.w,
+                                paddingHorizontal: 20.w,
+                                text:  'Sign in with Apple',
+                                height: 51.h,
+                                width: 311.w,
+                                color: ColorConstant.blackColor,
+                                radius: 47.r,
+                                textColor: ColorConstant.whiteColor,
+                                fw: FontWeight.w400,
+                                textSize: 13.sp,
+                                onTap: (){
+                                },
+                                icon: Icon(Icons.apple, size: 24.sp, color: Colors.white),
+                                isAuth: true,
+                              ),
+
+                              SizedBox(height: 8.h),
+
+                              ButtonWidget(
+                                sizedBoxWidth: 45.w,
+                                paddingHorizontal: 20.w,
+                                text:  'Continue with Google',
+                                height: 51.h,
+                                width: 311.w,
+                                color: ColorConstant.whiteColor,
+                                radius: 47.r,
+                                textColor: ColorConstant.blackColor,
+                                fw: FontWeight.w400,
+                                textSize: 13.sp,
+                                onTap: (){
+                                },
+                                icon: Icon( Icons.g_mobiledata, size: 30.sp, color: Colors.pinkAccent),
+                                isAuth: true,
+                              ),
+
+                              SizedBox(height: 8.h),
+
+                              ButtonWidget(
+                                sizedBoxWidth: 45.w,
+                                paddingHorizontal: 20.w,
+                                text:  'Continue with Facebook',
+                                height: 51.h,
+                                width: 311.w,
+                                color: ColorConstant.blueColor,
+                                radius: 47.r,
+                                textColor: ColorConstant.whiteColor,
+                                fw: FontWeight.w400,
+                                textSize: 13.sp,
+                                onTap: (){
+                                },
+                                icon: Icon( Icons.facebook, size: 30.sp, color: ColorConstant.whiteColor),
+                                isAuth: true,
+                              ),
+
+                              SizedBox(height: 8.h),
+
+                              ButtonWidget(
+                                sizedBoxWidth: 45.w,
+                                paddingHorizontal: 20.w,
+                                text:  'Continue with Instagram',
+                                height: 51.h,
+                                width: 311.w,
+                                color:  Colors.pink,
+                                radius: 47.r,
+                                textColor: ColorConstant.whiteColor,
+                                fw: FontWeight.w400,
+                                textSize: 13.sp,
+                                onTap: (){
+                                },
+                                icon: Icon( Icons.camera, size: 30.sp, color: ColorConstant.whiteColor),
+                                isAuth: true,
+                              ),
+
+                              SizedBox(height: 20.h), // Replace Spacer with SizedBox for space
+                              FittedBox(
+                                child: Row(
+                                  children: [
+                                    CustomText(
+                                      "Don't have an Account?",
+                                      fw: FontWeight.w400,
                                       size: 14.sp,
                                       color: ColorConstant.whiteColor,
                                     ),
-                                  )
-                                ],
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(() => SignUpScreen());
+                                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                                      },
+                                      child: CustomText(
+                                        "Signup",
+                                        fw: FontWeight.w700,
+                                        size: 14.sp,
+                                        color: ColorConstant.whiteColor,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
                       ),
                     ),
-
+                  ],)
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
-  }
+        );
+      },
 
-  // Helper function to build social buttons
-  Widget _buildSocialButton(
-      {required IconData icon,
-      required String text,
-      required Color backgroundColor}) {
-    return Container(
-      width: 311.w,
-      child: ElevatedButton.icon(
-        icon: Icon(icon, size: 24.sp, color: Colors.white),
-        label: Text(
-          text,
-          style: TextStyle(color: Colors.white),
-        ),
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 15.h),
-          backgroundColor: backgroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(47.r),
-          ),
-        ),
-        onPressed: () {},
-      ),
     );
   }
 }

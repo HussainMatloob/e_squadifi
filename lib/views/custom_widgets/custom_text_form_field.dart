@@ -1,4 +1,5 @@
 import 'package:e_squadifi/constants/color_constants.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatefulWidget {
   final double? borderRadius;
   final double? horizontalPadding;
   final double? verticalPadding;
+  final Widget? child;
   const CustomTextFormField({
     super.key,
     this.hintText,
@@ -35,7 +37,7 @@ class CustomTextFormField extends StatefulWidget {
     this.height,
     this.isPassword = false,
     this.color,
-    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding
+    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding, this.child
   });
 
   @override
@@ -46,8 +48,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width??0.w,
-      height: widget.height??0.h,
+      width: widget.width,
+      height: widget.height,
       decoration: BoxDecoration(
           color: widget.color??Colors.transparent,
           borderRadius: BorderRadius.circular(widget.borderRadius??10.r)),
@@ -65,7 +67,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fontWeight:widget.hintTextFw??FontWeight.w400,
             fontSize: widget.hintTextSize??16.sp,
             color: widget.hintTextColor??Color(0xFF9E9E9E),
-
           ),
           hintText: widget.hintText,
           border: OutlineInputBorder(
@@ -88,12 +89,26 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
             borderSide: BorderSide(color: widget.errorBorderColor, width: 2.0.w),
           ),
+          prefixIcon: widget.child == null
+              ? null
+              : Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 10.w,
+              ),
+              widget.child!,
+              SizedBox(
+                width: 10.w,
+              ),
+            ],
+          ),
           suffixIcon:null,
             fillColor: widget.fillColor??ColorConstant.greyColor,
           filled: true,
           contentPadding: EdgeInsets.symmetric(
-            vertical: widget.verticalPadding ?? 0.r,
-            horizontal: widget.horizontalPadding ?? 0.r,
+            vertical: widget.verticalPadding ?? 0.h,
+            horizontal: widget.horizontalPadding ?? 0.w,
           )
         ),
         validator: (value) {

@@ -77,6 +77,7 @@ class _ShareLinkScreenState extends State<ShareLinkScreen> {
                               ],),
 
                           ],),
+                        SizedBox(width: 15.w,),
                         Icon(Icons.more_vert,color: ColorConstant.whiteColor,)
                       ],
                     ),

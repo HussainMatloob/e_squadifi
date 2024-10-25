@@ -70,6 +70,7 @@ class LatestStreamWidget extends StatelessWidget {
         SizedBox(width: 10.w,),
         Expanded(
           child: CustomTextFormField(
+            horizontalPadding: 15.w,
             borderColor: Colors.transparent,
             focusedBorderColor: Colors.transparent,
             hintTextColor: Colors.white54,

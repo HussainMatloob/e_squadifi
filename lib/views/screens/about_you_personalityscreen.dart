@@ -1,9 +1,15 @@
-import 'package:e_squadifi/views/screens/otp_screen.dart';
+import 'package:e_squadifi/constants/app_data.dart';
+import 'package:e_squadifi/controllers/authentication_controller.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
+import 'package:e_squadifi/views/screens/authentications/otp_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
-import 'package:get/get.dart'; // Assuming your constants file
+import 'package:get/get.dart';
+
+import '../custom_widgets/custom_button_widget.dart'; // Assuming your constants file
 
 class AboutYouPersonalityScreen extends StatefulWidget {
   const AboutYouPersonalityScreen({super.key});
@@ -15,196 +21,173 @@ class AboutYouPersonalityScreen extends StatefulWidget {
 
 class _AboutYouPersonalityScreenState extends State<AboutYouPersonalityScreen> {
   String selectedTrait = '';
-  List<String> traits = [
-    'Extroverted',
-    'Introverted',
-    'Curious',
-    'Organized',
-    'Ambitious',
-    'Easygoing',
-    'Emotional',
-    'Analytical',
-    'Teamwork',
-    'Problem-solving skills',
-    'Mental endurance',
-    'Reaction time'
-  ];
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(375, 812));
-
-    return Scaffold(
-      body: Container(
-        height: Get.height,
-        width: Get.width,
-        padding: EdgeInsets.all(8.r), // Border width
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: ColorConstant.gradientBorderColor,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          borderRadius: BorderRadius.circular(50.r),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50.r),
-            gradient: LinearGradient(
-              colors: ColorConstant.primaryGradiantColor,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+    return GetBuilder<AuthenticationController>(
+      builder: (authenticationController){
+        return  Scaffold(
+          body: Container(
+            height: Get.height,
+            width: Get.width,
+            padding: EdgeInsets.all(8.r), // Border width
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: ColorConstant.gradientBorderColor,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.circular(50.r),
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 50.h),
+            child: Container(
+              padding: EdgeInsets.all(20.r),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.r),
+                gradient: LinearGradient(
+                  colors: ColorConstant.primaryGradiantColor,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Back Button
-                  IconButton(
-                    icon:
-                        Icon(Icons.arrow_back, color: Colors.white, size: 28.sp),
-                    onPressed: () {
+                  InkWell(
+                    onTap: (){
                       Get.back();
+                      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                     },
-                  ),
-                  SizedBox(height: 20.h),
-
-                  // Heading
-                  Text(
-                    'About You',
-                    style: TextStyle(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                    child: Container(
+                      height: 40.h,
+                      width: 40.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white38,
+                        borderRadius: BorderRadius.circular(100.r),
+                      ),
+                      child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Back Button
 
-                  // Subheading
-                  Text(
-                    'Which of the following activities do you enjoy in your free time?',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.white.withOpacity(0.7),
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
+                          SizedBox(height: 20.h),
 
-                  // Personality Traits Text
-                  Text(
-                    'Personality traits',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 15.h),
+                          // Heading
+                          CustomText(
+                            'About You',
+                            fw: FontWeight.w800,
+                            size: 32.sp,
+                            color: ColorConstant.whiteColor,
+                          ),
 
-                  // Traits (Dynamic Buttons)
-                  Wrap(
-                    spacing: 10.w,
-                    runSpacing: 10.h,
-                    children: traits
-                        .map((trait) => GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedTrait = trait;
-                                });
-                              },
-                              child: GoalButton(
-                                goal: trait,
-                                isSelected: selectedTrait == trait,
+                          SizedBox(height: 10.h),
+
+                          // Goals and Aspirations Text
+                          CustomText(
+                            'Which of the following activities do you enjoy in your free time?',
+                            fw: FontWeight.w400,
+                            size: 13.sp,
+                            color: ColorConstant.whiteColor,
+                          ),
+
+                          SizedBox(height: 20.h,),
+                          // Personality Traits Text
+
+                          CustomText(
+                            'Personality traits',
+                            fw: FontWeight.w600,
+                            size: 14.sp,
+                            color: ColorConstant.whiteColor,
+                          ),
+                          SizedBox(height: 15.h),
+                          // Traits (Dynamic Buttons)
+                          Wrap(
+                            alignment: WrapAlignment.start,
+                            //direction: Axis.horizontal,
+                            spacing: 10.w,
+                            runSpacing: 15.w,
+                            children:AppData.traits
+                                .map((goal) => FittedBox(
+                              child: Row(
+                                children: [
+                                  ButtonWidget(
+                                    borderColor: ColorConstant.cyanBlue,
+                                    borderWidth: 2.sp,
+                                    text:  goal,
+                                    height: 48.h,
+                                    color: (authenticationController.selectedTreats ?? []).contains(goal)
+                                        ? ColorConstant.cyanBlue
+                                        : Colors.transparent,
+                                    radius: 90.r,
+                                    textColor: (authenticationController.selectedTreats?? []).contains(goal)?ColorConstant.whiteColor:ColorConstant.cyanBlue,
+                                    fw: FontWeight.w700,
+                                    textSize: 14.sp,
+                                    paddingHorizontal: 15.w,
+                                    onTap: () {
+                                      authenticationController.selectOrRemoveTraits(goal);
+                                    },
+                                  ),
+                                ],
                               ),
-                            ))
-                        .toList(),
-                  ),
-                  SizedBox(height: 30.h),
+                            ),).toList(),
+                          ),
+                          SizedBox(height: 30.h),
 
-                  // Next Button
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(( )=> OtpScreen());
-                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.cyan,
-                        padding: EdgeInsets.symmetric(
-                            vertical: 16.h, horizontal: 100.w),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(47.r),
-                        ),
+                          // Next Button
+                          ButtonWidget(
+                            text:  'Next',
+                            height: 51.h,
+                            color: ColorConstant.cyanBlue,
+                            radius: 47.r,
+                            textColor: ColorConstant.whiteColor,
+                            fw: FontWeight.w700,
+                            textSize: 14.sp,
+                            onTap: (){
+                              Get.to(( )=> OtpScreen());
+                              SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                            },
+                          ),
+
+
+                          SizedBox(height: 30.h),
+
+                          // User Agreement and Privacy Policy
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'User Agreement',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.6),
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                              Text(
+                                'Privacy & Cookie Policy',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.6),
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      child: Text(
-                        'Next',
-                        style: TextStyle(fontSize: 18.sp),
-                      ),
+
                     ),
-                  ),
-
-                  SizedBox(height: 30.h),
-
-                  // User Agreement and Privacy Policy
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'User Agreement',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.6),
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                      Text(
-                        'Privacy & Cookie Policy',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.6),
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
+
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
+        );
+      },
 
-class GoalButton extends StatelessWidget {
-  final String goal;
-  final bool isSelected;
-
-  const GoalButton({
-    Key? key,
-    required this.goal,
-    required this.isSelected,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.cyan : Colors.transparent,
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: Colors.teal),
-      ),
-      child: Text(
-        goal,
-        style: TextStyle(
-          color: isSelected ? Colors.white : Colors.cyan,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     );
   }
 }

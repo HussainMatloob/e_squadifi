@@ -123,6 +123,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
                                   CustomText("Selected squad",fw: FontWeight.w700,size: 16.sp,color: ColorConstant.whiteColor,),
                                   SizedBox(height: 8.h,),
                                   CustomTextFormField(
+                                    horizontalPadding: 15.w,
                                     controller: squadController,
                                     //color: ColorConstant.greyColor,
                                     hintText: "select squad to create",
@@ -133,6 +134,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
                                   CustomText("Selected squad",fw: FontWeight.w700,size: 16.sp,color: ColorConstant.whiteColor,),
                                   SizedBox(height: 8.h,),
                                   CustomTextFormField(
+                                    horizontalPadding: 15.w,
                                     controller: squadNameController,
                                     //color: ColorConstant.greyColor,
                                     hintText: "squad name",
@@ -143,6 +145,7 @@ class _CreateSquadScreenState extends State<CreateSquadScreen> {
                                   CustomText("Squad Description",fw: FontWeight.w700,size: 16.sp,color: ColorConstant.whiteColor,),
                                   SizedBox(height: 8.h,),
                                   CustomTextFormField(
+                                    horizontalPadding: 15.w,
                                     width: 312.w,
                                     height: 137.h,
                                     controller: descriptionController,

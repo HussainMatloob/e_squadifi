@@ -103,7 +103,7 @@ class _ConnectVideoGameScreenState extends State<ConnectVideoGameScreen> {
                       borderRadius: 93.r,
                       fillColor:ColorConstant.greyLightColor ,
                       width: 311.w,
-                      height: 57.h,
+
                       controller: gameIdController,
                       color:  ColorConstant.greyLightColor,
                       borderColor: ColorConstant.greyLightColor,

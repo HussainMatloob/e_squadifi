@@ -189,6 +189,7 @@ class _SquadPodVideoScreenState extends State<SquadPodVideoScreen>  with SingleT
                               child: Row(children: [
                                 Icon(Icons.emoji_emotions_outlined,color: ColorConstant.whiteColor,),
                                 Expanded(child: CustomTextFormField(
+                                  horizontalPadding: 15.w,
                                   controller: podController,
                                   hintText: "Send a message...",)),
                                 GestureDetector(

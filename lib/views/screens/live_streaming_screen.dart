@@ -152,6 +152,7 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                             ),
                             // Controls at the bottom of the screen
                             Positioned(
+
                               child: Padding(
                                 padding: EdgeInsets.all(10.w),
                                 child: liveStreamingController.isShowingPlay.value
@@ -363,7 +364,9 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                                         child: Row(children: [
                                           Icon(Icons.emoji_emotions_outlined,color: ColorConstant.whiteColor,),
-                                          Expanded(child: CustomTextFormField(hintText: "Send a message",)),
+                                          Expanded(child: CustomTextFormField(
+                                            horizontalPadding: 15.w,
+                                            hintText: "Send a message",)),
                                           GestureDetector(
                                               onTap: (){},
                                               child: Icon(Icons.send,color: ColorConstant.whiteColor,)),

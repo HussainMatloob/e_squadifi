@@ -4,7 +4,7 @@ import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text_form_field.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
-import 'package:e_squadifi/views/screens/add_group_screen.dart';
+import 'package:e_squadifi/views/screens/community_create_group_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -109,6 +109,7 @@ class _CommunityNameScreenState extends State<CommunityNameScreen> {
                      CustomText("Community Name",fw: FontWeight.w700,size: 16.sp,color: ColorConstant.whiteColor,),
                      SizedBox(height: 8.h,),
                      CustomTextFormField(
+                       horizontalPadding: 15.w,
                        controller: nameController,
                      //color: ColorConstant.greyColor,
                        hintText: "Game",
@@ -120,6 +121,7 @@ class _CommunityNameScreenState extends State<CommunityNameScreen> {
                      CustomText("Community Description",fw: FontWeight.w700,size: 16.sp,color: ColorConstant.whiteColor,),
                      SizedBox(height: 8.h,),
                      CustomTextFormField(
+                       horizontalPadding: 15.w,
                        width: 312.w,
                        height: 137.h,
                        controller: descriptionController,
@@ -143,7 +145,7 @@ class _CommunityNameScreenState extends State<CommunityNameScreen> {
                            textSize: 14.sp,
                            onTap: (){
                             if(formKey.currentState!.validate()){
-                               Get.to(()=>AddGroupScreen());
+                               Get.to(()=>CommunityCreateGroupScreen());
                                SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                             }
                            },

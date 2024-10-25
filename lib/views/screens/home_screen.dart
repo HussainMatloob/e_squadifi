@@ -28,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen>
         return  GestureDetector(
           onTap: (){
             navController.setBottomSheetFalse();
+            FocusScope.of(context).unfocus();
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
           },
           child: Scaffold(
             body: Column(
