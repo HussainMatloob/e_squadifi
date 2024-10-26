@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'package:e_squadifi/models/user_with_email_model.dart';
+import 'package:e_squadifi/constants/app_enum.dart';
 import 'package:e_squadifi/views/screens/bottom_navigation_bar.dart';
 import 'package:e_squadifi/views/screens/create_avatar_screen.dart';
 import 'package:e_squadifi/views/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +19,7 @@ class AuthenticationController extends GetxController{
   String? selectedYear;
   String? selectedMonth;
   bool logInWithPhone=false;
-bool isPhone=false;
+  bool isPhone=false;
 bool isEmail=true;
 String? gender;
 List<String> selectedGoals=[];
@@ -166,6 +167,8 @@ String? phoneValidate(value)
           Get.to(()=> BottomNavBar());
         } else {
           await FirebaseServices.createUserWithGoogleAccount().then((value) {
+            logInWithPhone=false;
+            update();
             Get.to(()=>AboutYouScreen());
           });
         }
@@ -329,4 +332,67 @@ String? phoneValidate(value)
     Get.offAll(() => SplashScreen());
   }
 
+  /*--------------------------------------------------------------------------*/
+  /*                              Sign in with Facebook                       */
+  /*--------------------------------------------------------------------------*/
+// Future<UserCredential> signInWithFacebook() async{
+//     final LoginResult loginResult=await FacebookAuth.instance.login();
+//     final OAuthCredential facebookAuthCredential=await FacebookAuthProvider.credential("${loginResult.accessToken?.tokenString}");
+//     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+//   }
+
+  Future<void> signInWithFacebook(BuildContext context) async {
+    try {
+      // Attempt Facebook login
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      switch (result.status) {
+        case LoginStatus.success:
+        // Retrieve the credential for Firebase authentication
+          final AuthCredential facebookCredential = FacebookAuthProvider.credential(
+              "${result.accessToken?.tokenString}"
+          );
+
+          // Sign in with the credential
+            auth.signInWithCredential(facebookCredential);
+
+          // Check if the user already exists
+          bool userExists = await FirebaseServices.userExists();
+
+          if (userExists) {
+            // Navigate to Home Screen
+            Get.to(() => BottomNavBar());
+          } else {
+            // Create new user record and navigate to About You Screen
+            await FirebaseServices.createUserWithFacebookAccount();
+            logInWithPhone=false;
+            update();
+            Get.to(() => AboutYouScreen());
+          }
+
+          // Show success message
+          FlushMessagesUtil.snackBarMessage('Success', 'You login successfully', context);
+          break;
+
+        case LoginStatus.cancelled:
+          FlushMessagesUtil.snackBarMessage('Cancelled', 'Login cancelled by user', context);
+          break;
+
+        case LoginStatus.failed:
+          FlushMessagesUtil.snackBarMessage('Error', 'Login failed: ${result.message}', context);
+          break;
+
+        default:
+          FlushMessagesUtil.snackBarMessage('Error', 'Unexpected error occurred', context);
+      }
+    } on FirebaseAuthException catch (e) {
+      FlushMessagesUtil.snackBarMessage('Error', 'Firebase Auth error: ${e.message}', context);
+    } catch (e) {
+      FlushMessagesUtil.snackBarMessage('Error', 'An unexpected error occurred: $e', context);
+    }
+  }
+
 }
+
+
+

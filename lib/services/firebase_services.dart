@@ -76,6 +76,13 @@ class FirebaseServices{
         .doc(user.uid)
         .set(userModel.toJson());
   }
+/* --------------------------------------------------------------------------*/
+/*                         create Account with Facebook                      */
+/* --------------------------------------------------------------------------*/
+  static Future<void> createUserWithFacebookAccount() async {
+
+     return;
+  }
 
 /* -------------------------------------------------------------------------- */
 /*                                  update user data                          */

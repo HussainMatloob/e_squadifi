@@ -358,6 +358,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fw: FontWeight.w400,
                                   textSize: 13.sp,
                                   onTap: (){
+                                    authenticationController.signInWithFacebook(context);
+                                   //authenticationController.signInWithFacebook();
                                   },
                                   icon: Icon( Icons.facebook, size: 30.sp, color: ColorConstant.whiteColor),
                                   isAuth: true,
