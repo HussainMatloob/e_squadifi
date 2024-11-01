@@ -8,8 +8,8 @@ class FlushMessagesUtil{
     Get.snackbar(
       headingText,
       message,
-      colorText: Colors.black,
-      backgroundColor:ColorConstant.greyLightColor,
+      colorText: ColorConstant.whiteColor,
+      backgroundColor:ColorConstant.squadPurpleColor,
       snackPosition: SnackPosition.TOP,
     );
   }

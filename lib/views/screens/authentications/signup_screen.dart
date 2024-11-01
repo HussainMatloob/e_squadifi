@@ -201,13 +201,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       paddingHorizontal: 20.w,
                                       text:  'Sign in with Apple',
                                       height: 51.h,
-                                      width: 311.w,
+
                                       color: ColorConstant.blackColor,
                                       radius: 47.r,
                                       textColor: ColorConstant.whiteColor,
                                       fw: FontWeight.w400,
                                       textSize: 13.sp,
                                       onTap: (){
+                                        authenticationController.signInWithApple(context);
                                       },
                                       icon: Icon(Icons.apple, size: 24.sp, color: Colors.white),
                                       isAuth: true,
@@ -219,13 +220,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       paddingHorizontal: 20.w,
                                       text:  'Continue with Google',
                                       height: 51.h,
-                                      width: 311.w,
+
                                       color: ColorConstant.whiteColor,
                                       radius: 47.r,
                                       textColor: ColorConstant.blackColor,
                                       fw: FontWeight.w400,
                                       textSize: 13.sp,
                                       onTap: (){
+                                        authenticationController.handleGoogleBtnClick(context);
                                       },
                                       icon: Icon( Icons.g_mobiledata, size: 30.sp, color: Colors.pinkAccent),
                                       isAuth: true,
@@ -236,13 +238,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       paddingHorizontal: 20.w,
                                       text:  'Continue with Facebook',
                                       height: 51.h,
-                                      width: 311.w,
+
                                       color: ColorConstant.blueColor,
                                       radius: 47.r,
                                       textColor: ColorConstant.whiteColor,
                                       fw: FontWeight.w400,
                                       textSize: 13.sp,
                                       onTap: (){
+                                        authenticationController.signInWithFacebook(context);
                                       },
                                       icon: Icon( Icons.facebook, size: 30.sp, color: ColorConstant.whiteColor),
                                       isAuth: true,
@@ -255,13 +258,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       paddingHorizontal: 20.w,
                                       text:  'Continue with Instagram',
                                       height: 51.h,
-                                      width: 311.w,
+
                                       color:  Colors.pink,
                                       radius: 47.r,
                                       textColor: ColorConstant.whiteColor,
                                       fw: FontWeight.w400,
                                       textSize: 13.sp,
                                       onTap: (){
+                                        authenticationController.loginWithInstagram(context);
                                       },
                                       icon: Icon( Icons.camera, size: 30.sp, color: ColorConstant.whiteColor),
                                       isAuth: true,
@@ -295,13 +299,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                   ],
                                 ),
-
-
                             ),
                           ),
                         ],),
-
-
                   ),
                 ),
               ),

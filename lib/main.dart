@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
-import 'package:device_preview/device_preview.dart';
+
 
 late Size mq;
 void main() async {
@@ -29,6 +29,9 @@ void main() async {
   //         const MyApp())
   // );
 
+  // if (Platform.isAndroid) {
+  //   WebView.platform = SurfaceAndroidWebView();
+  // }
   runApp(const MyApp());
 }
 

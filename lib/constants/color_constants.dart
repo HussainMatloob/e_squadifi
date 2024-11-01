@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 class ColorConstant{
 
-
-
 static List<Color> primaryGradiantColor=[
   Color(0xFF5A189A),
   Color(0xFF1A003D),

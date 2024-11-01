@@ -144,7 +144,10 @@ class _OtpScreenState extends State<OtpScreen> {
                                 size: 12.sp,
                                 color: ColorConstant.whiteColor,
                               ),
-                              TextButton(onPressed: (){}, child: CustomText("Resend Code",
+                              TextButton(onPressed: (){
+                                authenticationController.verifyPhoneNumber(
+                                     authenticationController.mobileNumber??"",context,"resend");
+                              }, child: CustomText("Resend Code",
                                 fw: FontWeight.w700,
                                 size: 12.sp,
                                 color: ColorConstant.whiteColor,)),
@@ -152,7 +155,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
                             SizedBox(height: 30.h),
                             // Verify Code Button
-                            ButtonWidget(
+                            authenticationController.otpLoader?Center(child: CircularProgressIndicator(color: ColorConstant.whiteColor,),) :ButtonWidget(
                               text:  'Verify Code',
                               height: 51.h,
                               color: ColorConstant.cyanBlue,
@@ -162,11 +165,10 @@ class _OtpScreenState extends State<OtpScreen> {
                               textSize: 14.sp,
                               onTap: () async{
                                 if (authenticationController.pinCodeLength.length == 6) {
+                                  authenticationController.loaderOfOtp();
                                   authenticationController.submitVerificationCode(
                                       pinCode,  authenticationController.verificationID,context);
                                 }
-                                Get.to(( )=>CreateAvatarScreen());
-                                SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                               },
                             ),
                             SizedBox(height: 20.h),

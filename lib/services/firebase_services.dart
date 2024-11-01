@@ -16,6 +16,7 @@ class FirebaseServices{
   /* -------------------------------------------------------------------------- */
   /*                              check user exist or not                       */
   /* -------------------------------------------------------------------------- */
+
   static Future<bool> userExists() async {
     return (await fireStore.collection('SquadifiUsers').doc(auth.currentUser!.uid).get()).exists;
   }
@@ -23,6 +24,7 @@ class FirebaseServices{
   /* -------------------------------------------------------------------------- */
   /*                       create Account with Email and Password               */
   /* -------------------------------------------------------------------------- */
+
   static Future<void> createUserWithEmailOrContact() async {
     AuthenticationController authenticationController=Get.put(AuthenticationController());
     SharedPreferences sp = await SharedPreferences.getInstance();
@@ -52,21 +54,21 @@ class FirebaseServices{
         .set(userWithEmailModel.toJson());
   }
  /* -------------------------------------------------------------------------- */
- /*                         create Account with Google                         */
+ /*       create Account with Google Or Apple or Facebook or Instagram         */
  /* -------------------------------------------------------------------------- */
-  static Future<void> createUserWithGoogleAccount() async {
 
+  static Future<void> createUserWithOtherMethods() async {
     final time = DateTime.now().millisecondsSinceEpoch.toString();
     final  userModel =  UserWithGoogleModel(
       userId:user.uid,
       id: time,
-      email:auth.currentUser!.email.toString(),
+      email:auth.currentUser!.email.toString()??"",
       gender: "",
       goalsList: [],
       about: "",
       traitsList: [],
       image: "",
-      name: auth.currentUser!.displayName.toString(),
+      name: auth.currentUser!.displayName.toString()??"",
       isLive: false,
       age: ""
     );
@@ -76,17 +78,11 @@ class FirebaseServices{
         .doc(user.uid)
         .set(userModel.toJson());
   }
-/* --------------------------------------------------------------------------*/
-/*                         create Account with Facebook                      */
-/* --------------------------------------------------------------------------*/
-  static Future<void> createUserWithFacebookAccount() async {
-
-     return;
-  }
 
 /* -------------------------------------------------------------------------- */
 /*                                  update user data                          */
 /* -------------------------------------------------------------------------- */
+
   static Future<void>  updateUserData() async {
     AuthenticationController authenticationController=Get.put(AuthenticationController());
     SharedPreferences sp = await SharedPreferences.getInstance();

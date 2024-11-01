@@ -58,7 +58,7 @@ class ButtonWidget extends StatelessWidget {
           children: [
           icon!,
             SizedBox(width: sizedBoxWidth==null?7.w:sizedBoxWidth,),
-            CustomText( text,fw: fw,size: textSize,color: textColor,),
+            Center(child: CustomText( text,fw: fw,size: textSize,color: textColor,)),
           ],
         ):Center(child: icon,),
       ),
