@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_squadifi/controllers/authentication_controller.dart';
+import 'package:e_squadifi/models/CommunityModel.dart';
+import 'package:e_squadifi/models/GroupModel.dart';
 import 'package:e_squadifi/models/user_with_email_model.dart';
 import 'package:e_squadifi/models/user_with_google.dart';
+import 'package:e_squadifi/utils/flush_messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class FirebaseServices{
@@ -98,6 +102,55 @@ class FirebaseServices{
       "age":"${authenticationController.selectedMonth},${authenticationController.selectedYear}"
     }
     );
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  create  Community                         */
+  /* -------------------------------------------------------------------------- */
+
+  static Future<void> createCommunity(String communityName,String description,BuildContext context) async {
+    try{
+      final time = DateTime.now().millisecondsSinceEpoch.toString();
+      final  communityModel = CommunityModel(
+          userId:user.uid,
+          communityName: communityName,
+          createdAt: time,
+          description: description
+      );
+
+      return await fireStore
+          .collection('Community')
+          .doc(user.uid)
+          .set(communityModel.toJson());
+    }catch(e){
+      FlushMessagesUtil.snackBarMessage("Error", e.toString(), context);
+    }
+
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                    create Group                            */
+  /* -------------------------------------------------------------------------- */
+
+  static Future<void> createGroup(BuildContext context) async {
+    try{
+      final time = DateTime.now().millisecondsSinceEpoch.toString();
+      final  groupModel = GroupModel(
+          userId:user.uid,
+          groupId: time,
+        groupName: "general group",
+        createdAt: time,
+        groupMembers: [],
+        groupImage: "",
+      );
+      return await fireStore
+          .collection('Community')
+          .doc(user.uid).collection("Groups").doc(time)
+          .set(groupModel.toJson());
+    }catch(e){
+      FlushMessagesUtil.snackBarMessage("Error", e.toString(), context);
+    }
+
   }
 
 

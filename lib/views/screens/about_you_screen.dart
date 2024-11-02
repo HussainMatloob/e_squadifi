@@ -58,199 +58,202 @@ AuthenticationController authenticationController=Get.put(AuthenticationControll
                       end: Alignment.bottomRight,
                     ),
                   ),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Back Button
-                        InkWell(
-                          onTap: (){
-                            Get.back();
-                            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                          },
-                          child: Container(
-                            height: 40.h,
-                            width: 40.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white38,
-                              borderRadius: BorderRadius.circular(100.r),
+                  child:   Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Back Button
+                          InkWell(
+                            onTap: (){
+                              Get.back();
+                              SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                            },
+                            child: Container(
+                              height: 40.h,
+                              width: 40.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white38,
+                                borderRadius: BorderRadius.circular(100.r),
+                              ),
+                              child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
                             ),
-                            child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
                           ),
-                        ),
-                        SizedBox(height: 20.h),
+                          SizedBox(height: 20.h),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                CustomText(
+                                  'About You',
+                                  fw: FontWeight.w800,
+                                  size: 32.sp,
+                                  color: ColorConstant.whiteColor,
+                                ),
 
-                        // Heading
-                        CustomText(
-                          'About You',
-                          fw: FontWeight.w800,
-                          size: 32.sp,
-                          color: ColorConstant.whiteColor,
-                        ),
+                                SizedBox(height: 10.h),
 
-                        SizedBox(height: 10.h),
+                                // Subheading
+                                CustomText(
+                                  'Answer some questions to let you get started with your profile.',
+                                  fw: FontWeight.w400,
+                                  size: 13.sp,
+                                  color: ColorConstant.whiteColor,
+                                ),
 
-                        // Subheading
-                        CustomText(
-                          'Answer some questions to let you get started with your profile.',
-                          fw: FontWeight.w400,
-                          size: 13.sp,
-                          color: ColorConstant.whiteColor,
-                        ),
+                                SizedBox(height: 40.h),
 
-                        SizedBox(height: 40.h),
+                                CustomText(
+                                  "Age:",
+                                  fw: FontWeight.w600,
+                                  size: 14.sp,
+                                  color: ColorConstant.whiteColor,
+                                ),
+                                SizedBox(height: 10.h,),
+                                // Age Dropdowns
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: DropdownButtonFormField<String>(
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: ColorConstant.greyColor,
+                                          hintText: 'Year',
+                                          hintStyle:
+                                          TextStyle(color: Colors.white.withOpacity(0.6)),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(12.r),
+                                            borderSide: BorderSide.none,
+                                          ),
+                                        ),
+                                        dropdownColor: ColorConstant.greyColor,
+                                        value: authenticationController.selectedYear,
+                                        onChanged: (newValue) {
+                                          authenticationController.selectYear(newValue!);
+                                        },
+                                        items: AppData.years.map((year) {
+                                          return DropdownMenuItem<String>(
+                                            value: year,
+                                            child: Text(
+                                              year,
+                                              style: TextStyle(color: Colors.white),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Expanded(
+                                      child: DropdownButtonFormField<String>(
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor:  ColorConstant.greyColor,
+                                          hintText: 'Month',
+                                          hintStyle:
+                                          TextStyle(color: Colors.white.withOpacity(0.6)),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(12.r),
+                                            borderSide: BorderSide.none,
+                                          ),
+                                        ),
+                                        dropdownColor: ColorConstant.greyColor,
+                                        value:authenticationController.selectedMonth,
+                                        onChanged: (newValue) {
+                                          authenticationController.selectMonth(newValue!);
+                                        },
+                                        items:AppData.months.map((month) {
+                                          return DropdownMenuItem<String>(
+                                            value: month,
+                                            child: Text(
+                                              month,
+                                              style: TextStyle(color: Colors.white),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20.h),
+                                CustomText(
+                                  "Gender",
+                                  fw: FontWeight.w600,
+                                  size: 14.sp,
+                                  color: ColorConstant.whiteColor,
+                                ),
+                                SizedBox(height: 10.h,),
 
-                        CustomText(
-                          "Age:",
-                          fw: FontWeight.w600,
-                          size: 14.sp,
-                          color: ColorConstant.whiteColor,
-                        ),
-                        SizedBox(height: 10.h,),
-                        // Age Dropdowns
-                        Row(
-                          children: [
-                            Expanded(
-                              child: DropdownButtonFormField<String>(
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: ColorConstant.greyColor,
-                                  hintText: 'Year',
-                                  hintStyle:
-                                  TextStyle(color: Colors.white.withOpacity(0.6)),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    borderSide: BorderSide.none,
+                                // Gender Selection
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      for(int i =0;i<AppData.genderList.length;i++)
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10.w),
+                                          child: ButtonWidget(
+                                            borderColor: ColorConstant.cyanBlue,
+                                            borderWidth: 2.sp,
+                                            text: AppData.genderList[i],
+                                            height: 48.h,
+                                            color: authenticationController.gender==AppData.genderList[i]
+                                                ? ColorConstant.cyanBlue
+                                                : Colors.transparent,
+                                            radius: 90.r,
+                                            textColor:  authenticationController.gender==AppData.genderList[i]?ColorConstant.whiteColor:ColorConstant.cyanBlue,
+                                            fw: FontWeight.w700,
+                                            textSize: 14.sp,
+                                            paddingHorizontal: 25.w,
+                                            onTap: () {
+                                              authenticationController.selectGender(AppData.genderList[i]);
+                                            },
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                 ),
-                                dropdownColor: ColorConstant.greyColor,
-                                value: authenticationController.selectedYear,
-                                onChanged: (newValue) {
-                                  authenticationController.selectYear(newValue!);
-                                },
-                                items: AppData.years.map((year) {
-                                  return DropdownMenuItem<String>(
-                                    value: year,
-                                    child: Text(
-                                      year,
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                            SizedBox(width: 10.w),
-                            Expanded(
-                              child: DropdownButtonFormField<String>(
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor:  ColorConstant.greyColor,
-                                  hintText: 'Month',
-                                  hintStyle:
-                                  TextStyle(color: Colors.white.withOpacity(0.6)),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                                dropdownColor: ColorConstant.greyColor,
-                                value:authenticationController.selectedMonth,
-                                onChanged: (newValue) {
-                                  authenticationController.selectMonth(newValue!);
-                                },
-                                items:AppData.months.map((month) {
-                                  return DropdownMenuItem<String>(
-                                    value: month,
-                                    child: Text(
-                                      month,
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20.h),
-                        CustomText(
-                          "Gender",
-                          fw: FontWeight.w600,
-                          size: 14.sp,
-                          color: ColorConstant.whiteColor,
-                        ),
-                        SizedBox(height: 10.h,),
+                                SizedBox(height: 40.h),
 
-                        // Gender Selection
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              for(int i =0;i<AppData.genderList.length;i++)
-                              Padding(
-                                padding: EdgeInsets.only(left: 10.w),
-                                child: ButtonWidget(
-                                  borderColor: ColorConstant.cyanBlue,
-                                  borderWidth: 2.sp,
-                                  text: AppData.genderList[i],
-                                  height: 48.h,
-                                  color: authenticationController.gender==AppData.genderList[i]
-                                      ? ColorConstant.cyanBlue
-                                      : Colors.transparent,
-                                  radius: 90.r,
-                                  textColor:  authenticationController.gender==AppData.genderList[i]?ColorConstant.whiteColor:ColorConstant.cyanBlue,
+                                // Next Button
+
+                                ButtonWidget(
+                                  text:  'Next',
+                                  height: 51.h,
+                                  color: ColorConstant.cyanBlue,
+                                  radius: 47.r,
+                                  textColor: ColorConstant.whiteColor,
                                   fw: FontWeight.w700,
                                   textSize: 14.sp,
-                                  paddingHorizontal: 25.w,
-                                  onTap: () {
-                                     authenticationController.selectGender(AppData.genderList[i]);
+                                  onTap: (){
+                                    Get.to(( )=>AboutYouAspirationScreen());
+                                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                                   },
+                                ),
+                              ],),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'User Agreement',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.6),
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                              Text(
+                                'Privacy & Cookie Policy',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.6),
+                                  fontSize: 12.sp,
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(height: 40.h),
-
-                        // Next Button
-
-                        ButtonWidget(
-                          text:  'Next',
-                          height: 51.h,
-                          color: ColorConstant.cyanBlue,
-                          radius: 47.r,
-                          textColor: ColorConstant.whiteColor,
-                          fw: FontWeight.w700,
-                          textSize: 14.sp,
-                          onTap: (){
-                            Get.to(( )=>AboutYouAspirationScreen());
-                            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                          },
-                        ),
-                        Spacer(),
-
-                        // User Agreement and Privacy Policy
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'User Agreement',
-                              style: TextStyle(
-                                color: Colors.white.withOpacity(0.6),
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                            Text(
-                              'Privacy & Cookie Policy',
-                              style: TextStyle(
-                                color: Colors.white.withOpacity(0.6),
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-
+                        ],
+                      ),
                 ),
               ),
             ),

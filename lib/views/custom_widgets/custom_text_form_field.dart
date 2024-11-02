@@ -28,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
   final Function(dynamic value)? onChanged;
   final String? Function(String?)? validateFunction;
   final TextStyle? hintStyle;
+  final bool? isMultiline;
   const CustomTextFormField({
     super.key,
     this.hintText,
@@ -41,7 +42,7 @@ class CustomTextFormField extends StatefulWidget {
     this.height,
     this.isPassword = false,
     this.color,
-    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding, this.child, this.isObSecure, this.onChanged, this.hintStyle, this.obSecureTap, this.validateFunction
+    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding, this.child, this.isObSecure, this.onChanged, this.hintStyle, this.obSecureTap, this.validateFunction, this.isMultiline=false
   });
 
   @override
@@ -60,12 +61,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: TextFormField(
         onChanged: widget.onChanged,
         focusNode: widget.focusNode,
-        //keyboardType: TextInputType.multiline,
-        //maxLines: null,
+        maxLines:widget.isMultiline==true?null:1,
         obscureText: widget.isObSecure??false, // Toggle visibility based on state
         obscuringCharacter: "*",
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: TextInputType.text,
+        keyboardType:widget.isMultiline==false?TextInputType.text:TextInputType.multiline,
         controller: widget.controller,
         decoration: InputDecoration(
           labelText: widget.labelText,
@@ -74,7 +74,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fontSize: widget.hintTextSize??16.sp,
             color: widget.hintTextColor??Color(0xFF9E9E9E),
           ),
-
           hintText: widget.hintText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius??10.r),
