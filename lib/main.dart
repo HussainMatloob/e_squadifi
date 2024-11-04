@@ -1,4 +1,13 @@
+import 'package:e_squadifi/views/screens/challenge.dart';
+import 'package:e_squadifi/views/screens/challenge_details_screen.dart';
+import 'package:e_squadifi/views/screens/invite_people.dart';
+import 'package:e_squadifi/views/screens/new_promotion_screen.dart';
+import 'package:e_squadifi/views/screens/player_user_list_screen.dart';
+import 'package:e_squadifi/views/screens/select_video.dart';
+import 'package:e_squadifi/views/screens/set_token%20_Screen.dart';
 import 'package:e_squadifi/views/screens/splash_screen.dart';
+import 'package:e_squadifi/views/screens/squad_screen.dart';
+import 'package:e_squadifi/views/screens/user_List_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -17,11 +26,11 @@ void main() async {
   // Hide status bar and navigation bar
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
- // Set the status bar style (optional, if you want to control transparency)
- //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
- //    statusBarColor: Colors.transparent, // Makes status bar transparent
- //    statusBarIconBrightness: Brightness.light, // Changes icon brightness
- //  ));
+  // Set the status bar style (optional, if you want to control transparency)
+  //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //    statusBarColor: Colors.transparent, // Makes status bar transparent
+  //    statusBarIconBrightness: Brightness.light, // Changes icon brightness
+  //  ));
 
   // runApp(
   //     DevicePreview(
@@ -59,7 +68,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 scaffoldBackgroundColor: Colors.transparent,
               ),
-              home: SplashScreen(),
+              home: Set_Token_screen(),
             );
           },
         );
