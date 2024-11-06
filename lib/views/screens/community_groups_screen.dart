@@ -1,5 +1,7 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
+import 'package:e_squadifi/models/group_model.dart';
+import 'package:e_squadifi/services/firebase_services.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
@@ -8,6 +10,7 @@ import 'package:e_squadifi/views/screens/share_community_Link_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:paginate_firestore_plus/paginate_firestore.dart';
 
 class CommunityGroupsScreen extends StatefulWidget {
   const CommunityGroupsScreen({super.key});
@@ -126,56 +129,53 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                                 ],),
                             ),
                             SizedBox(height: 20.w,),
+                            /* -------------------------------------------------------------------------- */
+                            /*                            Fetch Community Groups                          */
+                            /* -------------------------------------------------------------------------- */
                             Container(
                               padding: EdgeInsets.all(20.r),
                               width: 310.w,
-                              height: 136.h,
                               decoration: BoxDecoration(
                                 color: ColorConstant.greyLightColor,
                                 borderRadius: BorderRadius.circular(12.r),
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CustomListTile(
-                                    text: "Group name",
-                                    color: ColorConstant.whiteColor,
-                                    image: ImageConstants.profileImagesList[3],
-                                    fw: FontWeight.w500,
-                                    textSize: 16.sp,
-                                    fontStyle: FontStyle.italic,
-                                    sizedBoxedWidth: 12.w,
-                                    width: 32.w,
-                                    height: 32.h,
-                                    containerColor: ColorConstant.dullPurpleColor,
-                                    borderRadius: 8.r,
-                                    onTap: (){
-                                      Get.to(()=>MessagesScreen());
-                                    },
-                                  ),
-                                  Divider(color: ColorConstant.greyColor,),
-                                  CustomListTile(
-                                    text: "Group name",
-                                    color: ColorConstant.whiteColor,
-                                    icon: Icon(
-                                      Icons.group_outlined,
-                                      color: ColorConstant.whiteColor,
-                                      size: 20,
-                                    ),
-                                    fw: FontWeight.w500,
-                                    textSize: 16.sp,
-                                    fontStyle: FontStyle.italic,
-                                    sizedBoxedWidth: 12.w,
-                                    width: 32.w,
-                                    height: 32.h,
-                                    containerColor: ColorConstant.dullPurpleColor,
-                                    borderRadius: 8.r,
-                                    onTap: (){
-                                      Get.to(()=>MessagesScreen());
-                                    },
-                                    image:ImageConstants.profileImagesList[3],
-                                  ),
-                                ],),
+                              child: PaginateFirestore(itemBuilder: (context,documentSnapshot,index)
+                                  {
+
+                                    GroupModel groupModel = GroupModel.fromJson(
+                                        documentSnapshot[index].data()
+                                        as Map<String, dynamic>);
+
+                                    return Column(children: [
+                                      index==0?Container():SizedBox(height: 10.w,),
+                                      index==0? Container():Divider(color: ColorConstant.greyColor,),
+                                      index==0?Container():SizedBox(height: 10.w,),
+                                      CustomListTile(
+                                            text: groupModel.groupName,
+                                            color: ColorConstant.whiteColor,
+                                            image: ImageConstants.profileImagesList[3],
+                                            fw: FontWeight.w500,
+                                            textSize: 16.sp,
+                                            fontStyle: FontStyle.italic,
+                                            sizedBoxedWidth: 12.w,
+                                            width: 32.w,
+                                            height: 32.h,
+                                            containerColor: ColorConstant.dullPurpleColor,
+                                            borderRadius: 8.r,
+                                            onTap: (){
+                                              Get.to(()=>MessagesScreen(groupModel: groupModel));
+                                            },
+                                          ),
+                                    ],);
+                                  },
+                                  query:FirebaseServices.getYourGroups(),
+                                  itemBuilderType:PaginateBuilderType.listView,
+                                  isLive: true,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                              )
+
                             ),
                             SizedBox(height: 30.w,),
                             Padding(
@@ -200,7 +200,7 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                                 icon: Icon(
                                   Icons.person_add_alt,
                                   color: ColorConstant.whiteColor,
-                                  size: 20,
+                                  size: 20.sp,
                                 ),
                                 fw: FontWeight.w500,
                                 textSize: 16.sp,

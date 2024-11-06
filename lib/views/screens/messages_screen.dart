@@ -1,5 +1,9 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
+import 'package:e_squadifi/helper/my_date_utils.dart';
+import 'package:e_squadifi/models/chat_model.dart';
+import 'package:e_squadifi/models/group_model.dart';
+import 'package:e_squadifi/services/firebase_services.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text_form_field.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
@@ -8,15 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:paginate_firestore_plus/paginate_firestore.dart';
 
 class MessagesScreen extends StatefulWidget {
-  const MessagesScreen({super.key});
+  final GroupModel? groupModel;
+  const MessagesScreen({super.key, this.groupModel});
 
   @override
   State<MessagesScreen> createState() => _MessagesScreenState();
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
+  TextEditingController messageController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -96,15 +103,26 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       ),
 
                       Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(children: [
-                              receiverMessage(),
-                                senderMessage(),
-                            receiverMessage(),
-                            senderMessage(),
-                            receiverMessage(),
-                            senderMessage()
-                          ],),
+                        child: PaginateFirestore(itemBuilder: (context,documentSnapshot,index){
+                         ChatModel chatModel=ChatModel.fromJson(documentSnapshot[index].data() as Map<String,dynamic>);
+                         if(chatModel.senderId==FirebaseServices.user.uid){
+                           return senderMessage(chatModel,context);
+                         }else{
+                          return receiverMessage(chatModel,context);
+                         }
+                        },
+                            query: FirebaseServices.getMessages(widget.groupModel!),
+                            itemBuilderType: PaginateBuilderType.listView,
+                        isLive: true,
+                          reverse: true,
+                          scrollDirection: Axis.vertical,
+                          physics: BouncingScrollPhysics(),
+                          onEmpty:Center(
+                              child: CustomText(
+                                "Say Hii 👋!",
+                                size: 20.sp,
+                                color: ColorConstant.whiteColor,
+                              )),
                         ),
                       ),
                       Divider(color: ColorConstant.greyColor,),
@@ -120,10 +138,15 @@ class _MessagesScreenState extends State<MessagesScreen> {
                           child: Row(children: [
                             Icon(Icons.emoji_emotions_outlined,color: ColorConstant.whiteColor,),
                           Expanded(child: CustomTextFormField(
+                            controller: messageController,
                             horizontalPadding: 15.w,
                             hintText: "Send a message",)),
                             GestureDetector(
-                                onTap: (){},
+                                onTap: (){
+                                  if(messageController.text.trim().isNotEmpty){
+                                   FirebaseServices.sendMessage(widget.groupModel!, context, messageController.text.toString());
+                                  }
+                                },
                                 child: Icon(Icons.send,color: ColorConstant.whiteColor,)),
                           ],),
                         ),
@@ -138,7 +161,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   }
 }
 
-Widget receiverMessage(){
+Widget receiverMessage(ChatModel chatModel,BuildContext context){
   return Row(children: [
     ReuseableGradientContainer(
       height: 38.h,
@@ -151,8 +174,7 @@ Widget receiverMessage(){
       internalPadding: 2.r,
     ),
     SizedBox(width: 18.w,),
-    Expanded(
-      child: Column(
+    Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -167,27 +189,26 @@ Widget receiverMessage(){
                   child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-               Flexible(child: CustomText("hy",color: ColorConstant.whiteColor,size: 13.sp,fw: FontWeight.w400,)),
+               Flexible(child: CustomText(chatModel.message,color: ColorConstant.whiteColor,size: 13.sp,fw: FontWeight.w400,)),
               ],)
                     ),
           SizedBox(height: 10.w,),
-         CustomText("12:00 Am",color: ColorConstant.whiteColor,size: 11.sp,fw: FontWeight.w400,),
+         CustomText(MyDateUtil.getLastMessagesTime(context: context, time: chatModel.sendTime.toString()),color: ColorConstant.whiteColor,size: 11.sp,fw: FontWeight.w400,),
       ],),
-    )
+
   ],);
 }
 
-Widget senderMessage(){
+Widget senderMessage(ChatModel chatModel,BuildContext context){
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
-    Expanded(
-      child: Column(
+     Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
                Container(
-                 width: 169,
+                width: 169,
                 margin: EdgeInsets.only(top: 60.h),
 
                           padding: EdgeInsets.all(15.r),
@@ -196,16 +217,16 @@ Widget senderMessage(){
                   border: Border.all(width: 1,color: ColorConstant.messageBorderColor),
                   borderRadius: BorderRadius.only(topLeft:Radius.circular(18.r) ,bottomLeft:Radius.circular(18.r) ,bottomRight:Radius.circular(18.r) )),
                           child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Flexible(child: CustomText("hi sdaljs ld;sakd asd;salkd;as sjd sl,d;lsad sdsa;lmdsa;md sdmasmdl",color: ColorConstant.whiteColor,size: 13.sp,fw: FontWeight.w400,)),
+                  Flexible(child: CustomText( chatModel.message,color: ColorConstant.whiteColor,size: 13.sp,fw: FontWeight.w400,)),
                           ],)
                   ),
 
           SizedBox(height: 10.w,),
-        CustomText("12:00 Am",color: ColorConstant.whiteColor,size: 11.sp,fw: FontWeight.w400,),
+        CustomText(MyDateUtil.getLastMessagesTime(context: context, time: chatModel.sendTime.toString()),color: ColorConstant.whiteColor,size: 11.sp,fw: FontWeight.w400,),
       ],),
-    ),
+
     SizedBox(width: 18.w,),
     ReuseableGradientContainer(
       height: 38.h,

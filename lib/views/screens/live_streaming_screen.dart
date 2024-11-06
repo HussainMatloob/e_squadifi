@@ -14,7 +14,6 @@ import '../../constants/image_constants.dart';
 import '../../controllers/live_streaming_controller.dart';
 import '../custom_widgets/comments_widget.dart';
 import '../custom_widgets/custom_image_container.dart';
-
 class LiveStreamingScreen extends StatefulWidget {
   final String? videoUrl;
   const LiveStreamingScreen({

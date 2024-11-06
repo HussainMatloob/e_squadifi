@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_squadifi/controllers/authentication_controller.dart';
-import 'package:e_squadifi/models/CommunityModel.dart';
-import 'package:e_squadifi/models/GroupModel.dart';
+import 'package:e_squadifi/models/chat_model.dart';
+import 'package:e_squadifi/models/community_model.dart';
+import 'package:e_squadifi/models/group_model.dart';
 import 'package:e_squadifi/models/user_with_email_model.dart';
 import 'package:e_squadifi/models/user_with_google.dart';
 import 'package:e_squadifi/utils/flush_messages.dart';
@@ -58,7 +59,7 @@ class FirebaseServices{
         .set(userWithEmailModel.toJson());
   }
  /* -------------------------------------------------------------------------- */
- /*       create Account with Google Or Apple or Facebook or Instagram         */
+ /*       create Account with Google or Apple or Facebook or Instagram         */
  /* -------------------------------------------------------------------------- */
 
   static Future<void> createUserWithOtherMethods() async {
@@ -150,8 +151,53 @@ class FirebaseServices{
     }catch(e){
       FlushMessagesUtil.snackBarMessage("Error", e.toString(), context);
     }
-
+  }
+  /* -------------------------------------------------------------------------- */
+  /*                      check Community Exist or not                         */
+  /* -------------------------------------------------------------------------- */
+  static Future<bool> communityExists() async {
+    return (await fireStore.collection('Community').doc(auth.currentUser!.uid).get()).exists;
   }
 
+/* -------------------------------------------------------------------------- */
+/*                                    get your groups                         */
+/* -------------------------------------------------------------------------- */
 
+static Query<Map<String ,dynamic>> getYourGroups(){
+  return fireStore.collection('Community').doc(user.uid).collection("Groups");
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    send message                            */
+/* -------------------------------------------------------------------------- */
+
+static Future<void> sendMessage(GroupModel groupModel,BuildContext context,String message) async{
+  try {
+    final time = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
+    final chatModel = ChatModel(
+      groupId: groupModel.groupId,
+      senderId: user.uid,
+      senderImage: "",
+      message: message,
+      sendTime: time
+    );
+    return await fireStore
+        .collection('Community')
+        .doc(groupModel.userId).collection("Groups").doc(groupModel.groupId).collection("groupChats").doc(time)
+        .set(chatModel.toJson());
+  } catch (e) {
+    FlushMessagesUtil.snackBarMessage("Error", e.toString(), context);
+  }
+}
+
+/*--------------------------------------------------------------------------*/
+/*                                 get messages                             */
+/*--------------------------------------------------------------------------*/
+
+static Query<Map<String,dynamic>> getMessages(GroupModel groupModel){
+  return fireStore.collection('Community').doc(groupModel.userId).collection("Groups").doc(groupModel.groupId).collection("groupChats").orderBy('sendTime',descending: true);
+}
 }

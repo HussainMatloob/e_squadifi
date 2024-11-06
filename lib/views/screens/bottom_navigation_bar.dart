@@ -24,7 +24,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           onWillPop:()async{
             if(navController.selectedNavIndex!=0){
               navController.navIndex(0);
-              navController.groupCreate(false);
               return false;
             }
             else{
@@ -62,7 +61,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
                   child: Stack(
                     children: [
-                       navController.groupExist==false?navController.pages[navController.selectedNavIndex]:CommunityGroupsScreen(),
+                       navController.pages[navController.selectedNavIndex],
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: BottomAppBar(
@@ -78,7 +77,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     Icons.home_outlined,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
-                                  navController.groupCreate(false);
                                   navController.navIndex(0);
                                 },
                               ),
@@ -86,7 +84,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                 icon: Icon(Icons.mic_none,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
-                                  navController.groupCreate(false);
+
                                   navController.navIndex(1);
                                 },
                               ),
@@ -96,8 +94,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                 icon: Icon(Icons.groups_3_outlined,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
+                                  navController.communityMethod();
                                   navController.navIndex(2);
-                                  navController.groupCreate(false);
                                 },
                               ),
                               IconButton(
@@ -105,7 +103,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     Icons.person_outline,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
-                                  navController.groupCreate(false);
+
                                   Get.to(()=>ProfileScreen());
                                   //navController.navIndex(3);
                                 },
