@@ -4,7 +4,6 @@ import 'package:e_squadifi/controllers/navigation_controller.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_bottom_sheet.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_image_container.dart';
 import 'package:e_squadifi/views/screens/profile_screen.dart';
-import 'package:e_squadifi/views/screens/community_groups_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

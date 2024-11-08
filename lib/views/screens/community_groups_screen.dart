@@ -1,5 +1,6 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
+import 'package:e_squadifi/controllers/live_streaming_controller.dart';
 import 'package:e_squadifi/models/group_model.dart';
 import 'package:e_squadifi/services/firebase_services.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
@@ -12,6 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paginate_firestore_plus/paginate_firestore.dart';
 
+import '../custom_widgets/custom_dialog_box.dart';
+
 class CommunityGroupsScreen extends StatefulWidget {
   const CommunityGroupsScreen({super.key});
 
@@ -21,6 +24,7 @@ class CommunityGroupsScreen extends StatefulWidget {
 
 class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
   @override
+  LiveStreamingController liveStreamingController = Get.put(LiveStreamingController());
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -177,14 +181,14 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                               )
 
                             ),
-                            SizedBox(height: 30.w,),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15.w),
-                              child: Row(mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  CustomText("Your Groups",fw: FontWeight.w700,size: 24.sp,color: ColorConstant.whiteColor,),
-                                ],),
-                            ),
+                            // SizedBox(height: 30.w,),
+                            // Padding(
+                            //   padding: EdgeInsets.symmetric(horizontal: 15.w),
+                            //   child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                            //     children: [
+                            //       CustomText("Your Groups",fw: FontWeight.w700,size: 24.sp,color: ColorConstant.whiteColor,),
+                            //     ],),
+                            // ),
                             SizedBox(height: 20.w,),
                             Container(
                               padding: EdgeInsets.all(20.r),
@@ -210,7 +214,9 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                                 height: 32.h,
                                 containerColor: ColorConstant.purpleLightColor,
                                 borderRadius: 8.r,
-                                onTap: (){},
+                                onTap: (){
+                                  CustomDialogBox().showDialogBox(context,false,400,200);
+                                },
                               ),
                             ),
                             SizedBox(height: 20.w,),

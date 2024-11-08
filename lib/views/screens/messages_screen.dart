@@ -145,6 +145,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                 onTap: (){
                                   if(messageController.text.trim().isNotEmpty){
                                    FirebaseServices.sendMessage(widget.groupModel!, context, messageController.text.toString());
+                                   messageController.clear();
                                   }
                                 },
                                 child: Icon(Icons.send,color: ColorConstant.whiteColor,)),

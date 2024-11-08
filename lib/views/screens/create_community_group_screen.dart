@@ -99,7 +99,7 @@ class _CreateCommunityGroupScreenState extends State<CreateCommunityGroupScreen>
                     containerColor: ColorConstant.purpleLightColor,
                     borderRadius: 8.r,
                     onTap: (){
-                      FirebaseServices.createGroup(context).then((onValue){
+                      FirebaseServices.createGroup(context,"general group").then((onValue){
                         navController.communityMethod();
                         navController.navIndex(2);
                         FlushMessagesUtil.snackBarMessage("Success", "Group created successfully", context);

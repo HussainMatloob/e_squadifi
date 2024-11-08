@@ -133,13 +133,13 @@ class FirebaseServices{
   /*                                    create Group                            */
   /* -------------------------------------------------------------------------- */
 
-  static Future<void> createGroup(BuildContext context) async {
+  static Future<void> createGroup(BuildContext context,String groupName) async {
     try{
       final time = DateTime.now().millisecondsSinceEpoch.toString();
       final  groupModel = GroupModel(
           userId:user.uid,
           groupId: time,
-        groupName: "general group",
+        groupName: groupName,
         createdAt: time,
         groupMembers: [],
         groupImage: "",

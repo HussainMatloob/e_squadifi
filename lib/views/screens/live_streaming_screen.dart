@@ -280,9 +280,7 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      CustomDialogBox()
-                                                          .showDialogBox(
-                                                              context);
+                                                      CustomDialogBox().showDialogBox(context,true,400,270);
                                                     },
                                                     child: Icon(
                                                       Icons.settings_outlined,

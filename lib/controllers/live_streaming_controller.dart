@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 class LiveStreamingController extends GetxController{
@@ -22,6 +23,14 @@ class LiveStreamingController extends GetxController{
   //   return uint8list;
   // }
 
+  TextEditingController groupNameController=Get.put(TextEditingController());
+  GlobalKey<FormState> formKey=GlobalKey<FormState>();
+  String? groupNameValidate(value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Please enter group name";
+    }
+    return null; // Valid input
+  }
  bool isSwitchedOn=false;
  void switchedButton(){
    isSwitchedOn=!isSwitchedOn;

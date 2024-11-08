@@ -1,12 +1,19 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/controllers/live_streaming_controller.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../services/firebase_services.dart';
+import '../../utils/flush_messages.dart';
 class CustomDialogBox {
   // The method to show the dialog
-  void showDialogBox(BuildContext context) {
+  void showDialogBox(BuildContext context,bool isVideoDialog,double dialogWidth,double dialogHeight) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -18,14 +25,14 @@ class CustomDialogBox {
                 borderRadius: BorderRadius.circular(28.r), // Optional: Add rounded corners
               ),
               child: Container(
-                height: liveStreamingController.isLandScape.value?150.h:270.h, // Set custom height
-                width: 400.w,  // Set custom width
+                height: liveStreamingController.isLandScape.value?150.h:dialogHeight.h, // Set custom height
+                width: dialogWidth.w,  // Set custom width
                 padding: EdgeInsets.all(28.r), // Add some padding
                 decoration: BoxDecoration(
                   color: ColorConstant.dialogColor, // Set background color
                   borderRadius: BorderRadius.circular(28.r), // Optional: Add rounded corners
                 ),
-                child: Column(
+                child:isVideoDialog==true?Column(
                   mainAxisSize: MainAxisSize.min, // Wrap content height
                   children: [
                     CustomListTile(
@@ -91,6 +98,48 @@ class CustomDialogBox {
                       sizedBoxedWidth: 15.w,
                     ),
                   ],
+                ):Form(
+                  key:liveStreamingController.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                      CustomText("Create new group",color: ColorConstant.whiteColor,size: 16.sp,fw: FontWeight.w700,),
+
+                        CustomTextFormField(
+                          validateFunction: liveStreamingController.groupNameValidate,
+                          controller: liveStreamingController.groupNameController,
+                          horizontalPadding: 10.w,
+                          hintText: "Enter group name",
+                        ),
+
+                      Row(mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                        ButtonWidget(
+                          onTap: (){
+                          if(liveStreamingController.formKey.currentState!.validate()){
+                            FlushMessagesUtil.easyLoading();
+                            FirebaseServices.createGroup(context,liveStreamingController.groupNameController.text.toString()).then((onValue){
+                              EasyLoading.dismiss();
+                              Get.back();
+                            });
+                          }
+                          },
+                          text:"Create",textColor: ColorConstant.whiteColor,
+                          color: ColorConstant.purpleLightColor,
+                          paddingHorizontal: 10.w,
+                          height: 30.h,radius: 50.r,),
+                          SizedBox(width: 10.w,),
+                          ButtonWidget(
+                            onTap: (){
+                              Get.back();
+                            },
+                            text:"Cancel",textColor: ColorConstant.whiteColor,
+                            color: ColorConstant.redColor,
+                            paddingHorizontal: 10.w,
+                            height: 30.h,radius: 50.r,),
+                      ],)
+                    ],),
+
                 ),
               ),
             );
