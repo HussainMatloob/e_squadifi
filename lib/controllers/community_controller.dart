@@ -7,4 +7,15 @@ class CommunityController extends GetxController{
     }
     return null; // Valid input
   }
+
+  List<String> selectedUsers=[];
+  void inviteUserCheck(String index){
+    if((selectedUsers??[]).contains(index)){
+      selectedUsers.remove(index);
+      update();
+    }else{
+      selectedUsers.add(index);
+      update();
+    }
+  }
 }

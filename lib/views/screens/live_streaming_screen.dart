@@ -266,8 +266,7 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      Get.to(() =>
-                                                          ConnectVideoGameScreen());
+                                                      //Get.to(() => ConnectVideoGameScreen());
                                                     },
                                                     child: Icon(
                                                       Icons.cast,
@@ -326,8 +325,8 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                                               right: 15.w,
                                               bottom: liveStreamingController
                                                       .isLandScape.value
-                                                  ? 5.h
-                                                  : 0.h),
+                                                  ? 8.h
+                                                  : 5.h),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,

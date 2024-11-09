@@ -93,6 +93,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                 icon: Icon(Icons.groups_3_outlined,
                                     color: ColorConstant.iconColor),
                                 onPressed:() {
+                                  navController.getCommunityName();
                                   navController.communityMethod();
                                   navController.navIndex(2);
                                 },

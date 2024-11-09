@@ -12,7 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CreateCommunityGroupScreen extends StatefulWidget {
-  const CreateCommunityGroupScreen({super.key});
+
+  const CreateCommunityGroupScreen({super.key, });
 
   @override
   State<CreateCommunityGroupScreen> createState() => _CreateCommunityGroupScreenState();
@@ -99,6 +100,7 @@ class _CreateCommunityGroupScreenState extends State<CreateCommunityGroupScreen>
                     containerColor: ColorConstant.purpleLightColor,
                     borderRadius: 8.r,
                     onTap: (){
+                      navController.getCommunityName();
                       FirebaseServices.createGroup(context,"general group").then((onValue){
                         navController.communityMethod();
                         navController.navIndex(2);

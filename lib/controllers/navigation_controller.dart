@@ -10,11 +10,17 @@ import 'package:get/get.dart';
 class NavController extends GetxController{
   bool isCommunityCreated=false;
  int selectedNavIndex=0;
+ String communityName="";
 
   void navIndex(index){
     selectedNavIndex=index;
     update();
   }
+
+Future<void> getCommunityName() async{
+    communityName=await FirebaseServices.getCommunity();
+    update();
+}
 
   Future<void> communityMethod() async{
     isCommunityCreated=await FirebaseServices.communityExists();

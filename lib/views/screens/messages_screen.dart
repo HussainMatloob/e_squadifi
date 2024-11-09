@@ -14,6 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paginate_firestore_plus/paginate_firestore.dart';
 
+import 'add_members_in_group.dart';
+
 class MessagesScreen extends StatefulWidget {
   final GroupModel? groupModel;
   const MessagesScreen({super.key, this.groupModel});
@@ -70,8 +72,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 10.w,),
-                      FittedBox(
-                        child: Row(
+                      Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
@@ -92,15 +93,20 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                   ),
                                 ),
                                 SizedBox(width: 15.w,),
-                                CustomText("Community Name",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
+                                InkWell(
+                                    onTap: (){
+                                      Get.to(( )=>AddMembersInGroup(groupModel:widget.groupModel));
+                                    },
+                                    child: CustomText(widget.groupModel!.groupName,fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,)),
                               ],),
-                            SizedBox(width: 10.w,),
-                            Icon(Icons.video_camera_front_outlined,color: ColorConstant.whiteColor,),
-                            SizedBox(width: 10.w,),
-                            Icon(Icons.call_outlined,color: ColorConstant.whiteColor,)
+                            Row(children: [
+                              SizedBox(width: 10.w,),
+                              Icon(Icons.video_camera_front_outlined,color: ColorConstant.whiteColor,),
+                              SizedBox(width: 10.w,),
+                              Icon(Icons.call_outlined,color: ColorConstant.whiteColor,)
+                            ],)
                           ],
                         ),
-                      ),
 
                       Expanded(
                         child: PaginateFirestore(itemBuilder: (context,documentSnapshot,index){
@@ -117,12 +123,13 @@ class _MessagesScreenState extends State<MessagesScreen> {
                           reverse: true,
                           scrollDirection: Axis.vertical,
                           physics: BouncingScrollPhysics(),
-                          onEmpty:Center(
-                              child: CustomText(
-                                "Say Hii 👋!",
-                                size: 20.sp,
-                                color: ColorConstant.whiteColor,
-                              )),
+                          onEmpty: Center(
+                            child: CustomText(
+                                          "Say Hii 👋!",
+                                          size: 20.sp,
+                                          color: ColorConstant.whiteColor,
+                                        ),
+                          ),
                         ),
                       ),
                       Divider(color: ColorConstant.greyColor,),

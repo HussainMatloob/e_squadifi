@@ -43,3 +43,4 @@ class GroupModel {
     "groupImage": groupImage,
   };
 }
+

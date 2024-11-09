@@ -24,6 +24,7 @@ class SquadPodController extends GetxController{
     return uint8list;
   }
 
+
   void inviteCheck(int index){
     if((selectedMembers??[]).contains(index)){
       selectedMembers.remove(index);

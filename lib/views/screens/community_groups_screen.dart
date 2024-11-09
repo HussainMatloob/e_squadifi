@@ -1,6 +1,7 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/live_streaming_controller.dart';
+import 'package:e_squadifi/controllers/navigation_controller.dart';
 import 'package:e_squadifi/models/group_model.dart';
 import 'package:e_squadifi/services/firebase_services.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
@@ -25,6 +26,7 @@ class CommunityGroupsScreen extends StatefulWidget {
 class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
   @override
   LiveStreamingController liveStreamingController = Get.put(LiveStreamingController());
+  NavController navController=Get.put(NavController());
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -35,37 +37,41 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 10.w,),
-                      FittedBox(
-                        child: Row(
+                     Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                ReuseableGradientContainer(
-                                  height: 62.h,
-                                  width: 63.w,
-                                  borderRadius: 28.r,
-                                  gradientColor: ColorConstant.profilePicGradient,
-                                  padding: 2.r,
-                                  image: ImageConstants.profileImagesList[3],
-                                  color: ColorConstant.purple,
-                                  internalPadding: 5.r,
-                                ),
-                                SizedBox(width: 15.w,),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomText("Community Name",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
-                                    CustomText("Community Group",fw: FontWeight.w400,size: 14.sp,color: ColorConstant.whiteColor,)
-                                  ],),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  ReuseableGradientContainer(
+                                    height: 62.h,
+                                    width: 63.w,
+                                    borderRadius: 28.r,
+                                    gradientColor: ColorConstant.profilePicGradient,
+                                    padding: 2.r,
+                                    image: ImageConstants.profileImagesList[3],
+                                    color: ColorConstant.purple,
+                                    internalPadding: 5.r,
+                                  ),
+                                  SizedBox(width: 15.w,),
+                                  Flexible(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                            child: CustomText(navController.communityName??"",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,textOverflow: TextOverflow.ellipsis,)),
+                                        CustomText("Community Groups",fw: FontWeight.w400,size: 14.sp,color: ColorConstant.whiteColor,textOverflow: TextOverflow.ellipsis,)
+                                      ],),
+                                  ),
 
-                              ],),
-                            SizedBox(width: 15.w,),
+                                ],),
+                            ),
+                            //SizedBox(width: 15.w,),
                             Icon(Icons.more_vert,color: ColorConstant.whiteColor,)
                           ],
                         ),
-                      ),
+
 
                       Expanded(
                         child: SingleChildScrollView(
