@@ -83,8 +83,7 @@ class _PlayerDetailScreenState extends State<PlayerDetailScreen> {
 
                             InkWell(
                               onTap: (){
-                                SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                authenticationController.logOut();
+
                               },
                               child: Container(
                                 height: 40.h,

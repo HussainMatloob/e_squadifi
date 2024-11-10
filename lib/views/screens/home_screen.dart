@@ -1,11 +1,11 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/navigation_controller.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_drawer.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/home_page_profiles_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/latest_stream_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
-import 'package:e_squadifi/views/screens/games_list_screen.dart';
 import 'package:e_squadifi/views/screens/player_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   @override
   NavController navController=Get.put(NavController());
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
     return GetBuilder<NavController>(
       builder: (navController){
@@ -32,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen>
             SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
           },
           child: Scaffold(
+            key: _scaffoldKey,
+             drawer: CustomDrawer(),
             body: Column(
               children: [
                 Expanded(
@@ -80,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     InkWell(
                                       onTap: (){
-                                        Get.to(( )=>GamesListScreen());
+                                        _scaffoldKey.currentState?.openDrawer();
                                       },
                                       child: Container(
                                         height: 40.h,

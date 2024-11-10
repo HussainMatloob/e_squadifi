@@ -266,7 +266,6 @@ class _PlayVideoWidgetState extends State<LiveStreamingScreen> {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      //Get.to(() => ConnectVideoGameScreen());
                                                     },
                                                     child: Icon(
                                                       Icons.cast,
