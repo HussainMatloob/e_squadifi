@@ -18,4 +18,11 @@ class CommunityController extends GetxController{
       update();
     }
   }
+
+  bool showEmoji = false;
+
+  emoji(bool value) {
+    showEmoji = value;
+    update();
+  }
 }

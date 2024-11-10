@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../services/firebase_services.dart';
 import '../../../utils/flush_messages.dart';
 
@@ -334,6 +335,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         Get.offAll(() => BottomNavBar());
                                                         SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                                                       } else {
+                                                        SharedPreferences sp =
+                                                        await SharedPreferences.getInstance();
+                                                        sp.setString('email', emailController.text);
                                                         await FirebaseServices.createUserWithEmailOrContact().then((value) {
                                                           FlushMessagesUtil.snackBarMessage("Success", "Login Successfully", context);
                                                           authenticationController.phoneLoginOrNot();

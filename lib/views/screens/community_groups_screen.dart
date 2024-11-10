@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/live_streaming_controller.dart';
@@ -135,12 +136,12 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                               padding: EdgeInsets.symmetric(horizontal: 15.w),
                               child: Row(mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  CustomText("Your Groups",fw: FontWeight.w700,size: 24.sp,color: ColorConstant.whiteColor,),
+                                  CustomText("My Groups",fw: FontWeight.w700,size: 24.sp,color: ColorConstant.whiteColor,),
                                 ],),
                             ),
                             SizedBox(height: 20.w,),
                             /* -------------------------------------------------------------------------- */
-                            /*                            Fetch Community Groups                          */
+                            /*                                 My Groups                                  */
                             /* -------------------------------------------------------------------------- */
                             Container(
                               padding: EdgeInsets.all(20.r),
@@ -173,7 +174,7 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                                             containerColor: ColorConstant.dullPurpleColor,
                                             borderRadius: 8.r,
                                             onTap: (){
-                                              Get.to(()=>MessagesScreen(groupModel: groupModel));
+                                              Get.to(()=>MessagesScreen(groupModel: groupModel,isYourGroup: true,));
                                             },
                                           ),
                                     ],);
@@ -187,14 +188,79 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                               )
 
                             ),
-                            // SizedBox(height: 30.w,),
-                            // Padding(
-                            //   padding: EdgeInsets.symmetric(horizontal: 15.w),
-                            //   child: Row(mainAxisAlignment: MainAxisAlignment.start,
-                            //     children: [
-                            //       CustomText("Your Groups",fw: FontWeight.w700,size: 24.sp,color: ColorConstant.whiteColor,),
-                            //     ],),
-                            // ),
+                            SizedBox(height: 30.w,),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15.w),
+                              child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CustomText("Other Groups",fw: FontWeight.w700,size: 24.sp,color: ColorConstant.whiteColor,),
+                                ],),
+                            ),
+                            SizedBox(height: 20.w,),
+                            /* -------------------------------------------------------------------------- */
+                            /*                                 Other Groups                                */
+                            /* -------------------------------------------------------------------------- */
+                            Container(
+                              padding: EdgeInsets.all(20.r),
+                              width: 310.w,
+                              decoration: BoxDecoration(
+                                color: ColorConstant.greyLightColor,
+                                borderRadius: BorderRadius.circular(12.r),
+                              ),
+                              child: StreamBuilder<List<DocumentSnapshot>>(
+                                stream: FirebaseServices.getOtherGroupsStream(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                    return const Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        CircularProgressIndicator()
+                                      ],
+                                    );
+                                  }
+                                  if (snapshot.hasError) {
+                                    return Text("Error: ${snapshot.error}");
+                                  }
+                                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                                    return CustomText("You are not part of any group yet.", color: ColorConstant.whiteColor, fw: FontWeight.w500, size: 16.sp);
+                                  }
+
+                                  List<DocumentSnapshot> allGroups = snapshot.data!;
+
+                                  return Column(
+                                    children: List.generate(allGroups.length, (index) {
+                                      GroupModel groupModel = GroupModel.fromJson(
+                                        allGroups[index].data() as Map<String, dynamic>,
+                                      );
+
+                                      return Column(
+                                        children: [
+                                          index == 0 ? Container() : SizedBox(height: 10.w),
+                                          index == 0 ? Container() : Divider(color: ColorConstant.greyColor),
+                                          index == 0 ? Container() : SizedBox(height: 10.w),
+                                          CustomListTile(
+                                            text: groupModel.groupName,
+                                            color: ColorConstant.whiteColor,
+                                            image: ImageConstants.profileImagesList[3],
+                                            fw: FontWeight.w500,
+                                            textSize: 16.sp,
+                                            fontStyle: FontStyle.italic,
+                                            sizedBoxedWidth: 12.w,
+                                            width: 32.w,
+                                            height: 32.h,
+                                            containerColor: ColorConstant.dullPurpleColor,
+                                            borderRadius: 8.r,
+                                            onTap: () {
+                                              Get.to(() => MessagesScreen(groupModel: groupModel));
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    }),
+                                  );
+                                },
+                              ),
+                            ),
                             SizedBox(height: 20.w,),
                             Container(
                               padding: EdgeInsets.all(20.r),

@@ -1,6 +1,6 @@
 import 'package:e_squadifi/controllers/community_controller.dart';
 import 'package:e_squadifi/models/group_model.dart';
-import 'package:e_squadifi/models/user_with_email_model.dart';
+import 'package:e_squadifi/models/user_model.dart';
 import 'package:e_squadifi/utils/flush_messages.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -75,7 +75,7 @@ class AddMembersInGroup extends StatelessWidget {
                               onTap: (){
                                if(communityController.selectedUsers!=[]){
                                  FlushMessagesUtil.easyLoading();
-                                   FirebaseServices.addMembersInGroup(
+                                   FirebaseServices.addUsersInGroup(
                                      communityController.selectedUsers,groupModel!
                                    ).then((value){
                                      EasyLoading.dismiss();
@@ -92,7 +92,7 @@ class AddMembersInGroup extends StatelessWidget {
                           child:
 
                           PaginateFirestore(itemBuilder: (context,documentSnapshot,index){
-                            UserWithEmailOrContactModel userModel=UserWithEmailOrContactModel.fromJson(documentSnapshot[index].data() as Map<String,dynamic>);
+                            UserModel userModel=UserModel.fromJson(documentSnapshot[index].data() as Map<String,dynamic>);
 
                             return Padding(
                               padding:EdgeInsets.only(bottom: 10.h),

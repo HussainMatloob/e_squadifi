@@ -104,7 +104,7 @@ AuthenticationController authenticationController=Get.put(AuthenticationControll
                                 SizedBox(height: 40.h),
 
                                 CustomText(
-                                  "Age:",
+                                  "Date of birth:",
                                   fw: FontWeight.w600,
                                   size: 14.sp,
                                   color: ColorConstant.whiteColor,

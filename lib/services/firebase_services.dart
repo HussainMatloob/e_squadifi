@@ -3,15 +3,14 @@ import 'package:e_squadifi/controllers/authentication_controller.dart';
 import 'package:e_squadifi/models/chat_model.dart';
 import 'package:e_squadifi/models/community_model.dart';
 import 'package:e_squadifi/models/group_model.dart';
-import 'package:e_squadifi/models/user_with_email_model.dart';
-import 'package:e_squadifi/models/user_with_other_methods_model.dart';
+import 'package:e_squadifi/models/user_model.dart';
 import 'package:e_squadifi/utils/flush_messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:rxdart/rxdart.dart' as rx_dart;
 class FirebaseServices {
   static FirebaseAuth auth = FirebaseAuth.instance;
   static FirebaseFirestore fireStore = FirebaseFirestore.instance;
@@ -43,7 +42,7 @@ class FirebaseServices {
     String? about = sp.getString('about');
     final time = DateTime.now().millisecondsSinceEpoch.toString();
 
-    final userWithEmailModel = UserWithEmailOrContactModel(
+    final userModel = UserModel(
         userId: user.uid,
         id: time,
         email: email ?? "",
@@ -55,7 +54,7 @@ class FirebaseServices {
         name: name,
         isLive: false,
         contact: authenticationController.mobileNumber ?? "",
-        age:
+        birthDate:
             "${authenticationController.selectedMonth},${authenticationController.selectedYear}" ??
                 "",
         communitiesList: [],
@@ -64,7 +63,7 @@ class FirebaseServices {
     return await fireStore
         .collection('SquadifiUsers')
         .doc(user.uid)
-        .set(userWithEmailModel.toJson());
+        .set(userModel.toJson());
   }
   /* -------------------------------------------------------------------------- */
   /*       create Account with Google or Apple or Facebook or Instagram         */
@@ -72,18 +71,19 @@ class FirebaseServices {
 
   static Future<void> createUserWithOtherMethods() async {
     final time = DateTime.now().millisecondsSinceEpoch.toString();
-    final userModel = UserWithOtherMethodsModel(
+    final userModel = UserModel(
         userId: user.uid,
         id: time,
         email: auth.currentUser!.email.toString() ?? "",
         gender: "",
         goalsList: [],
-        about: "",
+        about:  "",
         traitsList: [],
         image: "",
         name: auth.currentUser!.displayName.toString() ?? "",
         isLive: false,
-        age: "",
+        contact: "",
+        birthDate: "",
         communitiesList: [],
         groupsList: []);
 
@@ -107,7 +107,7 @@ class FirebaseServices {
       "goalsList": authenticationController.selectedGoals,
       "about": about,
       "traitsList": authenticationController.selectedTreats,
-      "age":
+      "birthDate":
           "${authenticationController.selectedMonth},${authenticationController.selectedYear}"
     });
   }
@@ -252,10 +252,10 @@ static Query<Map<String,dynamic>> getUsers(){
 }
 
 /*--------------------------------------------------------------------------*/
-/*                                  get Users                               */
+/*                            add Users in group                            */
 /*--------------------------------------------------------------------------*/
 
-static Future<void> addMembersInGroup(List<String> usersList,GroupModel groupModel) async{
+static Future<void> addUsersInGroup(List<String> usersList,GroupModel groupModel) async{
   for(int i=0;i<usersList.length;i++){
     await fireStore.collection("SquadifiUsers").doc(usersList[i]).update(
         {
@@ -264,4 +264,39 @@ static Future<void> addMembersInGroup(List<String> usersList,GroupModel groupMod
         });
   }
 }
+
+/*--------------------------------------------------------------------------*/
+/*                              get other groups                            */
+/*--------------------------------------------------------------------------*/
+
+  static Stream<List<DocumentSnapshot>> getOtherGroupsStream() async* {
+    DocumentSnapshot<Map<String, dynamic>> snapshot =
+    await fireStore.collection('SquadifiUsers').doc(user.uid).get();
+    var data = snapshot.data();
+    var userModel = UserModel.fromJson(data!);
+    List<dynamic>? communities = userModel.communitiesList;
+    List<dynamic>? groups = userModel.groupsList;
+
+    if (communities != null && communities.isNotEmpty) {
+      // Create a list of streams, each querying a community
+      List<Stream<List<DocumentSnapshot>>> communityStreams = communities.map((communityId) {
+        return fireStore
+            .collection("Community")
+            .doc(communityId)
+            .collection("Groups")
+            .where("groupId", whereIn: groups)
+            .snapshots()
+            .map((snapshot) => snapshot.docs);
+      }).toList();
+
+      // Combine all streams into one using Rx
+      yield* rx_dart.Rx.combineLatestList(communityStreams).map((listOfDocumentLists) {
+        // Flatten the list of lists into a single list of documents
+        return listOfDocumentLists.expand((docs) => docs).toList();
+      });
+    } else {
+      // Return an empty stream if there are no communities
+      yield [];
+    }
+  }
 }

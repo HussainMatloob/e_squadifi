@@ -1,14 +1,14 @@
 // To parse this JSON data, do
 //
-//     final userWithOtherMethodsModel = userWithOtherMethodsModelFromJson(jsonString);
+//     final userWithEmailOrContactModel = userWithEmailOrContactModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UserWithOtherMethodsModel userWithOtherMethodsModelFromJson(String str) => UserWithOtherMethodsModel.fromJson(json.decode(str));
+UserModel userWithEmailOrContactModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-String userWithOtherMethodsModelToJson(UserWithOtherMethodsModel data) => json.encode(data.toJson());
+String userWithEmailOrContactModelToJson(UserModel data) => json.encode(data.toJson());
 
-class UserWithOtherMethodsModel {
+class UserModel {
   String? userId;
   String? id;
   bool? isLive;
@@ -19,11 +19,12 @@ class UserWithOtherMethodsModel {
   String? about;
   List<dynamic>? traitsList;
   String? image;
-  String? age;
+  String? contact;
+  String? birthDate;
   List<dynamic>? communitiesList;
   List<dynamic>? groupsList;
 
-  UserWithOtherMethodsModel({
+  UserModel({
     this.userId,
     this.id,
     this.isLive,
@@ -34,12 +35,13 @@ class UserWithOtherMethodsModel {
     this.about,
     this.traitsList,
     this.image,
-    this.age,
+    this.contact,
+    this. birthDate,
     this.communitiesList,
     this.groupsList,
   });
 
-  factory UserWithOtherMethodsModel.fromJson(Map<String, dynamic> json) => UserWithOtherMethodsModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     userId: json["userId"],
     id: json["id"],
     isLive: json["isLive"],
@@ -50,7 +52,8 @@ class UserWithOtherMethodsModel {
     about: json["about"],
     traitsList: json["traitsList"] == null ? [] : List<dynamic>.from(json["traitsList"]!.map((x) => x)),
     image: json["image"],
-    age: json["age"],
+    contact: json["contact"],
+    birthDate: json["birthDate"],
     communitiesList: json["communitiesList"] == null ? [] : List<dynamic>.from(json["communitiesList"]!.map((x) => x)),
     groupsList: json["groupsList"] == null ? [] : List<dynamic>.from(json["groupsList"]!.map((x) => x)),
   );
@@ -66,7 +69,8 @@ class UserWithOtherMethodsModel {
     "about": about,
     "traitsList": traitsList == null ? [] : List<dynamic>.from(traitsList!.map((x) => x)),
     "image": image,
-    "age": age,
+    "contact": contact,
+    "birthDate": birthDate,
     "communitiesList": communitiesList == null ? [] : List<dynamic>.from(communitiesList!.map((x) => x)),
     "groupsList": groupsList == null ? [] : List<dynamic>.from(groupsList!.map((x) => x)),
   };

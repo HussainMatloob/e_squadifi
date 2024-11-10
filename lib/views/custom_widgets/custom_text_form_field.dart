@@ -29,6 +29,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? Function(String?)? validateFunction;
   final TextStyle? hintStyle;
   final bool? isMultiline;
+  final VoidCallback? onTap;
   const CustomTextFormField({
     super.key,
     this.hintText,
@@ -42,7 +43,7 @@ class CustomTextFormField extends StatefulWidget {
     this.height,
     this.isPassword = false,
     this.color,
-    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding, this.child, this.isObSecure, this.onChanged, this.hintStyle, this.obSecureTap, this.validateFunction, this.isMultiline=false
+    this.focusNode, this.fillColor, this.hintTextSize, this.hintTextColor, this.hintTextFw, this.borderRadius, this.horizontalPadding, this.verticalPadding, this.child, this.isObSecure, this.onChanged, this.hintStyle, this.obSecureTap, this.validateFunction, this.isMultiline=false, this.onTap
   });
 
   @override
@@ -59,6 +60,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           color: widget.color??Colors.transparent,
           borderRadius: BorderRadius.circular(widget.borderRadius??10.r)),
       child: TextFormField(
+        onTap: widget.onTap,
         onChanged: widget.onChanged,
         focusNode: widget.focusNode,
         maxLines:widget.isMultiline==true?null:1,
