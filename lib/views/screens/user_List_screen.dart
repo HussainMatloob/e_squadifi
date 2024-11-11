@@ -1,9 +1,8 @@
 import 'package:e_squadifi/constants/color_constants.dart'; // Your custom color constants
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-class User_List_Screen extends StatelessWidget {
+class UserListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

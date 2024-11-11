@@ -1,3 +1,4 @@
+import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -56,11 +57,15 @@ class CustomImageContainer extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(borderRadius ?? 0.r), // Clip the image with same radius
-              child: Image.asset(
+              child: image!=null?Image.asset(
                 height: height,
                 width: width,
                 image ?? "",  // Fallback to empty string if no image is provided
                 fit: BoxFit.cover, // Ensure the image covers the container fully
+              ):Icon(
+                Icons.image, // Icon to display when image is null
+                size: height ?? width, // Adjust size to fit container
+                color: ColorConstant.greyColor, // Optionally set icon color
               ),
             ),
           ),

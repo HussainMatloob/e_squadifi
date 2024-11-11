@@ -1,7 +1,8 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Set_Token_screen extends StatelessWidget {
+class SetTokenscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,17 @@ class Set_Token_screen extends StatelessWidget {
                       ),
                       alignment: Alignment.topRight,
                       padding: const EdgeInsets.all(16),
-                      child: Icon(Icons.notifications, color: Colors.white),
+                      child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                              onTap: (){
+                                Get.back();
+                              },
+                              child: Icon(Icons.arrow_back,color: Colors.white,)),
+                          Icon(Icons.notifications, color: Colors.white)
+                        ],
+                      ),
                     ),
                     Positioned(
                       bottom: 8,
@@ -148,50 +159,8 @@ class Set_Token_screen extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            bottom: 45,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 70,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: ColorConstant.primaryGradiantColor,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.home, color: Colors.white),
-                      onPressed: () {}),
-                  IconButton(
-                      icon: Icon(Icons.search, color: Colors.white),
-                      onPressed: () {}),
-                  SizedBox(width: 50),
-                  IconButton(
-                      icon: Icon(Icons.people, color: Colors.white),
-                      onPressed: () {}),
-                  IconButton(
-                      icon: Icon(Icons.settings, color: Colors.white),
-                      onPressed: () {}),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 70,
-            child: CircleAvatar(
-              backgroundImage: AssetImage('asset/images/bottom_bar_logo.jpg'),
-              radius: 28,
-              backgroundColor: Colors.pinkAccent,
-            ),
-          ),
+
+
         ],
       ),
     );

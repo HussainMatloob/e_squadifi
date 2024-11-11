@@ -13,14 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../services/firebase_services.dart';
 import '../../../utils/flush_messages.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -326,56 +324,33 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 } else {
                                                   authenticationController
                                                       .loadingFunctionLogin();
-                                                  auth
-                                                      .signInWithEmailAndPassword(
-                                                          email: emailController
-                                                              .text
-                                                              .toString(),
-                                                          password:
-                                                              passwordController
-                                                                  .text
-                                                                  .toString())
+                                                  auth.signInWithEmailAndPassword(
+                                                          email: emailController.text.toString(),
+                                                          password: passwordController.text.toString())
                                                       .then((value) async {
-                                                    authenticationController
-                                                        .loadingFunctionLogin();
+                                                    authenticationController.loadingFunctionLogin();
                                                     if (value != null) {
-                                                      if ((await FirebaseServices
-                                                          .userExists())) {
-                                                        Get.offAll(() =>
-                                                            BottomNavBar());
-                                                        SystemChrome
-                                                            .setEnabledSystemUIMode(
-                                                                SystemUiMode
-                                                                    .immersiveSticky);
+                                                      if ((await FirebaseServices.userExists())) {
+                                                        FlushMessagesUtil.snackBarMessage("Success", "Login Successfully", context);
+                                                        Get.offAll(() => BottomNavBar());
+                                                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
                                                       } else {
-                                                        await FirebaseServices
-                                                                .createUserWithEmailOrContact()
-                                                            .then((value) {
-                                                          authenticationController
-                                                              .phoneLoginOrNot();
-                                                          SystemChrome
-                                                              .setEnabledSystemUIMode(
-                                                                  SystemUiMode
-                                                                      .immersiveSticky);
-                                                          Get.offAll(() =>
-                                                              AboutYouScreen());
+                                                        SharedPreferences sp =
+                                                        await SharedPreferences.getInstance();
+                                                        sp.setString('email', emailController.text);
+                                                        await FirebaseServices.createUserWithEmailOrContact().then((value) {
+                                                          FlushMessagesUtil.snackBarMessage("Success", "Login Successfully", context);
+                                                          authenticationController.phoneLoginOrNot();
+                                                          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                                                          Get.offAll(() => AboutYouScreen());
                                                         });
                                                       }
-                                                      FlushMessagesUtil
-                                                          .snackBarMessage(
-                                                              "Success",
-                                                              "Login Successfully",
-                                                              context);
                                                     }
                                                   }).onError(
                                                           (error, stackTrace) {
                                                     authenticationController
                                                         .loadingFunctionLogin();
-                                                    FlushMessagesUtil
-                                                        .snackBarMessage(
-                                                            "Error",
-                                                            error.toString(),
-                                                            context);
+                                                    FlushMessagesUtil.snackBarMessage("Error", error.toString(), context);
                                                   });
                                                 }
                                               }
@@ -394,7 +369,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Padding(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 8.w),
-                                        child: Text(
+                                        child: const Text(
                                           'Or',
                                           style:
                                               TextStyle(color: Colors.white54),

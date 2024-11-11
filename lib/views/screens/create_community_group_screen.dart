@@ -1,23 +1,25 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/navigation_controller.dart';
+import 'package:e_squadifi/services/firebase_services.dart';
+import 'package:e_squadifi/utils/flush_messages.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/reuseable_gradient_container.dart';
 import 'package:e_squadifi/views/screens/bottom_navigation_bar.dart';
-import 'package:e_squadifi/views/screens/community_groups_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class CommunityCreateGroupScreen extends StatefulWidget {
-  const CommunityCreateGroupScreen({super.key});
+class CreateCommunityGroupScreen extends StatefulWidget {
+
+  const CreateCommunityGroupScreen({super.key, });
 
   @override
-  State<CommunityCreateGroupScreen> createState() => _CommunityCreateGroupScreenState();
+  State<CreateCommunityGroupScreen> createState() => _CreateCommunityGroupScreenState();
 }
 
-class _CommunityCreateGroupScreenState extends State<CommunityCreateGroupScreen> {
+class _CreateCommunityGroupScreenState extends State<CreateCommunityGroupScreen> {
   @override
   NavController navController=Get.put( NavController());
   Widget build(BuildContext context) {
@@ -98,9 +100,13 @@ class _CommunityCreateGroupScreenState extends State<CommunityCreateGroupScreen>
                     containerColor: ColorConstant.purpleLightColor,
                     borderRadius: 8.r,
                     onTap: (){
-                      navController.groupCreate(true);
-                      navController.navIndex(2);
-                      Get.offAll(()=>BottomNavBar());
+                      navController.getCommunityName();
+                      FirebaseServices.createGroup(context,"general group").then((onValue){
+                        navController.communityMethod();
+                        navController.navIndex(2);
+                        FlushMessagesUtil.snackBarMessage("Success", "Group created successfully", context);
+                        Get.offAll(()=>BottomNavBar());
+                      });
                     },
                   ),
                   SizedBox(height: 20.w,),
@@ -121,7 +127,6 @@ class _CommunityCreateGroupScreenState extends State<CommunityCreateGroupScreen>
                     containerColor: ColorConstant.purpleLightColor,
                     borderRadius: 8.r,
                     onTap: (){
-                      navController.groupCreate(true);
                       navController.navIndex(2);
                       Get.offAll(()=>BottomNavBar());
                     },

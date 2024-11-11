@@ -2,7 +2,7 @@ import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_button_widget.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_list_tile.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
-import 'package:e_squadifi/views/screens/community_name_screen.dart';
+import 'package:e_squadifi/views/screens/create_community_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -112,7 +112,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                     fw: FontWeight.w700,
                     textSize: 14.sp,
                     onTap: (){
-                      Get.to(()=>CommunityNameScreen());
+                      Get.to(()=>CreateCommunityScreen());
                     },
                   ),
                 ],
