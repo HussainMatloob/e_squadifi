@@ -1,7 +1,6 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/navigation_controller.dart';
-import 'package:e_squadifi/views/custom_widgets/custom_bottom_sheet.dart';
 
 import 'package:flutter/material.dart';
 
