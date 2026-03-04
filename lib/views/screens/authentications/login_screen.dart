@@ -49,27 +49,19 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Form(
               key: formKey,
               child: Scaffold(
+                backgroundColor: ColorConstant.purple,
                 body: Container(
                   height: Get.height,
                   width: Get.width,
-                  padding: EdgeInsets.all(8.r), // Border width
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: ColorConstant.gradientBorderColor,
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                    borderRadius: BorderRadius.circular(50.r),
-                  ),
                   child: Container(
-                      padding: EdgeInsets.all(20.r),
+                      padding:
+                          EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: ColorConstant.primaryGradiantColor,
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: BorderRadius.circular(50.r),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +85,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: 10.h,
                           ),
                           Expanded(
                             child: SingleChildScrollView(
@@ -324,25 +319,56 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 } else {
                                                   authenticationController
                                                       .loadingFunctionLogin();
-                                                  auth.signInWithEmailAndPassword(
-                                                          email: emailController.text.toString(),
-                                                          password: passwordController.text.toString())
+                                                  auth
+                                                      .signInWithEmailAndPassword(
+                                                          email: emailController
+                                                              .text
+                                                              .toString(),
+                                                          password:
+                                                              passwordController
+                                                                  .text
+                                                                  .toString())
                                                       .then((value) async {
-                                                    authenticationController.loadingFunctionLogin();
+                                                    authenticationController
+                                                        .loadingFunctionLogin();
                                                     if (value != null) {
-                                                      if ((await FirebaseServices.userExists())) {
-                                                        FlushMessagesUtil.snackBarMessage("Success", "Login Successfully", context);
-                                                        Get.offAll(() => BottomNavBar());
-                                                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                                                      if ((await FirebaseServices
+                                                          .userExists())) {
+                                                        FlushMessagesUtil
+                                                            .snackBarMessage(
+                                                                "Success",
+                                                                "Login Successfully",
+                                                                context);
+                                                        Get.offAll(() =>
+                                                            BottomNavBar());
+                                                        SystemChrome
+                                                            .setEnabledSystemUIMode(
+                                                                SystemUiMode
+                                                                    .immersiveSticky);
                                                       } else {
                                                         SharedPreferences sp =
-                                                        await SharedPreferences.getInstance();
-                                                        sp.setString('email', emailController.text);
-                                                        await FirebaseServices.createUserWithEmailOrContact().then((value) {
-                                                          FlushMessagesUtil.snackBarMessage("Success", "Login Successfully", context);
-                                                          authenticationController.phoneLoginOrNot();
-                                                          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                                          Get.offAll(() => AboutYouScreen());
+                                                            await SharedPreferences
+                                                                .getInstance();
+                                                        sp.setString(
+                                                            'email',
+                                                            emailController
+                                                                .text);
+                                                        await FirebaseServices
+                                                                .createUserWithEmailOrContact()
+                                                            .then((value) {
+                                                          FlushMessagesUtil
+                                                              .snackBarMessage(
+                                                                  "Success",
+                                                                  "Login Successfully",
+                                                                  context);
+                                                          authenticationController
+                                                              .phoneLoginOrNot();
+                                                          SystemChrome
+                                                              .setEnabledSystemUIMode(
+                                                                  SystemUiMode
+                                                                      .immersiveSticky);
+                                                          Get.offAll(() =>
+                                                              AboutYouScreen());
                                                         });
                                                       }
                                                     }
@@ -350,7 +376,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                                           (error, stackTrace) {
                                                     authenticationController
                                                         .loadingFunctionLogin();
-                                                    FlushMessagesUtil.snackBarMessage("Error", error.toString(), context);
+                                                    FlushMessagesUtil
+                                                        .snackBarMessage(
+                                                            "Error",
+                                                            error.toString(),
+                                                            context);
                                                   });
                                                 }
                                               }
@@ -470,34 +500,37 @@ class _LoginScreenState extends State<LoginScreen> {
                                   SizedBox(
                                       height: 20
                                           .h), // Replace Spacer with SizedBox for space
-                                  FittedBox(
-                                    child: Row(
-                                      children: [
-                                        CustomText(
-                                          "Don't have an Account?",
-                                          fw: FontWeight.w400,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CustomText(
+                                        "Don't have an Account?",
+                                        fw: FontWeight.w400,
+                                        size: 14.sp,
+                                        color: ColorConstant.whiteColor,
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Get.to(() => SignUpScreen());
+                                          SystemChrome.setEnabledSystemUIMode(
+                                              SystemUiMode.immersiveSticky);
+                                        },
+                                        child: CustomText(
+                                          "Signup",
+                                          fw: FontWeight.w700,
                                           size: 14.sp,
                                           color: ColorConstant.whiteColor,
                                         ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Get.to(() => SignUpScreen());
-                                            SystemChrome.setEnabledSystemUIMode(
-                                                SystemUiMode.immersiveSticky);
-                                          },
-                                          child: CustomText(
-                                            "Signup",
-                                            fw: FontWeight.w700,
-                                            size: 14.sp,
-                                            color: ColorConstant.whiteColor,
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: 15.h,
                           ),
                         ],
                       )),

@@ -1,43 +1,43 @@
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
-import 'dart:typed_data';
-class SquadPodController extends GetxController{
-  int circularImageIndex=-1;
-  List<int> selectedMembers=[];
 
-  Uint8List? thumbnailData;
-  void  generateThumbnail(videoUrl){
-     thumbNail(videoUrl).then((data) {
-      thumbnailData = data;
-      update();
-    });
-  }
+//import 'package:video_thumbnail/video_thumbnail.dart';
+//import 'dart:typed_data';
+class SquadPodController extends GetxController {
+  int circularImageIndex = -1;
+  List<int> selectedMembers = [];
 
-  Future<Uint8List?> thumbNail(String videoUrl) async {
-    final uint8list = await VideoThumbnail.thumbnailData(
-      video: videoUrl,
-      imageFormat: ImageFormat.PNG,
-      maxWidth: 128, // Specify the width of the thumbnail
-      quality: 25,    // Specify the quality of the thumbnail
-    );
-    return uint8list;
-  }
+  // Uint8List? thumbnailData;
+  // void  generateThumbnail(videoUrl){
+  //    thumbNail(videoUrl).then((data) {
+  //     thumbnailData = data;
+  //     update();
+  //   });
+  // }
 
+  // Future<Uint8List?> thumbNail(String videoUrl) async {
+  //   final uint8list = await VideoThumbnail.thumbnailData(
+  //     video: videoUrl,
+  //     imageFormat: ImageFormat.PNG,
+  //     maxWidth: 128, // Specify the width of the thumbnail
+  //     quality: 25,    // Specify the quality of the thumbnail
+  //   );
+  //   return uint8list;
+  // }
 
-  void inviteCheck(int index){
-    if((selectedMembers??[]).contains(index)){
+  void inviteCheck(int index) {
+    if ((selectedMembers ?? []).contains(index)) {
       selectedMembers.remove(index);
       update();
-    }else{
+    } else {
       selectedMembers.add(index);
       update();
     }
   }
 
-  void circularImages(int index){
-     circularImageIndex=index;
-     update();
+  void circularImages(int index) {
+    circularImageIndex = index;
+    update();
   }
 
   late VideoPlayerController controller;
@@ -50,6 +50,7 @@ class SquadPodController extends GetxController{
     final seconds = twoDigits(duration.inSeconds.remainder(60));
     return [if (duration.inHours > 0) hours, minutes, seconds].join(':');
   }
+
   // Track if the video is completed
   var isVideoCompleted = false.obs; // Make this an observable
 
@@ -63,7 +64,7 @@ class SquadPodController extends GetxController{
 
       // Initialize the video player and store the Future.
       initializeVideoPlayerFuture = controller.initialize().then((_) {
-        update();  // Update once video is initialized.
+        update(); // Update once video is initialized.
       }).catchError((error) {
         print('Error initializing video player: $error');
       });
@@ -73,10 +74,11 @@ class SquadPodController extends GetxController{
         // Check if the video is completed
         if (controller.value.position >= controller.value.duration) {
           isVideoCompleted.value = true; // Update the observable
-          videoPause();  // Automatically pause when video completes.
+          videoPause(); // Automatically pause when video completes.
         }
-        sliderValue.value = controller.value.position.inSeconds.toDouble();  // Update the slider value
-        update();  // Trigger UI update on every tick.
+        sliderValue.value = controller.value.position.inSeconds
+            .toDouble(); // Update the slider value
+        update(); // Trigger UI update on every tick.
       });
     } else {
       print('Error: URL is null');
@@ -89,7 +91,7 @@ class SquadPodController extends GetxController{
   }
 
   void videoPlay() {
-    isVideoCompleted.value = false;  // Reset the completion status
+    isVideoCompleted.value = false; // Reset the completion status
     controller.play();
     update();
   }
@@ -97,13 +99,13 @@ class SquadPodController extends GetxController{
   void sliderPosition(double value) {
     final newPosition = Duration(seconds: value.toInt());
     controller.seekTo(newPosition);
-    sliderValue.value = value;  // Update slider position
+    sliderValue.value = value; // Update slider position
     update();
   }
 
   @override
   void onClose() {
-    controller.dispose();  // Dispose the video controller when not needed.
+    controller.dispose(); // Dispose the video controller when not needed.
     super.onClose();
   }
 }

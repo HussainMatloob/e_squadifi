@@ -1,4 +1,3 @@
-import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
-
 
 late Size mq;
 void main() async {
@@ -19,11 +18,11 @@ void main() async {
   // Hide status bar and navigation bar
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
- //Set the status bar style (optional, if you want to control transparency)
- //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
- //    statusBarColor: Colors.transparent, // Makes status bar transparent
- //    statusBarIconBrightness: Brightness.light, // Changes icon brightness
- //  ));
+  //Set the status bar style (optional, if you want to control transparency)
+  //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //    statusBarColor: Colors.transparent, // Makes status bar transparent
+  //    statusBarIconBrightness: Brightness.light, // Changes icon brightness
+  //  ));
 
   // runApp(
   //     DevicePreview(
@@ -34,6 +33,7 @@ void main() async {
   // if (Platform.isAndroid) {
   //   WebView.platform = SurfaceAndroidWebView();
   // }
+  GoogleFonts.config.allowRuntimeFetching = true;
   runApp(const MyApp());
 }
 
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 scaffoldBackgroundColor: Colors.transparent,
               ),
-              home: SplashScreen(),
+              home: const SplashScreen(),
               builder: EasyLoading.init(),
             );
           },

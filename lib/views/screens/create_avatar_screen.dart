@@ -20,126 +20,143 @@ class CreateAvatarScreen extends StatefulWidget {
 class _CreateAvatarScreenState extends State<CreateAvatarScreen> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      backgroundColor: ColorConstant.purple,
       extendBodyBehindAppBar: true,
-      body:  Container(
-        height: Get.height,
-        width: Get.width,
-        padding: EdgeInsets.all(8.r), // Border width
+      body: Container(
+        padding: EdgeInsets.all(25.r),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: ColorConstant.gradientBorderColor,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            colors: ColorConstant.primaryGradiantColor,
+            begin: FractionalOffset(1.0, 1.0),
+            end: FractionalOffset(-0.2, 0.1),
+            // begin: Alignment.topLeft, // Start the gradient at top-left
+            // end: Alignment.bottomRight, // End the gradient at bottom-right
+            stops: [0.0, 0.2, 0.5, 0.8, 1.0],
           ),
-          borderRadius: BorderRadius.circular(50.r),
+
+          // border: Border.all(width: 10,color: Colors.purple)
         ),
-        child:  Container(
-          padding: EdgeInsets.all(25.r),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors:ColorConstant.primaryGradiantColor,
-              begin: FractionalOffset(1.0,1.0),
-              end: FractionalOffset(-0.2,0.1),
-              // begin: Alignment.topLeft, // Start the gradient at top-left
-              // end: Alignment.bottomRight, // End the gradient at bottom-right
-              stops: [0.0, 0.2, 0.5, 0.8, 1.0],
-            ),
-            borderRadius: BorderRadius.circular(50.r),
-            // border: Border.all(width: 10,color: Colors.purple)
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  child:  Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 10.w,),
-                        FittedBox(
-                          child: Container(
-                            width: Get.width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                InkWell(
-                                  onTap: (){
-                                    Get.back();
-                                  },
-                                  child: Container(
-                                    height: 40.h,
-                                    width: 40.w,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white38,
-                                      borderRadius: BorderRadius.circular(100.r),
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10.w,
+                      ),
+                      FittedBox(
+                        child: Container(
+                          width: Get.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  height: 40.h,
+                                  width: 40.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white38,
+                                    borderRadius: BorderRadius.circular(100.r),
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      CupertinoIcons.back,
+                                      color: ColorConstant.whiteColor,
                                     ),
-                                    child: Center(child: Icon(CupertinoIcons.back,color: ColorConstant.whiteColor,),),
                                   ),
                                 ),
-                                SizedBox(width: 15.w,),
-
-                                InkWell(
-                                    onTap: (){
-                                      Get.to(( )=>SetProfileScreen());
-                                      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-                                    },
-                                    child: Container(child: CustomText("Skip",fw: FontWeight.w700,size: 14.sp,color: ColorConstant.whiteColor,))),
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              InkWell(
+                                  onTap: () {
+                                    Get.to(() => SetProfileScreen());
+                                    SystemChrome.setEnabledSystemUIMode(
+                                        SystemUiMode.immersiveSticky);
+                                  },
+                                  child: Container(
+                                      child: CustomText(
+                                    "Skip",
+                                    fw: FontWeight.w700,
+                                    size: 14.sp,
+                                    color: ColorConstant.whiteColor,
+                                  ))),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 25.h,),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                              CustomText("Create a Avatar for Yourself",fw: FontWeight.w800,size: 32.sp,color: ColorConstant.whiteColor,),
-                                SizedBox(height: 10.h,),
-                                CustomText("Give yourself a unique character to play the game with your squad.",fw: FontWeight.w400,size: 13.sp,color: ColorConstant.whiteColor,),
-                               SizedBox(height: 25.h,),
-                               Column(
-                                 mainAxisAlignment: MainAxisAlignment.center,
-                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                 children: [
-                                   CustomImageContainer(
-                                     color: ColorConstant.grayColor,
-                                     image: ImageConstants.profilePic,
-                                     width: 255.w,
-                                     height: 255.h,
-                                     borderRadius: 127.r,
-                                   ),
-                                   SizedBox(height: 25.h,),
-                                   ButtonWidget(
-                                     textColor: ColorConstant.whiteColor,
-                                     radius: 47.r,
-                                     fw: FontWeight.w700,
-                                     textSize: 14.sp,
-                                     text: "Take a Picture",
-                                     height: 50.h,
-                                     paddingHorizontal: 30.w,
-                                     color: ColorConstant.cyanBlue,
-                                     onTap: (){
-
-                                     },
-                                   ),
-                               ],),
-
-                              ],
-                            ),
+                      ),
+                      SizedBox(
+                        height: 25.h,
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                "Create a Avatar for Yourself",
+                                fw: FontWeight.w800,
+                                size: 32.sp,
+                                color: ColorConstant.whiteColor,
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              CustomText(
+                                "Give yourself a unique character to play the game with your squad.",
+                                fw: FontWeight.w400,
+                                size: 13.sp,
+                                color: ColorConstant.whiteColor,
+                              ),
+                              SizedBox(
+                                height: 25.h,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CustomImageContainer(
+                                    color: ColorConstant.grayColor,
+                                    image: ImageConstants.profilePic,
+                                    width: 255.w,
+                                    height: 255.h,
+                                    borderRadius: 127.r,
+                                  ),
+                                  SizedBox(
+                                    height: 25.h,
+                                  ),
+                                  ButtonWidget(
+                                    textColor: ColorConstant.whiteColor,
+                                    radius: 47.r,
+                                    fw: FontWeight.w700,
+                                    textSize: 14.sp,
+                                    text: "Take a Picture",
+                                    height: 50.h,
+                                    paddingHorizontal: 30.w,
+                                    color: ColorConstant.cyanBlue,
+                                    onTap: () {},
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ]
-                  ),
-                ),
+                      ),
+                    ]),
               ),
-            ],
-          ),
-        ),),
+            ),
+          ],
+        ),
+      ),
     );
-
   }
 }

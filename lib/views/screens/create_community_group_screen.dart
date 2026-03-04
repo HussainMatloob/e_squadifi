@@ -12,52 +12,47 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CreateCommunityGroupScreen extends StatefulWidget {
-
-  const CreateCommunityGroupScreen({super.key, });
+  const CreateCommunityGroupScreen({
+    super.key,
+  });
 
   @override
-  State<CreateCommunityGroupScreen> createState() => _CreateCommunityGroupScreenState();
+  State<CreateCommunityGroupScreen> createState() =>
+      _CreateCommunityGroupScreenState();
 }
 
-class _CreateCommunityGroupScreenState extends State<CreateCommunityGroupScreen> {
+class _CreateCommunityGroupScreenState
+    extends State<CreateCommunityGroupScreen> {
   @override
-  NavController navController=Get.put( NavController());
+  NavController navController = Get.put(NavController());
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstant.purple,
       extendBodyBehindAppBar: true,
-      body:  Container(
+      body: Container(
         height: Get.height,
-        width: Get.width,
-        padding: EdgeInsets.all(8.r), // Border width
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: ColorConstant.gradientBorderColor,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            colors: ColorConstant.primaryGradiantColor,
+            begin: FractionalOffset(1.0, 1.0),
+            end: FractionalOffset(-0.2, 0.1),
+            // begin: Alignment.topLeft, // Start the gradient at top-left
+            // end: Alignment.bottomRight, // End the gradient at bottom-right
+            stops: [0.0, 0.2, 0.5, 0.8, 1.0],
           ),
-          borderRadius: BorderRadius.circular(50.r),
+
+          // border: Border.all(width: 10,color: Colors.purple)
         ),
-        child:  Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors:ColorConstant.primaryGradiantColor,
-              begin: FractionalOffset(1.0,1.0),
-              end: FractionalOffset(-0.2,0.1),
-              // begin: Alignment.topLeft, // Start the gradient at top-left
-              // end: Alignment.bottomRight, // End the gradient at bottom-right
-              stops: [0.0, 0.2, 0.5, 0.8, 1.0],
-            ),
-            borderRadius: BorderRadius.circular(50.r),
-            // border: Border.all(width: 10,color: Colors.purple)
-          ),
-          child: Container(
-            padding: EdgeInsets.all(20.r),
-            child: SingleChildScrollView(
-              child: Column(
+        child: Container(
+          padding: EdgeInsets.all(20.r),
+          child: SingleChildScrollView(
+            child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10.w,),
+                  SizedBox(
+                    height: 10.w,
+                  ),
                   Row(
                     children: [
                       ReuseableGradientContainer(
@@ -70,19 +65,41 @@ class _CreateCommunityGroupScreenState extends State<CreateCommunityGroupScreen>
                         color: ColorConstant.purple,
                         internalPadding: 5.r,
                       ),
-                      SizedBox(width: 15.w,),
+                      SizedBox(
+                        width: 15.w,
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomText("Community Name",fw: FontWeight.w700,size: 18.sp,color: ColorConstant.whiteColor,),
-                          CustomText("Announcement Group",fw: FontWeight.w400,size: 14.sp,color: ColorConstant.whiteColor,)
-                        ],),
-
-                    ],),
-                  SizedBox(height: 50.w,),
-                  CustomText("Add Group",fw: FontWeight.w700,size: 24.sp,color: ColorConstant.whiteColor,),
-                  SizedBox(height: 50.w,),
+                          CustomText(
+                            "Community Name",
+                            fw: FontWeight.w700,
+                            size: 18.sp,
+                            color: ColorConstant.whiteColor,
+                          ),
+                          CustomText(
+                            "Announcement Group",
+                            fw: FontWeight.w400,
+                            size: 14.sp,
+                            color: ColorConstant.whiteColor,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50.w,
+                  ),
+                  CustomText(
+                    "Add Group",
+                    fw: FontWeight.w700,
+                    size: 24.sp,
+                    color: ColorConstant.whiteColor,
+                  ),
+                  SizedBox(
+                    height: 50.w,
+                  ),
                   CustomListTile(
                     text: "Create group",
                     color: ColorConstant.whiteColor,
@@ -99,17 +116,21 @@ class _CreateCommunityGroupScreenState extends State<CreateCommunityGroupScreen>
                     height: 32.h,
                     containerColor: ColorConstant.purpleLightColor,
                     borderRadius: 8.r,
-                    onTap: (){
+                    onTap: () {
                       navController.getCommunityName();
-                      FirebaseServices.createGroup(context,"general group").then((onValue){
+                      FirebaseServices.createGroup(context, "general group")
+                          .then((onValue) {
                         navController.communityMethod();
                         navController.navIndex(2);
-                        FlushMessagesUtil.snackBarMessage("Success", "Group created successfully", context);
-                        Get.offAll(()=>BottomNavBar());
+                        FlushMessagesUtil.snackBarMessage(
+                            "Success", "Group created successfully", context);
+                        Get.offAll(() => BottomNavBar());
                       });
                     },
                   ),
-                  SizedBox(height: 20.w,),
+                  SizedBox(
+                    height: 20.w,
+                  ),
                   CustomListTile(
                     text: "Add existing group",
                     color: ColorConstant.whiteColor,
@@ -126,16 +147,15 @@ class _CreateCommunityGroupScreenState extends State<CreateCommunityGroupScreen>
                     height: 32.h,
                     containerColor: ColorConstant.purpleLightColor,
                     borderRadius: 8.r,
-                    onTap: (){
+                    onTap: () {
                       navController.navIndex(2);
-                      Get.offAll(()=>BottomNavBar());
+                      Get.offAll(() => BottomNavBar());
                     },
                   ),
-                ]
-              ),
-            ),
+                ]),
           ),
-        ),),
+        ),
+      ),
     );
   }
 }

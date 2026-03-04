@@ -1,6 +1,8 @@
 import 'package:e_squadifi/constants/color_constants.dart';
 import 'package:e_squadifi/constants/image_constants.dart';
 import 'package:e_squadifi/controllers/navigation_controller.dart';
+import 'package:e_squadifi/controllers/profile_controller.dart';
+import 'package:e_squadifi/views/custom_widgets/custom_bottom_sheet.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_drawer.dart';
 import 'package:e_squadifi/views/custom_widgets/custom_text.dart';
 import 'package:e_squadifi/views/custom_widgets/home_page_profiles_widget.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -21,20 +24,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   @override
-  NavController navController=Get.put(NavController());
+  ProfileController profileController = Get.put(ProfileController());
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
     return GetBuilder<NavController>(
-      builder: (navController){
-        return  GestureDetector(
-          onTap: (){
-            navController.setBottomSheetFalse();
+      builder: (navController) {
+        return GestureDetector(
+          onTap: () {
             FocusScope.of(context).unfocus();
             SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
           },
           child: Scaffold(
             key: _scaffoldKey,
-             drawer: CustomDrawer(),
+            drawer: CustomDrawer(),
             body: Column(
               children: [
                 Expanded(
@@ -61,14 +64,15 @@ class _HomeScreenState extends State<HomeScreen>
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        navController.toggleBottomSheet();
-                                        },
+                                        CustomBottomSheet.showFilterBottomSheet(
+                                            context);
+                                      },
                                       child: Container(
                                         height: 40.h,
                                         width: 40.w,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(48.r),
+                                                BorderRadius.circular(48.r),
                                             color: Colors.white38),
                                         child: Center(
                                           child: Icon(
@@ -82,14 +86,15 @@ class _HomeScreenState extends State<HomeScreen>
                                       width: 8.w,
                                     ),
                                     InkWell(
-                                      onTap: (){
+                                      onTap: () {
                                         _scaffoldKey.currentState?.openDrawer();
                                       },
                                       child: Container(
                                         height: 40.h,
                                         width: 40.w,
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(48.r),
+                                            borderRadius:
+                                                BorderRadius.circular(48.r),
                                             color: Colors.white38),
                                         child: Center(
                                           child: Icon(
@@ -163,14 +168,17 @@ class _HomeScreenState extends State<HomeScreen>
                                       padding: EdgeInsets.only(left: 20.r),
                                       child: Row(
                                         children: [
-                                          for (int i = 0; i < ImageConstants
-                                                  .profileImagesList.length; i++)
+                                          for (int i = 0;
+                                              i <
+                                                  ImageConstants
+                                                      .profileImagesList.length;
+                                              i++)
                                             HomePageProfilesWidget(
-                                              onTap: (){
-                                             Get.to(()=>PlayerDetailScreen(
-                                               image: ImageConstants
-                                                   .profileImagesList[i],
-                                             ));
+                                              onTap: () {
+                                                Get.to(() => PlayerDetailScreen(
+                                                      image: ImageConstants
+                                                          .profileImagesList[i],
+                                                    ));
                                               },
                                               image: ImageConstants
                                                   .profileImagesList[i],
@@ -181,9 +189,11 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 20.r),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.r),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           height: 20.h,
@@ -215,13 +225,11 @@ class _HomeScreenState extends State<HomeScreen>
                               ),
                             ),
                           ),
-
                         ]),
                   ),
                 ),
               ],
             ),
-
           ),
         );
       },

@@ -454,9 +454,8 @@ class AuthenticationController extends GetxController {
   /*                              Sign in with Instagram                      */
   /*--------------------------------------------------------------------------*/
 
-
-
-  final String instagramAuthURL = 'https://bd88-103-149-240-172.ngrok-free.app/login-instagram';
+  final String instagramAuthURL =
+      'https://bd88-103-149-240-172.ngrok-free.app/login-instagram';
   late WebViewController _webViewController;
 
   Future<void> loginWithInstagram(BuildContext context) async {
@@ -468,14 +467,16 @@ class AuthenticationController extends GetxController {
         NavigationDelegate(
           onPageFinished: (String url) {
             debugPrint("onPageFinished URL: $url");
-            if (url.contains('/instagram-auth') && !redirectURLCompleter.isCompleted) {
+            if (url.contains('/instagram-auth') &&
+                !redirectURLCompleter.isCompleted) {
               redirectURLCompleter.complete(url);
               Navigator.of(context).pop();
             }
           },
           onNavigationRequest: (NavigationRequest request) {
             debugPrint("Navigation request: ${request.url}");
-            if (request.url.contains('/instagram-auth') && !redirectURLCompleter.isCompleted) {
+            if (request.url.contains('/instagram-auth') &&
+                !redirectURLCompleter.isCompleted) {
               redirectURLCompleter.complete(request.url);
               Navigator.of(context).pop();
               return NavigationDecision.prevent;
@@ -519,7 +520,9 @@ class AuthenticationController extends GetxController {
           final data = json.decode(response.body);
           final firebaseToken = data['firebaseToken'];
 
-          await auth.signInWithCustomToken(firebaseToken).then((userCredential) async {
+          await auth
+              .signInWithCustomToken(firebaseToken)
+              .then((userCredential) async {
             bool userExists = await FirebaseServices.userExists();
 
             if (userExists) {
@@ -546,8 +549,6 @@ class AuthenticationController extends GetxController {
       FlushMessagesUtil.snackBarMessage("Error", "Redirect failed", context);
     }
   }
-
-
 
   Future<void> isUserLogin() async {
     if (FirebaseAuth.instance.currentUser != null) {

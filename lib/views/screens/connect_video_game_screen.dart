@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../constants/color_constants.dart';
+
 class ConnectVideoGameScreen extends StatefulWidget {
   const ConnectVideoGameScreen({super.key});
 
@@ -18,54 +19,46 @@ class ConnectVideoGameScreen extends StatefulWidget {
 }
 
 class _ConnectVideoGameScreenState extends State<ConnectVideoGameScreen> {
-  TextEditingController gameIdController=TextEditingController();
+  TextEditingController gameIdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
-      onTap: (){
+    return GestureDetector(
+      onTap: () {
         FocusScope.of(context).unfocus();
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
       },
       child: WillPopScope(
-        onWillPop: () async{
+        onWillPop: () async {
           SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
           return true;
         },
         child: Scaffold(
           body: Container(
             height: Get.height,
-            width: Get.width,
-            padding: EdgeInsets.all(8.r), // Border width
+            padding: EdgeInsets.all(20.r),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: ColorConstant.gradientBorderColor,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                colors: ColorConstant.primaryGradiantColor,
+                begin: FractionalOffset(1.0, 1.0),
+                end: FractionalOffset(-0.2, 0.1),
+                // begin: Alignment.topLeft, // Start the gradient at top-left
+                // end: Alignment.bottomRight, // End the gradient at bottom-right
+                stops: [0.0, 0.2, 0.5, 0.8, 1.0],
               ),
-              borderRadius: BorderRadius.circular(50.r),),
-            child: Container(
-              padding: EdgeInsets.all(20.r),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors:ColorConstant.primaryGradiantColor,
-                  begin: FractionalOffset(1.0,1.0),
-                  end: FractionalOffset(-0.2,0.1),
-                  // begin: Alignment.topLeft, // Start the gradient at top-left
-                  // end: Alignment.bottomRight, // End the gradient at bottom-right
-                  stops: [0.0, 0.2, 0.5, 0.8, 1.0],
-                ),
-                borderRadius: BorderRadius.circular(50.r),
-                // border: Border.all(width: 10,color: Colors.purple)
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(children: [
+
+              // border: Border.all(width: 10,color: Colors.purple)
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
                       GestureDetector(
-                        onTap: (){
-                          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                        onTap: () {
+                          SystemChrome.setEnabledSystemUIMode(
+                              SystemUiMode.immersiveSticky);
                           Get.back();
                         },
                         child: Container(
@@ -83,48 +76,74 @@ class _ConnectVideoGameScreenState extends State<ConnectVideoGameScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.w,),
-                      CustomText("Connect Video Game",fw: FontWeight.w700,size: 20.sp,color: Colors.white,)
-                    ],),
-                    SizedBox(height: 40.h,),
-                    CustomText("SELECT GAME",fw: FontWeight.w400,size: 14.sp,color: Colors.white,),
-                    SizedBox(height: 20.h,),
-                    CustomDropDownButton(
-                      text: "Select game",
-                      dropDownButtonList: AppData.gameType,
-                    ),
-                    SizedBox(height: 20.h,),
-                    CustomText("ENTER GAME ID",fw: FontWeight.w400,size: 14.sp,color: Colors.white,),
-                    SizedBox(height: 20.h,),
-                    CustomTextFormField(
-                      hintTextColor: ColorConstant.whiteColor,
-                      hintTextSize: 12.sp,
-                      hintTextFw: FontWeight.w400,
-                      borderRadius: 93.r,
-                      fillColor:ColorConstant.greyLightColor ,
-                      width: 311.w,
-
-                      controller: gameIdController,
-                      color:  ColorConstant.greyLightColor,
-                      borderColor: ColorConstant.greyLightColor,
-                      focusedBorderColor: ColorConstant.greyLightColor,
-                      hintText: "Game ID",
-                      horizontalPadding: 20.r,
-                    ),
-                    SizedBox(height: 35.h,),
-                    ButtonWidget(
-                      text: "Save",
-                      marginAll: 8.w,
-                      height: 51.h,
-                      color: ColorConstant.cyanBlue,
-                      radius: 47.r,
-                      textColor: ColorConstant.whiteColor,
-                      fw: FontWeight.w700,
-                      textSize: 14.sp,
-                      onTap: (){
-                      },
-                    )
-                  ],),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      CustomText(
+                        "Connect Video Game",
+                        fw: FontWeight.w700,
+                        size: 20.sp,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40.h,
+                  ),
+                  CustomText(
+                    "SELECT GAME",
+                    fw: FontWeight.w400,
+                    size: 14.sp,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  CustomDropDownButton(
+                    text: "Select game",
+                    dropDownButtonList: AppData.gameType,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  CustomText(
+                    "ENTER GAME ID",
+                    fw: FontWeight.w400,
+                    size: 14.sp,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  CustomTextFormField(
+                    hintTextColor: ColorConstant.whiteColor,
+                    hintTextSize: 12.sp,
+                    hintTextFw: FontWeight.w400,
+                    borderRadius: 93.r,
+                    fillColor: ColorConstant.greyLightColor,
+                    width: 311.w,
+                    controller: gameIdController,
+                    color: ColorConstant.greyLightColor,
+                    borderColor: ColorConstant.greyLightColor,
+                    focusedBorderColor: ColorConstant.greyLightColor,
+                    hintText: "Game ID",
+                    horizontalPadding: 20.r,
+                  ),
+                  SizedBox(
+                    height: 35.h,
+                  ),
+                  ButtonWidget(
+                    text: "Save",
+                    marginAll: 8.w,
+                    height: 51.h,
+                    color: ColorConstant.cyanBlue,
+                    radius: 47.r,
+                    textColor: ColorConstant.whiteColor,
+                    fw: FontWeight.w700,
+                    textSize: 14.sp,
+                    onTap: () {},
+                  )
+                ],
               ),
             ),
           ),

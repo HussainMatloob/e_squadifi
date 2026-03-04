@@ -13,10 +13,8 @@ import '../screens/challenge.dart';
 import '../screens/challenge_details_screen.dart';
 import '../screens/connect_video_game_screen.dart';
 import '../screens/games_list_screen.dart';
-import '../screens/new_promotion_screen.dart';
+
 import '../screens/player_user_list_screen.dart';
-import '../screens/set_token _Screen.dart';
-import '../screens/user_List_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -25,45 +23,53 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AuthenticationController>(
       init: AuthenticationController(),
-      builder: (authenticationController)
-      {
-       return Drawer(
+      builder: (authenticationController) {
+        return Drawer(
           child: Container(
-
             child: Container(
               color: ColorConstant.deepPurpleColor,
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
                   DrawerHeader(
-                    child:Row(
+                    child: Row(
                       children: [
-                        CustomImageContainer(image:ImageConstants.appLogo,height: 200.h,width: 200.w,),
+                        CustomImageContainer(
+                          image: ImageConstants.appLogo,
+                          height: 200.h,
+                          width: 200.w,
+                        ),
                       ],
                     ),
                     decoration: BoxDecoration(
-                      color: ColorConstant.deepPurpleColor, // Set the background color here
+                      color: ColorConstant
+                          .deepPurpleColor, // Set the background color here
                     ),
                   ),
 
-
                   ListTile(
-                    title: CustomText("Live Videos",
+                    title: CustomText(
+                      "Live Videos",
                       size: 16.sp,
                       fw: FontWeight.w700,
                       color: ColorConstant.whiteColor,
                     ),
                     // trailing: Text("6:30"),
                     onTap: () {
-                      Get.to(( )=>GamesListScreen());
+                      Get.to(() => GamesListScreen());
                     },
-                    leading: Icon(Icons.live_tv,color: ColorConstant.whiteColor,),
+                    leading: Icon(
+                      Icons.live_tv,
+                      color: ColorConstant.whiteColor,
+                    ),
                   ),
                   Divider(
-                    height: 1,color: ColorConstant.dividerColor,
+                    height: 1,
+                    color: ColorConstant.dividerColor,
                   ),
                   ListTile(
-                    title: CustomText("Start Live Game Connection",
+                    title: CustomText(
+                      "Start Live Game Connection",
                       size: 16.sp,
                       fw: FontWeight.w700,
                       color: ColorConstant.whiteColor,
@@ -72,71 +78,95 @@ class CustomDrawer extends StatelessWidget {
                     onTap: () {
                       Get.to(() => ConnectVideoGameScreen());
                     },
-                    leading: Icon(Icons.gamepad,color: ColorConstant.whiteColor,),
+                    leading: Icon(
+                      Icons.gamepad,
+                      color: ColorConstant.whiteColor,
+                    ),
                   ),
                   Divider(
-                    height: 1,color: ColorConstant.dividerColor,
+                    height: 1,
+                    color: ColorConstant.dividerColor,
                   ),
                   ListTile(
-                    title: CustomText("Challenges",
+                    title: CustomText(
+                      "Challenges",
                       size: 16.sp,
                       fw: FontWeight.w700,
                       color: ColorConstant.whiteColor,
                     ),
                     // trailing: Text("6:30"),
                     onTap: () {
-                      Get.to(( )=>Challenge());
+                      Get.to(() => Challenge());
                     },
-                    leading: Icon(Icons.flag,color: ColorConstant.whiteColor,),
+                    leading: Icon(
+                      Icons.flag,
+                      color: ColorConstant.whiteColor,
+                    ),
                   ),
                   Divider(
-                    height: 1,color: ColorConstant.dividerColor,
+                    height: 1,
+                    color: ColorConstant.dividerColor,
                   ),
                   //Divider(height: 1,),
                   ListTile(
-                    title: CustomText("Challenges Detail",
+                    title: CustomText(
+                      "Challenges Detail",
                       size: 16.sp,
                       fw: FontWeight.w700,
                       color: ColorConstant.whiteColor,
                     ),
                     // trailing: Text("6:30"),
                     onTap: () {
-                      Get.to(( )=> ChallengeDetailScreen());
+                      Get.to(() => ChallengeDetailScreen());
                     },
-                    leading: Icon(Icons.description,color: ColorConstant.whiteColor,),
+                    leading: Icon(
+                      Icons.description,
+                      color: ColorConstant.whiteColor,
+                    ),
                   ),
                   Divider(
-                    height: 1,color: ColorConstant.dividerColor,
+                    height: 1,
+                    color: ColorConstant.dividerColor,
                   ),
 
                   ListTile(
-                    title: CustomText("Players",
+                    title: CustomText(
+                      "Players",
                       size: 16.sp,
                       fw: FontWeight.w700,
                       color: ColorConstant.whiteColor,
                     ),
                     // trailing: Text("6:30"),
                     onTap: () {
-                      Get.to(( )=>PlayerSquadScreen());
+                      Get.to(() => PlayerSquadScreen());
                     },
-                    leading: Icon(Icons.groups,color: ColorConstant.whiteColor,),
+                    leading: Icon(
+                      Icons.groups,
+                      color: ColorConstant.whiteColor,
+                    ),
                   ),
 
                   Divider(
-                    height: 1,color: ColorConstant.dividerColor,
+                    height: 1,
+                    color: ColorConstant.dividerColor,
                   ),
                   ListTile(
-                    title: CustomText("Log out",
+                    title: CustomText(
+                      "Log out",
                       size: 16.sp,
                       fw: FontWeight.w700,
                       color: ColorConstant.whiteColor,
                     ),
                     // trailing: Text("6:30"),
                     onTap: () {
-                      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+                      SystemChrome.setEnabledSystemUIMode(
+                          SystemUiMode.immersiveSticky);
                       authenticationController.logOut();
                     },
-                    leading: Icon(Icons.logout,color: ColorConstant.redColor,),
+                    leading: Icon(
+                      Icons.logout,
+                      color: ColorConstant.redColor,
+                    ),
                   ),
                   // Divider(height: 1,)
                 ],
