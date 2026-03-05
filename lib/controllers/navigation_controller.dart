@@ -1,3 +1,4 @@
+import 'package:e_squadifi/controllers/profile_controller.dart';
 import 'package:e_squadifi/services/firebase_services.dart';
 import 'package:e_squadifi/views/screens/community_groups_screen.dart';
 import 'package:e_squadifi/views/screens/community_screen.dart';
@@ -14,6 +15,7 @@ class NavController extends GetxController {
 
   void navIndex(index) {
     selectedNavIndex = index;
+    Get.put(ProfileController()).setLoadingTrue();
     update();
   }
 

@@ -19,6 +19,7 @@ class _ShareLinkScreenState extends State<ShareLinkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: ColorConstant.purple,
       body: Container(
         height: Get.height,
         width: Get.width,
@@ -39,8 +40,8 @@ class _ShareLinkScreenState extends State<ShareLinkScreen> {
           width: Get.width,
           padding: EdgeInsets.all(20.r),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 10.w,

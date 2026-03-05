@@ -121,7 +121,6 @@ class _ConnectVideoGameScreenState extends State<ConnectVideoGameScreen> {
                     hintTextFw: FontWeight.w400,
                     borderRadius: 93.r,
                     fillColor: ColorConstant.greyLightColor,
-                    width: 311.w,
                     controller: gameIdController,
                     color: ColorConstant.greyLightColor,
                     borderColor: ColorConstant.greyLightColor,
