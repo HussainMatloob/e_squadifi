@@ -51,46 +51,43 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     color: const Color(0xFF1D0E3A),
                     shape: const CircularNotchedRectangle(),
                     notchMargin: 8,
-                    child: SizedBox(
-                      height: 60, // Fixed height
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.home_outlined,
-                                color: navController.selectedNavIndex == 0
-                                    ? ColorConstant.whiteColor
-                                    : ColorConstant.iconColor),
-                            onPressed: () => navController.navIndex(0),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.mic_none,
-                                color: navController.selectedNavIndex == 1
-                                    ? ColorConstant.whiteColor
-                                    : ColorConstant.iconColor),
-                            onPressed: () => navController.navIndex(1),
-                          ),
-                          const SizedBox(width: 40), // Space for FAB
-                          IconButton(
-                            icon: Icon(Icons.groups_3_outlined,
-                                color: navController.selectedNavIndex == 2
-                                    ? ColorConstant.whiteColor
-                                    : ColorConstant.iconColor),
-                            onPressed: () {
-                              navController.getCommunityName();
-                              navController.communityMethod();
-                              navController.navIndex(2);
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.person_outline,
-                                color: navController.selectedNavIndex == 3
-                                    ? ColorConstant.whiteColor
-                                    : ColorConstant.iconColor),
-                            onPressed: () => navController.navIndex(3),
-                          ),
-                        ],
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.home_outlined,
+                              color: navController.selectedNavIndex == 0
+                                  ? ColorConstant.whiteColor
+                                  : ColorConstant.iconColor),
+                          onPressed: () => navController.navIndex(0),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.mic_none,
+                              color: navController.selectedNavIndex == 1
+                                  ? ColorConstant.whiteColor
+                                  : ColorConstant.iconColor),
+                          onPressed: () => navController.navIndex(1),
+                        ),
+                        const SizedBox(width: 40), // Space for FAB
+                        IconButton(
+                          icon: Icon(Icons.groups_3_outlined,
+                              color: navController.selectedNavIndex == 2
+                                  ? ColorConstant.whiteColor
+                                  : ColorConstant.iconColor),
+                          onPressed: () {
+                            navController.getCommunityName();
+                            navController.communityMethod();
+                            navController.navIndex(2);
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.person_outline,
+                              color: navController.selectedNavIndex == 3
+                                  ? ColorConstant.whiteColor
+                                  : ColorConstant.iconColor),
+                          onPressed: () => navController.navIndex(3),
+                        ),
+                      ],
                     ),
                   ),
 

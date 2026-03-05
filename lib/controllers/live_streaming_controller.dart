@@ -2,9 +2,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-class LiveStreamingController extends GetxController{
 
-
+class LiveStreamingController extends GetxController {
   // Uint8List? thumbnailData;
   // void  generateThumbnail(videoUrl){
   //   thumbNail(videoUrl).then((data) {
@@ -23,31 +22,31 @@ class LiveStreamingController extends GetxController{
   //   return uint8list;
   // }
 
-  TextEditingController groupNameController=Get.put(TextEditingController());
-  GlobalKey<FormState> formKey=GlobalKey<FormState>();
+  TextEditingController groupNameController = Get.put(TextEditingController());
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String? groupNameValidate(value) {
     if (value == null || value.trim().isEmpty) {
       return "Please enter group name";
     }
     return null; // Valid input
   }
- bool isSwitchedOn=false;
- void switchedButton(){
-   isSwitchedOn=!isSwitchedOn;
-   update();
- }
 
-  Rx<bool> isShowingPlay=false.obs;
-  Rx<bool> isLandScape=false.obs;
-
-  void landscapeOrPortrait(){
-    isLandScape.value=!isLandScape.value;
+  bool isSwitchedOn = false;
+  void switchedButton() {
+    isSwitchedOn = !isSwitchedOn;
+    update();
   }
 
-  void showingPlay(){
-    isShowingPlay.value=!isShowingPlay.value;
+  Rx<bool> isShowingPlay = false.obs;
+  Rx<bool> isLandScape = false.obs;
+
+  void landscapeOrPortrait() {
+    isLandScape.value = !isLandScape.value;
   }
 
+  void showingPlay() {
+    isShowingPlay.value = !isShowingPlay.value;
+  }
 
   late VideoPlayerController videoController;
   late Future<void> initializeVideoPlayerFuture;
@@ -62,7 +61,8 @@ class LiveStreamingController extends GetxController{
     final hours = twoDigits(durationAndPosition.inHours);
     final minutes = twoDigits(durationAndPosition.inMinutes.remainder(60));
     final seconds = twoDigits(durationAndPosition.inSeconds.remainder(60));
-    return [if (durationAndPosition.inHours > 0) hours, minutes, seconds].join(':');
+    return [if (durationAndPosition.inHours > 0) hours, minutes, seconds]
+        .join(':');
   }
 
   // Initialize video player with a URL
@@ -72,8 +72,7 @@ class LiveStreamingController extends GetxController{
 
       // Initialize the video player and store the Future.
       initializeVideoPlayerFuture = videoController.initialize().then((_) {
-        videoController.setLooping(false);  // Disable looping by default.
-
+        videoController.setLooping(false); // Disable looping by default.
       }).catchError((error) {
         print('Error initializing video player: $error');
       });
@@ -87,10 +86,11 @@ class LiveStreamingController extends GetxController{
         position.value = videoController.value.position;
 
         // If the video reaches the end, stop the video
-        if(position.value >= videoController.value.duration) {
+        if (position.value >= videoController.value.duration) {
           position.value = Duration.zero;
-          playerState.value = PlayerState.stopped;  // Set player state to 'stopped'
-          videoController.seekTo(Duration.zero);    // Seek to the beginning
+          playerState.value =
+              PlayerState.stopped; // Set player state to 'stopped'
+          videoController.seekTo(Duration.zero); // Seek to the beginning
           videoController.pause();
         }
       });
@@ -98,10 +98,11 @@ class LiveStreamingController extends GetxController{
       print('Error: URL is null');
     }
   }
-  void backAction(){
+
+  void backAction() {
     position.value = Duration.zero;
-    playerState.value = PlayerState.stopped;  // Set player state to 'stopped'
-    videoController.seekTo(Duration.zero);    // Seek to the beginning
+    playerState.value = PlayerState.stopped; // Set player state to 'stopped'
+    videoController.seekTo(Duration.zero); // Seek to the beginning
     videoController.pause();
   }
 
@@ -117,12 +118,11 @@ class LiveStreamingController extends GetxController{
     }
   }
 
-
   // Seek to a specific position using the slider
   void sliderPosition(double value) {
     final newPosition = Duration(seconds: value.toInt());
     videoController.seekTo(newPosition);
-    position.value = newPosition;  // Update position
+    position.value = newPosition; // Update position
   }
 
   // Dispose video controller when not needed
@@ -131,5 +131,4 @@ class LiveStreamingController extends GetxController{
     videoController.dispose();
     super.onClose();
   }
-
 }
