@@ -1,14 +1,15 @@
-import 'package:e_squadifi/views/screens/profile_screen.dart';
 import 'package:e_squadifi/views/screens/splash_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
-void main() async{
 
+late Size mq;
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -17,12 +18,22 @@ void main() async{
   // Hide status bar and navigation bar
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-  // Set the status bar style (optional, if you want to control transparency)
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // Makes status bar transparent
-    statusBarIconBrightness: Brightness.light, // Changes icon brightness
-  ));
+  //Set the status bar style (optional, if you want to control transparency)
+  //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //    statusBarColor: Colors.transparent, // Makes status bar transparent
+  //    statusBarIconBrightness: Brightness.light, // Changes icon brightness
+  //  ));
 
+  // runApp(
+  //     DevicePreview(
+  //         builder:(context)=>
+  //         const MyApp())
+  // );
+
+  // if (Platform.isAndroid) {
+  //   WebView.platform = SurfaceAndroidWebView();
+  // }
+  GoogleFonts.config.allowRuntimeFetching = true;
   runApp(const MyApp());
 }
 
@@ -36,7 +47,6 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation) {
         // Check if the orientation is landscape or portrait
         var isLandscape = orientation == Orientation.landscape;
-
         return ScreenUtilInit(
           // Set the designSize based on the screen orientation
           designSize: isLandscape ? Size(932, 430) : Size(375, 812),
@@ -51,7 +61,8 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
                 scaffoldBackgroundColor: Colors.transparent,
               ),
-              home: SplashScreen(),
+              home: const SplashScreen(),
+              builder: EasyLoading.init(),
             );
           },
         );
@@ -59,4 +70,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

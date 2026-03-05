@@ -25,12 +25,13 @@ class ColumnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         achievement == false
             ? Container()
             :  ReuseableGradientContainer(
               text1: text1,
-              borderRadius: 100.r,
+              borderRadius: 50.w,
           padding: 7.r,
           stops: [0.5,0.5],
           height: height,
@@ -42,7 +43,7 @@ class ColumnWidget extends StatelessWidget {
             ? CustomText(
                 text1,
                 fw: FontWeight.w700,
-                size: 24,
+                size: 24.sp,
                 color: ColorConstant.whiteColor,
               )
             : Container(),
@@ -52,7 +53,7 @@ class ColumnWidget extends StatelessWidget {
         CustomText(
           text2,
           fw: FontWeight.w400,
-          size: 12,
+          size: 12.sp,
           color: ColorConstant.whiteColor,
         ),
       ],

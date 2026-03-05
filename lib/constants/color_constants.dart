@@ -1,8 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
 class ColorConstant{
+
+static List<Color> primaryGradiantColor=[
+  Color(0xFF5A189A),
+  Color(0xFF1A003D),
+  Color(0xFF1A003D),
+  Color(0xFF1A003D),
+  Color(0xFF5A189A),
+];
+
 static List<Color> gradientBorderColor=[
   Color(0xFF8A4FB3), // Light purple
   Color(0xFF74409C), // Deep purple
@@ -16,18 +22,12 @@ static List<Color> gradientBorderLandScapeColor=[
 
 ];
 
-static List<Color> gradientScreenColor=[
-  Color(0xFF5A189A),
-  Color(0xFF1A003D),
-  Color(0xFF1A003D),
-  Color(0xFF1A003D),
-  Color(0xFF5A189A),
-];
 static Color blackColor=Colors.black;
 static Color whiteColor=Colors.white;
 static Color darkBlueColor=Color(0xFF0A89AD);
 static Color greyColor=Color(0xFF3A5175);
 static Color borderColor= Color(0xFF8F52B8);
+static Color greyLightColor=Color(0x663A5175);
 
 static List<Color> iconColors=[
   Colors.blue,
@@ -49,4 +49,26 @@ static List<Color> tournamentGradientColor=[Color(0xFF6D7D8B),
 ];
 static List<Color> profilePicGradient=[ Color(0xFFCA00FF),Color(0xFF3957FE)];
 static Color cyanBlue=Color(0xFF0A89AD);
+static Color lighterCyanBlue = Color(0xFF99CCE1);
+
+static Color iconColor=Color(0xFFA897CD);
+static Color purpleLightColor= Color(0xFF9354BC);
+static Color dullPurpleColor=Color(0x269354BC);
+static Color popUpColor=Color(0xFF532E77);
+static Color deepPurpleColor=Color(0xFF1A003D);
+static Color purple=Color(0xFF5A189A);
+static Color redColor=Colors.red;
+static Color messageBorderColor=Color(0xFF522B7A);
+static Color senderMessageColor=Color(0x3A51751C);
+static Color squadPurpleColor=Color(0xFF884DB1);
+static Color darkGrayColor=Color(0xFF18203A);
+static Color grayColor=Color(0xFF35383F);
+static List<Color> wildCatColor=[Color(0xFF0A89AD), Color(0xFF884DB1)]; // #884DB1];
+
+static Color searchFieldColor = Color(0x80353278);
+static Color bottomSheetDividerColor = Color(0xFF2B2F57);
+static Color blueColor=Colors.blue;
+static Color orangeColor=Color(0xFFF75555);
+static Color dialogColor=Color(0xFF1F222A);
 }
+
