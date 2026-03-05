@@ -159,8 +159,8 @@ class _HomeScreenState extends State<HomeScreen>
                           Expanded(
                             child: SingleChildScrollView(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
@@ -213,11 +213,19 @@ class _HomeScreenState extends State<HomeScreen>
                                         SizedBox(
                                           height: 15.h,
                                         ),
-                                        for (int i = 0; i <= 3; i++)
-                                          LatestStreamWidget(),
-                                        SizedBox(
-                                          height: 100.h,
-                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            for (int i = 0; i <= 3; i++)
+                                              LatestStreamWidget(),
+                                            SizedBox(
+                                              height: 100.h,
+                                            ),
+                                          ],
+                                        )
                                       ],
                                     ),
                                   ),
